@@ -1,46 +1,56 @@
 # Tasks: 01-foundation-slice
 
 ## Overview
-Total tasks: 4
+Total tasks: 5
 
 ## Phase 1: Make It Work (POC)
 
-- [ ] 1.1 [P] Create the first playable room
+- [ ] 1.1 [P] Make Floor 1 fully walkable
   - **Do**:
-    1. Add `Main.tscn` as the project entry scene.
-    2. Add a single corridor room that loads at launch.
-    3. Make the room the first visible play space with no manual setup.
-  - **Files**: `project.godot`, `Main.tscn`, `Room01.tscn`
-  - **Done when**: Pressing Play opens directly into the first corridor room.
-  - **Verify**: Open the project in Godot and confirm the first room loads on launch.
-  - **Commit**: `feat(slice): create first playable room`
+    1. Keep `Main.tscn` as the entry scene.
+    2. Build `Floor01.tscn` as a clean, unobstructed first floor.
+    3. Make sure the player can move freely without level geometry blocking basic movement.
+  - **Files**: `project.godot`, `Main.tscn`, `Floor01.tscn`, `Player.tscn`
+  - **Done when**: Launching the project drops the player into Floor 1 and movement is not hindered by the room layout.
+  - **Verify**: Open the project and confirm the first floor loads with clear left/right traversal space.
+  - **Commit**: `feat(slice): make floor 1 walkable`
 
 - [ ] 1.2 [P] Add the player baseline
   - **Do**:
     1. Create `Player.tscn` with left/right movement, jump, crouch, and blaster fire.
-    2. Add the minimum input actions needed for those controls.
-    3. Keep the implementation simple and readable.
+    2. Add only the input actions required for those controls.
+    3. Keep the controller simple so movement tuning stays easy.
   - **Files**: `Player.tscn`, `project.godot`
-  - **Done when**: The player can move, jump, crouch, and shoot inside the first room.
-  - **Verify**: Play the project and confirm all four inputs respond.
-  - **Commit**: `feat(slice): add player movement and blaster`
+  - **Done when**: The player can move, jump, crouch, and shoot on Floor 1 without collisions or input friction.
+  - **Verify**: Play Floor 1 and confirm each input works as expected.
+  - **Commit**: `feat(slice): add player baseline`
 
-- [ ] 1.3 [P] Add the first enemy and damage loop
+- [ ] 1.3 [P] Add Floor 2 as the first pressure check
   - **Do**:
-    1. Create `EnemyBasic.tscn` as the first enemy.
-    2. Add player damage and enemy hit resolution.
-    3. Tune the enemy so the player must react, not just walk forward.
-  - **Files**: `EnemyBasic.tscn`, `Player.tscn`, `Room01.tscn`
-  - **Done when**: The player can fight one enemy and take damage from it.
-  - **Verify**: Play the room and confirm the enemy can be damaged and can damage the player.
-  - **Commit**: `feat(slice): add first enemy interaction`
+    1. Build `Floor02.tscn` with one simple threat or obstacle.
+    2. Keep the path readable so movement remains the primary feel test.
+    3. Avoid introducing anything that obscures whether the player controller still feels clean.
+  - **Files**: `Floor02.tscn`, `EnemyBasic.tscn`, `Player.tscn`
+  - **Done when**: Floor 2 adds a small amount of pressure without making movement feel awkward.
+  - **Verify**: Play Floors 1-2 and confirm traversal remains smooth.
+  - **Commit**: `feat(slice): add floor 2 pressure`
 
-- [ ] 1.4 [VERIFY] Add the elevator exit and close the loop
+- [ ] 1.4 [P] Add Floor 3 and close the first slice
   - **Do**:
-    1. Create `Elevator.tscn` or an equivalent exit trigger.
-    2. Make it advance the player to the next room or placeholder transition.
-    3. Confirm the first slice can be played start to finish without breaking flow.
-  - **Files**: `Elevator.tscn`, `Room01.tscn`, `Main.tscn`
-  - **Done when**: The room can be completed and the transition works cleanly.
-  - **Verify**: Play from spawn to exit and confirm the transition triggers.
-  - **Commit**: `feat(slice): complete first playable loop`
+    1. Build `Floor03.tscn` as the third and final floor in the initial slice.
+    2. Add the minimal exit or transition needed to complete the 3-floor loop.
+    3. Keep the floor concise so it remains tuneable later.
+  - **Files**: `Floor03.tscn`, `Elevator.tscn`, `Main.tscn`
+  - **Done when**: Floors 1-3 can be played in sequence and the loop closes cleanly.
+  - **Verify**: Play from Floor 1 through Floor 3 and confirm the final transition works.
+  - **Commit**: `feat(slice): complete 3-floor loop`
+
+- [ ] 1.5 [VERIFY] Tune the 3-floor slice for readability
+  - **Do**:
+    1. Play the full 3-floor sequence.
+    2. Adjust room spacing, collision, and pacing only where movement feels hindered.
+    3. Keep the slice minimal and avoid adding new systems.
+  - **Files**: `Floor01.tscn`, `Floor02.tscn`, `Floor03.tscn`, `Player.tscn`
+  - **Done when**: The 3-floor slice feels clear, playable, and tuneable without extra complexity.
+  - **Verify**: Run the full sequence and confirm movement stays consistent across all three floors.
+  - **Commit**: `feat(slice): tune first 3 floors`

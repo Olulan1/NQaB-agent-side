@@ -3,6 +3,9 @@
 ## Goal
 Validate that a small Godot slice can prove the core corridor-action loop for *Not Quite a Box* before any larger content is built.
 
+## Source context
+- `dev-thoughts/NQaB base design.md`
+
 ## What the slice must test
 - Player movement in a 3-tile-tall corridor
 - Jumping and crouching as combat movement, not just traversal
@@ -14,6 +17,7 @@ Validate that a small Godot slice can prove the core corridor-action loop for *N
 - The project is feasible as a Godot 2D action game.
 - The current scope is small enough to build a playable proof-of-concept without needing the full 20-floor tower.
 - The first slice should be treated as a mechanics test, not a content test.
+- The game should remain strictly 2D.
 
 ## Main risks
 - The corridor may be too narrow or too flat if jump/crouch timing is not readable.
