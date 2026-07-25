@@ -10,7 +10,8 @@ extends CharacterBody2D
 @export var fire_cooldown: float = 0.18
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var body: Polygon2D = $Body
+@onready var body_top: Polygon2D = $BodyTop
+@onready var body_bottom: Polygon2D = $BodyBottom
 @onready var muzzle: Marker2D = $Muzzle
 
 var facing: int = 1
@@ -22,26 +23,26 @@ func _physics_process(delta: float) -> void:
 	if fire_timer > 0.0:
 		fire_timer = maxf(fire_timer - delta, 0.0)
 
-	var horizontal := Input.get_axis("ui_left", "ui_right")
+	var horizontal := Input.get_axis("move_left", "move_right")
 	if horizontal < 0.0:
 		facing = -1
 	elif horizontal > 0.0:
 		facing = 1
 
-	crouching = Input.is_action_pressed("ui_down")
+	crouching = Input.is_action_pressed("crouch")
 	_update_crouch_state()
 	_update_muzzle_position()
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if is_on_floor() and Input.is_action_just_pressed("ui_up"):
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_velocity
 
 	var move_speed := crouch_speed if crouching else speed
 	velocity.x = horizontal * move_speed
 
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("fire"):
 		_try_fire()
 
 	move_and_slide()
@@ -54,11 +55,13 @@ func _update_crouch_state() -> void:
 
 	if crouching:
 		shape.size = Vector2(24.0, 32.0)
-		body.scale = Vector2(1.0, 0.72)
+		body_top.scale = Vector2(1.0, 0.72)
+		body_bottom.scale = Vector2(1.0, 0.72)
 		collision_shape.position = Vector2(0.0, 8.0)
 	else:
 		shape.size = Vector2(24.0, 48.0)
-		body.scale = Vector2.ONE
+		body_top.scale = Vector2.ONE
+		body_bottom.scale = Vector2.ONE
 		collision_shape.position = Vector2.ZERO
 
 

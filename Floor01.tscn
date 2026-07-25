@@ -8,6 +8,7 @@ size = Vector2(2048, 72)
 [node name="Floor01" type="Node2D"]
 
 [node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="Background" type="ColorRect" parent="Backdrop"]
 offset_right = 1280.0
