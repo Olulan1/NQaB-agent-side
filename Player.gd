@@ -1,22 +1,25 @@
 extends CharacterBody2D
 
-@export var speed: float = 240.0
-@export var crouch_speed: float = 140.0
-@export var jump_velocity: float = -420.0
-@export var gravity: float = 1400.0
+@export var speed: float = 96.0
+@export var crouch_speed: float = 64.0
+@export var jump_velocity: float = -360.0
+@export var gravity: float = 1200.0
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var projectile_spawn_offset: Vector2 = Vector2(18.0, -8.0)
 @export var crouched_projectile_spawn_offset: Vector2 = Vector2(18.0, -2.0)
 @export var fire_cooldown: float = 0.18
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var body_top: Polygon2D = $BodyTop
-@onready var body_bottom: Polygon2D = $BodyBottom
+@onready var visual_root: Node2D = $VisualRoot
 @onready var muzzle: Marker2D = $Muzzle
 
 var facing: int = 1
 var fire_timer: float = 0.0
 var crouching: bool = false
+
+
+func _ready() -> void:
+	_configure_inputs()
 
 
 func _physics_process(delta: float) -> void:
@@ -48,20 +51,35 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func _configure_inputs() -> void:
+	_bind_key("move_left", KEY_W)
+	_bind_key("move_right", KEY_D)
+	_bind_key("jump", KEY_SPACE)
+	_bind_key("crouch", KEY_S)
+	_bind_key("fire", KEY_E)
+
+
+func _bind_key(action_name: StringName, keycode: Key) -> void:
+	if not InputMap.has_action(action_name):
+		InputMap.add_action(action_name)
+	InputMap.action_erase_events(action_name)
+	var event := InputEventKey.new()
+	event.physical_keycode = keycode
+	InputMap.action_add_event(action_name, event)
+
+
 func _update_crouch_state() -> void:
 	var shape := collision_shape.shape as RectangleShape2D
 	if shape == null:
 		return
 
 	if crouching:
-		shape.size = Vector2(24.0, 32.0)
-		body_top.scale = Vector2(1.0, 0.72)
-		body_bottom.scale = Vector2(1.0, 0.72)
-		collision_shape.position = Vector2(0.0, 8.0)
+		shape.size = Vector2(20.0, 28.0)
+		visual_root.position = Vector2(0.0, 6.0)
+		collision_shape.position = Vector2(0.0, 6.0)
 	else:
-		shape.size = Vector2(24.0, 48.0)
-		body_top.scale = Vector2.ONE
-		body_bottom.scale = Vector2.ONE
+		shape.size = Vector2(20.0, 40.0)
+		visual_root.position = Vector2.ZERO
 		collision_shape.position = Vector2.ZERO
 
 
