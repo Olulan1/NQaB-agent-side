@@ -1,0 +1,15 @@
+{
+  "source": "spec",
+  "name": "01-foundation-slice",
+  "basePath": "/Users/lani/nqab/specs/01-foundation-slice",
+  "phase": "research",
+  "taskIndex": 0,
+  "totalTasks": 0,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": true,
+  "relatedSpecs": [],
+  "awaitingApproval": true
+}
