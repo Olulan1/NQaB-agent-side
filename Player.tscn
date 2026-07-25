@@ -15,5 +15,8 @@ shape = SubResource("1_player_shape")
 polygon = PackedVector2Array(-12, -24, 12, -24, 12, 24, -12, 24)
 color = Color(0.898039, 0.909804, 0.941176, 1)
 
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(18, -8)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

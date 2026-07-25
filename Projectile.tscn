@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://p7r8m6n4b2v1c"]
+
+[ext_resource type="Script" path="res://Projectile.gd" id="1_projectile_script"]
+
+[sub_resource type="RectangleShape2D" id="1_projectile_shape"]
+size = Vector2(14, 4)
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_projectile_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_projectile_shape")
+
+[node name="Bolt" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -2, 7, -2, 7, 2, -7, 2)
+color = Color(0.839216, 0.945098, 1, 1)

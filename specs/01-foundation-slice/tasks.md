@@ -15,7 +15,7 @@ Total tasks: 5
   - **Verify**: Open the project and confirm the first floor loads with clear left/right traversal space.
   - **Commit**: `feat(slice): make floor 1 walkable`
 
-- [ ] 1.2 [P] Add the player baseline
+- [x] 1.2 [P] Add the player baseline
   - **Do**:
     1. Create `Player.tscn` with left/right movement, jump, crouch, and blaster fire.
     2. Add only the input actions required for those controls.
