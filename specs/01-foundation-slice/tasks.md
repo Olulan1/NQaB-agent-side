@@ -5,7 +5,7 @@ Total tasks: 5
 
 ## Phase 1: Make It Work (POC)
 
-- [ ] 1.1 [P] Make Floor 1 fully walkable
+- [x] 1.1 [P] Make Floor 1 fully walkable
   - **Do**:
     1. Keep `Main.tscn` as the entry scene.
     2. Build `Floor01.tscn` as a clean, unobstructed first floor.

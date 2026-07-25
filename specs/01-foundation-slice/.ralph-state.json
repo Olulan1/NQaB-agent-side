@@ -3,7 +3,7 @@
   "name": "01-foundation-slice",
   "basePath": "/Users/lani/nqab/specs/01-foundation-slice",
   "phase": "implementation",
-  "taskIndex": 0,
+  "taskIndex": 1,
   "totalTasks": 5,
   "taskIteration": 1,
   "maxTaskIterations": 5,
@@ -11,5 +11,5 @@
   "maxGlobalIterations": 100,
   "commitSpec": true,
   "relatedSpecs": [],
-  "awaitingApproval": true
+  "awaitingApproval": false
 }

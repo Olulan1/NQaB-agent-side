@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j7q4t7j52m1x1"]
 
-[ext_resource type="PackedScene" path="res://Room01.tscn" id="1_room01"]
+[ext_resource type="PackedScene" path="res://Floor01.tscn" id="1_floor01"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Room01" parent="." instance=ExtResource("1_room01")]
+[node name="Floor01" parent="." instance=ExtResource("1_floor01")]
