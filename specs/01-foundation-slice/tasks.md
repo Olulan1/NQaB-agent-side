@@ -5,12 +5,12 @@ Total tasks: 5
 
 ## Phase 1: Make It Work (POC)
 
-- [x] 1.1 [P] Make Floor 1 fully walkable
+- [x] 1.1 [P] Make Intro01 fully walkable
   - **Do**:
     1. Keep `Main.tscn` as the entry scene.
-    2. Build `Floor01.tscn` as a clean, unobstructed first floor.
+    2. Build `Intro01.tscn` as a clean, unobstructed first floor.
     3. Make sure the player can move freely without level geometry blocking basic movement.
-  - **Files**: `project.godot`, `Main.tscn`, `Floor01.tscn`, `Player.tscn`
+  - **Files**: `project.godot`, `Main.tscn`, `Intro01.tscn`, `Player.tscn`
   - **Done when**: Launching the project drops the player into Floor 1 and movement is not hindered by the room layout.
   - **Verify**: Open the project and confirm the first floor loads with clear left/right traversal space.
   - **Commit**: `feat(slice): make floor 1 walkable`
@@ -25,12 +25,12 @@ Total tasks: 5
   - **Verify**: Play Floor 1 and confirm each input works as expected.
   - **Commit**: `feat(slice): add player baseline`
 
-- [x] 1.3 [P] Add Floor 2 as the first pressure check
+- [x] 1.3 [P] Add Intro02 as the first pressure check
   - **Do**:
-    1. Build `Floor02.tscn` with one simple threat or obstacle.
+    1. Build `Intro02.tscn` with one simple threat or obstacle.
     2. Keep the path readable so movement remains the primary feel test.
     3. Avoid introducing anything that obscures whether the player controller still feels clean.
-  - **Files**: `Floor02.tscn`, `EnemyBasic.tscn`, `Player.tscn`
+  - **Files**: `Intro02.tscn`, `EnemyBasic.tscn`, `Player.tscn`
   - **Done when**: Floor 2 adds a small amount of pressure without making movement feel awkward.
   - **Verify**: Play Floors 1-2 and confirm traversal remains smooth.
   - **Commit**: `feat(slice): add floor 2 pressure`
@@ -50,7 +50,7 @@ Total tasks: 5
     1. Play the full 3-floor sequence.
     2. Adjust room spacing, collision, and pacing only where movement feels hindered.
     3. Keep the slice minimal and avoid adding new systems.
-  - **Files**: `Floor01.tscn`, `Floor02.tscn`, `Floor03.tscn`, `Player.tscn`
+  - **Files**: `Intro01.tscn`, `Intro02.tscn`, `Floor03.tscn`, `Player.tscn`
   - **Done when**: The 3-floor slice feels clear, playable, and tuneable without extra complexity.
   - **Verify**: Run the full sequence and confirm movement stays consistent across all three floors.
   - **Commit**: `feat(slice): tune first 3 floors`

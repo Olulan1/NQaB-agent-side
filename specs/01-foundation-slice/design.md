@@ -9,9 +9,9 @@ Build a minimal Godot 2D slice that proves the game can support corridor movemen
 ## Scene structure
 
 - `Main.tscn`: entry scene and root of the slice.
-- `Room01.tscn`: first corridor room, built to launch immediately.
-- `Floor01.tscn`: first floor, tuned to prove clean movement.
-- `Floor02.tscn`: second floor, adds one small pressure point without blocking movement.
+- `Intro00.tscn`: 0th-floor wrapper that features the first two intro floors.
+- `Intro01.tscn`: first intro floor, tuned to prove clean movement.
+- `Intro02.tscn`: second intro floor, adds one small pressure point without blocking movement.
 - `Floor03.tscn`: third floor, closes the first playable slice.
 - `Player.tscn`: player controller and combat actions.
 - `EnemyBasic.tscn`: first enemy type used to test pressure and damage.
@@ -36,9 +36,9 @@ Build a minimal Godot 2D slice that proves the game can support corridor movemen
 ## Implementation order
 
 1. Make `Main.tscn` launch the slice.
-2. Build `Floor01.tscn` so movement is fully unhindered.
+2. Build `Intro01.tscn` so movement is fully unhindered.
 3. Add `Player.tscn` with the required controls.
-4. Build `Floor02.tscn` and add the first light enemy pressure.
+4. Build `Intro02.tscn` and add the first light enemy pressure.
 5. Build `Floor03.tscn` and verify the 3-floor loop closes cleanly.
 
 ## Constraints

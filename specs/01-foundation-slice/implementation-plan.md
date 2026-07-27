@@ -48,12 +48,9 @@ Execute the first playable slice of *Not Quite a Box* as a minimal, tunable 3-fl
 - Floor 3 closes the loop cleanly.
 - The slice remains minimal, readable, and tuneable.
 
-## Current Implementation Tasks
-- Keep the game strictly 2D and preserve the existing main plan above.
-- Rename `Floor01.tscn` to `Intro01.tscn`.
-- Create `Intro02.tscn` from the current `Intro01` layout, with one extra grid square of floor on the left of the visible background while staying connected to the existing floor.
-- Add a seamless scene transition at the end of `Intro01` that transports the player to the start of `Intro02.tscn`.
-- Add a grey vertical background wall in the middle of `Intro02`.
-- Add centered Roboto text in `Intro02` at size 42 and 80% opacity above the wall, spanning about four grid squares.
-- Add a grey wall in `Intro02` that blocks forward movement and is higher than the player can jump.
-- Keep the current work focused on the first 3 floors only.
+## (Potentially) Completed Tasks
+- 1.1 Floor 1 movement gate: the first playable space is in place and unobstructed.
+- 1.2 Player baseline: movement, jump, crouch, and blaster fire are already wired.
+- 1.3 Floor 2 pressure check: the first pressure floor has been added and linked.
+- The current 0th-floor wrapper now features the Intro01/Intro02 sequence.
+- Keep the main plan above unchanged; this subsection is only for progress notes.

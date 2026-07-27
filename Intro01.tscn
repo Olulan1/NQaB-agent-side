@@ -9,7 +9,7 @@ size = Vector2(1279.5, 72)
 [sub_resource type="RectangleShape2D" id="2_portal_shape"]
 size = Vector2(32, 72)
 
-[node name="Floor01" type="Node2D" unique_id=1710646779]
+[node name="Intro01" type="Node2D" unique_id=1710646779]
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=863519553]
 layer = -1
@@ -45,7 +45,7 @@ position = Vector2(160, 556)
 [node name="ExitPortal" type="Area2D" parent="."]
 position = Vector2(1216, 556)
 script = ExtResource("2_portal_script")
-target_scene_path = "res://Floor02.tscn"
+target_scene_path = "res://Intro02.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal"]
 shape = SubResource("2_portal_shape")
