@@ -1,0 +1,7 @@
+- Using grid snap, ensure the floor is only 3 blocks past the visible background for the player
+- Rename Floor01.tscn to Intro01.tscn
+- Make a file, Intro02.tscn the exact same as the aforementioned .tscn file as it currently is, with the one extra grid square of floor on the left of the background, still connected to the existing floor.
+- At the end of the visible path in Intro01, being the boundary between where the floor and the background stop meeting, instantiate a new scene that transports the player to the start of Intro02.tscn, at the end of the aforementioned grid square, entering the visible view for the player.
+- Add a grey, vertical background wall in the middle of background of Intro02
+- Add Roboto text in 42 size, 80% opacity in the middle of the background of Intro02, above the wall, which should be about 4 grid squares wide
+- Add a wall that obstructs the player from moving forward in Intro02, higher than their jump height, colored grey

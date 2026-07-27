@@ -25,7 +25,7 @@ Total tasks: 5
   - **Verify**: Play Floor 1 and confirm each input works as expected.
   - **Commit**: `feat(slice): add player baseline`
 
-- [ ] 1.3 [P] Add Floor 2 as the first pressure check
+- [x] 1.3 [P] Add Floor 2 as the first pressure check
   - **Do**:
     1. Build `Floor02.tscn` with one simple threat or obstacle.
     2. Keep the path readable so movement remains the primary feel test.
