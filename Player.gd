@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	if fire_timer > 0.0:
 		fire_timer = maxf(fire_timer - delta, 0.0)
 
-	var left_held := Input.is_physical_key_pressed(KEY_W)
+	var left_held := Input.is_physical_key_pressed(KEY_A)
 	var right_held := Input.is_physical_key_pressed(KEY_D)
 	var horizontal := 0.0
 	if left_held != right_held:

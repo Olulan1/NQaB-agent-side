@@ -23,16 +23,16 @@ offset_bottom = 576.0
 color = Color(0.109804, 0.223529, 0.337255, 0.3)
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(1024, 684)
+position = Vector2(1024, 612)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("1_floor_shape")
 
 [node name="FloorVisual" type="ColorRect" parent="Backdrop"]
-offset_top = 648.0
+offset_top = 576.0
 offset_right = 2048.0
-offset_bottom = 720.0
-color = Color(0.105882, 0.129412, 0.188235, 1)
+offset_bottom = 648.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(160, 624)
+position = Vector2(160, 556)
