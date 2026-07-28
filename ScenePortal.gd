@@ -1,6 +1,7 @@
 extends Area2D
 
 @export_file("*.tscn") var target_scene_path: String = ""
+@export var target_spawn_name: String = ""
 
 var _transitioning: bool = false
 
@@ -16,4 +17,5 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	_transitioning = true
+	SceneTransition.set_pending_spawn_name(target_spawn_name)
 	get_tree().call_deferred("change_scene_to_file", target_scene_path)

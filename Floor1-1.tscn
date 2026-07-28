@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://wus2qayr0lbg"]
+
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="1_floor_shape"]
+size = Vector2(1279.5, 72)
+
+[sub_resource type="RectangleShape2D" id="2_left_boundary_shape"]
+size = Vector2(32, 144)
+
+[sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
+size = Vector2(32, 144)
+
+[node name="Floor1-1" type="Node2D"]
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Backdrop"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.164706, 0.188235, 1)
+
+[node name="ScreenPanel" type="ColorRect" parent="Backdrop"]
+offset_top = 288.0
+offset_right = 1280.0
+offset_bottom = 432.0
+color = Color(0.494118, 0.878431, 0.882353, 1)
+
+[node name="FloorVisual" type="ColorRect" parent="Backdrop"]
+offset_top = 360.0
+offset_right = 2048.0
+offset_bottom = 432.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1024, 420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-383.75, 0)
+shape = SubResource("1_floor_shape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-16, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("2_left_boundary_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(1296, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("3_right_boundary_shape")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(160, 364)

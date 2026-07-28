@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 96.0
 @export var crouch_speed: float = 64.0
-@export var jump_velocity: float = -360.0
+@export var jump_velocity: float = -416.0
+@export var sprint_multiplier: float = 3.0
 @export var gravity: float = 1200.0
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var projectile_spawn_offset: Vector2 = Vector2(18.0, -8.0)
@@ -44,6 +45,8 @@ func _physics_process(delta: float) -> void:
 	jump_was_held = jump_held
 
 	var move_speed := crouch_speed if crouching else speed
+	if Input.is_key_pressed(KEY_SHIFT):
+		move_speed *= sprint_multiplier
 	velocity.x = horizontal * move_speed
 
 	var fire_held := Input.is_physical_key_pressed(KEY_E)

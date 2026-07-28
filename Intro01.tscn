@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bjsk12qb2gb0l"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
-[ext_resource type="Script" path="res://ScenePortal.gd" id="2_portal_script"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="2_portal_script"]
+[ext_resource type="Script" path="res://Intro01.gd" id="3_intro01_script"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1279.5, 72)
@@ -9,7 +10,11 @@ size = Vector2(1279.5, 72)
 [sub_resource type="RectangleShape2D" id="2_portal_shape"]
 size = Vector2(32, 72)
 
+[sub_resource type="RectangleShape2D" id="3_left_boundary_shape"]
+size = Vector2(32, 720)
+
 [node name="Intro01" type="Node2D" unique_id=1710646779]
+script = ExtResource("3_intro01_script")
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=863519553]
 layer = -1
@@ -17,20 +22,27 @@ layer = -1
 [node name="Background" type="ColorRect" parent="Backdrop" unique_id=1249804464]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.0705882, 0.137255, 0.211765, 1)
+color = Color(0.2, 0.0, 0.0, 1)
 
 [node name="UpperGlow" type="ColorRect" parent="Backdrop" unique_id=936115880]
 offset_left = 72.0
 offset_top = 96.0
 offset_right = 1208.0
 offset_bottom = 576.0
-color = Color(0.109804, 0.223529, 0.337255, 0.3)
+color = Color(0.313725, 0.0980392, 0.0980392, 0.3)
 
 [node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=861283913]
 offset_top = 576.0
 offset_right = 2048.0
 offset_bottom = 648.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="PortalVisual" type="ColorRect" parent="Backdrop" unique_id=285574040]
+offset_left = 1200.0
+offset_top = 520.0
+offset_right = 1232.0
+offset_bottom = 576.0
+color = Color(0.219608, 0.439216, 0.654902, 0.7)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1258947198]
 position = Vector2(1024, 612)
@@ -42,17 +54,19 @@ shape = SubResource("1_floor_shape")
 [node name="Player" parent="." unique_id=1713921933 instance=ExtResource("1_player")]
 position = Vector2(160, 556)
 
-[node name="ExitPortal" type="Area2D" parent="."]
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=2106397712]
+position = Vector2(1120, 556)
+
+[node name="ExitPortal" type="Area2D" parent="." unique_id=1398987573]
 position = Vector2(1216, 556)
 script = ExtResource("2_portal_script")
 target_scene_path = "res://Intro02.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal" unique_id=1652989034]
 shape = SubResource("2_portal_shape")
 
-[node name="PortalVisual" type="ColorRect" parent="Backdrop"]
-offset_left = 1200.0
-offset_top = 520.0
-offset_right = 1232.0
-offset_bottom = 576.0
-color = Color(0.219608, 0.439216, 0.654902, 0.7)
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=2106397710]
+position = Vector2(-16, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=2106397711]
+shape = SubResource("3_left_boundary_shape")

@@ -1,55 +1,101 @@
-[gd_scene format=3 uid="uid://k0f2z5r9p7s2a"]
+[gd_scene format=3 uid="uid://damct1xrls2jq"]
 
-[ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="2_portal_script"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
-size = Vector2(1279.5, 72)
+size = Vector2(1472, 72)
 
-[sub_resource type="RectangleShape2D" id="2_barrier_shape"]
-size = Vector2(32, 48)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vb1t"]
+size = Vector2(64, 130)
 
-[node name="Intro02" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
+size = Vector2(32, 572)
 
-[node name="Backdrop" type="CanvasLayer" parent="."]
+[node name="Intro02" type="Node2D" unique_id=1067762781]
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=624274905]
 layer = -1
 
-[node name="Background" type="ColorRect" parent="Backdrop"]
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1775833851]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.0705882, 0.137255, 0.211765, 1)
+color = Color(0.2, 0, 0, 1)
 
-[node name="UpperGlow" type="ColorRect" parent="Backdrop"]
+[node name="UpperGlow" type="ColorRect" parent="Backdrop" unique_id=1120577197]
 offset_left = 72.0
 offset_top = 96.0
 offset_right = 1208.0
 offset_bottom = 576.0
-color = Color(0.109804, 0.223529, 0.337255, 0.3)
+color = Color(0.313725, 0.0980392, 0.0980392, 0.3)
 
-[node name="FloorVisual" type="ColorRect" parent="Backdrop"]
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=2045417099]
 offset_top = 576.0
 offset_right = 2048.0
 offset_bottom = 648.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="BarrierVisual" type="ColorRect" parent="Backdrop"]
-offset_left = 816.0
-offset_top = 528.0
-offset_right = 848.0
-offset_bottom = 576.0
+[node name="BarrierVisual" type="ColorRect" parent="Backdrop" unique_id=630670589]
+offset_left = 512.00006
+offset_right = 515.3551
+offset_bottom = 447.5022
+scale = Vector2(76.30287, 1.2871445)
 color = Color(0.388235, 0.388235, 0.388235, 1)
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1593926073]
 position = Vector2(1024, 612)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(-383.75, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2146852389]
+position = Vector2(-480, 0)
 shape = SubResource("1_floor_shape")
 
-[node name="Barrier" type="StaticBody2D" parent="."]
+[node name="Barrier" type="StaticBody2D" parent="." unique_id=1198197902]
 position = Vector2(832, 552)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
-shape = SubResource("2_barrier_shape")
-
-[node name="Player" parent="." instance=ExtResource("1_player")]
+[node name="Player" parent="." unique_id=1804852992 instance=ExtResource("1_player")]
 position = Vector2(160, 556)
+
+[node name="ReturnPortal" type="Area2D" parent="." unique_id=1708558279]
+position = Vector2(64, 288)
+script = ExtResource("2_portal_script")
+target_scene_path = "res://Intro01.tscn"
+target_spawn_name = "intro01_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnPortal" unique_id=1708558280]
+position = Vector2(-96, 224)
+shape = SubResource("RectangleShape2D_2vb1t")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1708558281]
+position = Vector2(-16, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1708558282]
+position = Vector2(-64, -2)
+shape = SubResource("3_right_boundary_shape")
+
+[node name="ReturnPortalVisual" type="ColorRect" parent="." unique_id=164468693]
+offset_left = -64.0
+offset_top = 448.0
+offset_bottom = 576.0
+color = Color(0.219608, 0.439216, 0.654902, 0.7)
+
+[node name="TowerPortal" type="Area2D" parent="." unique_id=1708558283]
+position = Vector2(512, 288)
+script = ExtResource("2_portal_script")
+target_scene_path = "res://Floor1-1.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerPortal" unique_id=1708558284]
+position = Vector2(96, 224)
+shape = SubResource("RectangleShape2D_2vb1t")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1708558285]
+position = Vector2(1296, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1708558286]
+shape = SubResource("3_right_boundary_shape")
+
+[node name="TowerPortalVisual" type="ColorRect" parent="." unique_id=1708558287]
+offset_left = 576.0
+offset_top = 448.0
+offset_right = 640.0
+offset_bottom = 576.0
+color = Color(0, 0, 0, 0.7019608)
