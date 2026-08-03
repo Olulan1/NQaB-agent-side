@@ -52,5 +52,7 @@ Execute the first playable slice of *Not Quite a Box* as a minimal, tunable 3-fl
 - 1.1 Floor 1 movement gate: the first playable space is in place and unobstructed.
 - 1.2 Player baseline: movement, jump, crouch, and blaster fire are already wired.
 - 1.3 Floor 2 pressure check: the first pressure floor has been added and linked.
+- 1.4 Floor 3 and close the first slice: the third floor and elevator exit are now in place.
+- 1.5 Readability pass: the 3-floor slice has been reviewed and kept minimal.
 - The current 0th-floor wrapper now features the Intro01/Intro02 sequence.
 - Keep the main plan above unchanged; this subsection is only for progress notes.

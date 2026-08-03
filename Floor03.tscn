@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b7x8edrnv3688"]
+
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Elevator.tscn" id="2_elevator"]
+
+[sub_resource type="RectangleShape2D" id="1_floor_shape"]
+size = Vector2(1360, 72)
+
+[sub_resource type="RectangleShape2D" id="2_left_boundary_shape"]
+size = Vector2(32, 432)
+
+[sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
+size = Vector2(32, 144)
+
+[node name="Floor03" type="Node2D" unique_id=10237484]
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=959528717]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=901171232]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.164706, 0.188235, 1)
+
+[node name="CorridorPanel" type="ColorRect" parent="Backdrop" unique_id=1470932215]
+offset_top = 288.0
+offset_right = 1280.0
+offset_bottom = 432.0
+color = Color(0.141176, 0.317647, 0.352941, 1)
+
+[node name="ExitBand" type="ColorRect" parent="Backdrop" unique_id=526978492]
+offset_left = 1128.0
+offset_top = 448.0
+offset_right = 1288.0
+offset_bottom = 520.0
+rotation = -1.5707964
+color = Color(0.219608, 0.439216, 0.654902, 0.25)
+
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=1600095086]
+offset_top = 360.0
+offset_right = 1280.0
+offset_bottom = 432.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="ExitLabel" type="Label" parent="Backdrop" unique_id=321466449]
+offset_left = 1052.0
+offset_top = 244.0
+offset_right = 1252.0
+offset_bottom = 276.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 0.9)
+theme_override_font_sizes/font_size = 18
+text = "EXIT ELEVATOR"
+horizontal_alignment = 1
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=537728461]
+position = Vector2(1024, 420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1150747848]
+position = Vector2(-424, 0)
+shape = SubResource("1_floor_shape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=260013190]
+position = Vector2(-16, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1383109015]
+position = Vector2(-80, -144)
+shape = SubResource("2_left_boundary_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1420994024]
+position = Vector2(1296, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1704224994]
+shape = SubResource("3_right_boundary_shape")
+
+[node name="Player" parent="." unique_id=952308366 instance=ExtResource("1_player")]
+position = Vector2(160, 364)
+
+[node name="ExitElevator" parent="." unique_id=628796693 instance=ExtResource("2_elevator")]
+position = Vector2(1160, 388)
+target_scene_path = "res://Intro01.tscn"

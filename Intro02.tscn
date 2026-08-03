@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="2_portal_script"]
+[ext_resource type="Script" uid="uid://cehbmplfysk3c" path="res://Intro02.gd" id="3_intro02_script"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1472, 72)
@@ -13,6 +14,7 @@ size = Vector2(64, 130)
 size = Vector2(32, 572)
 
 [node name="Intro02" type="Node2D" unique_id=1067762781]
+script = ExtResource("3_intro02_script")
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=624274905]
 layer = -1
@@ -55,6 +57,9 @@ position = Vector2(832, 552)
 [node name="Player" parent="." unique_id=1804852992 instance=ExtResource("1_player")]
 position = Vector2(160, 556)
 
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=1804852993]
+position = Vector2(160, 556)
+
 [node name="ReturnPortal" type="Area2D" parent="." unique_id=1708558279]
 position = Vector2(64, 288)
 script = ExtResource("2_portal_script")
@@ -79,12 +84,11 @@ offset_bottom = 576.0
 color = Color(0.219608, 0.439216, 0.654902, 0.7)
 
 [node name="TowerPortal" type="Area2D" parent="." unique_id=1708558283]
-position = Vector2(512, 288)
+position = Vector2(608, 512)
 script = ExtResource("2_portal_script")
-target_scene_path = "res://Floor1-1.tscn"
+target_scene_path = "res://Floor00.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TowerPortal" unique_id=1708558284]
-position = Vector2(96, 224)
 shape = SubResource("RectangleShape2D_2vb1t")
 
 [node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1708558285]

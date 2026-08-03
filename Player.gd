@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @export var speed: float = 96.0
 @export var crouch_speed: float = 64.0
-@export var jump_velocity: float = -416.0
+@export var jump_velocity: float = -360.0
 @export var sprint_multiplier: float = 3.0
-@export var fall_gravity: float = 1200.0
+@export var fall_gravity: float = 400.0
 @export var knockback_horizontal_speed: float = 160.0
 @export var knockback_vertical_speed: float = -160.0
 @export var knockback_duration: float = 0.14
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	var jump_held := Input.is_physical_key_pressed(KEY_SPACE)
 	var weak_jump_held := Input.is_physical_key_pressed(KEY_W)
 	if is_on_floor() and weak_jump_held and not weak_jump_was_held and not (jump_held and not jump_was_held):
-		velocity.y = jump_velocity * 0.75
+		velocity.y = jump_velocity * 0.5
 	elif is_on_floor() and jump_held and not jump_was_held:
 		velocity.y = jump_velocity
 	jump_was_held = jump_held

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wus2qayr0lbg"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
-[ext_resource type="Script" path="res://Turret.gd" id="2_turret_script"]
+[ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1279.5, 72)
@@ -61,12 +61,12 @@ color = Color(0.388235, 0.65098, 0.662745, 1)
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1091297499]
 position = Vector2(1024, 420)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699051]
-position = Vector2(-383.75, 0)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=942899569]
+position = Vector2(-384, -172)
 shape = SubResource("1_floor_shape")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/CollisionShape2D" unique_id=942899569]
-position = Vector2(-0.25, -172)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699051]
+position = Vector2(-383.75, 0)
 shape = SubResource("1_floor_shape")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=228714617]
@@ -101,11 +101,10 @@ shape = SubResource("5_turret_shape")
 shape = SubResource("6_turret_knockback_shape")
 
 [node name="TurretVisual" type="Polygon2D" parent="Turret" unique_id=2026734512]
-polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)
 color = Color(0.388235, 0.388235, 0.388235, 1)
+polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)
 
 [node name="FireTimer" type="Timer" parent="Turret" unique_id=2026734513]
-wait_time = 1.0
 autostart = true
 
 [node name="Turret02" type="StaticBody2D" parent="." unique_id=2026734517]
@@ -138,13 +137,13 @@ position = Vector2(6, 0)
 shape = SubResource("9_turret02_knockback_shape")
 
 [node name="TurretVisual" type="Polygon2D" parent="Turret02" unique_id=2026734521]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [node name="Dot" type="Polygon2D" parent="Turret02" unique_id=2026734523]
 position = Vector2(2, -2)
-polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 color = Color(0.85098, 0.172549, 0.192157, 1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 
 [node name="FireTimer" type="Timer" parent="Turret02" unique_id=2026734522]
 wait_time = 2.0

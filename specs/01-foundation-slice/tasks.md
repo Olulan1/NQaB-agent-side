@@ -35,7 +35,7 @@ Total tasks: 5
   - **Verify**: Play Floors 1-2 and confirm traversal remains smooth.
   - **Commit**: `feat(slice): add floor 2 pressure`
 
-- [ ] 1.4 [P] Add Floor 3 and close the first slice
+- [x] 1.4 [P] Add Floor 3 and close the first slice
   - **Do**:
     1. Build `Floor03.tscn` as the third and final floor in the initial slice.
     2. Add the minimal exit or transition needed to complete the 3-floor loop.
@@ -45,7 +45,7 @@ Total tasks: 5
   - **Verify**: Play from Floor 1 through Floor 3 and confirm the final transition works.
   - **Commit**: `feat(slice): complete 3-floor loop`
 
-- [ ] 1.5 [VERIFY] Tune the 3-floor slice for readability
+- [x] 1.5 [VERIFY] Tune the 3-floor slice for readability
   - **Do**:
     1. Play the full 3-floor sequence.
     2. Adjust room spacing, collision, and pacing only where movement feels hindered.
