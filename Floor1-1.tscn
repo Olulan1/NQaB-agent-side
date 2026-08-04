@@ -172,7 +172,7 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-32, -52.5, 32, -52.5, 32, 52.5, -32, 52.5)
 
 [node name="Player" parent="." unique_id=1003581347 instance=ExtResource("1_player")]
-position = Vector2(160, 364)
+position = Vector2(96, 364)
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1003581348]
 position = Vector2(68, 364)
