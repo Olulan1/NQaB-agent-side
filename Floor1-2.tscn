@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://wus2qayr0lbg"]
+[gd_scene format=3 uid="uid://r7m2p9v4x6q1"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
-[ext_resource type="Script" uid="uid://ddv43ppmvrsqx" path="res://Floor1-1.gd" id="3_floor_script"]
+[ext_resource type="Script" path="res://Floor1-2.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
@@ -33,66 +33,66 @@ size = Vector2(4, 16)
 size = Vector2(4, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
-size = Vector2(64, 108.5)
+size = Vector2(32, 105)
 
-[node name="Floor1-1" type="Node2D" unique_id=859458130]
+[node name="Floor1-2" type="Node2D" unique_id=859458131]
 script = ExtResource("3_floor_script")
 
-[node name="Backdrop" type="CanvasLayer" parent="." unique_id=1425520211]
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=1425520212]
 layer = -1
 
-[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1863727859]
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1863727860]
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.0784314, 0.164706, 0.188235, 1)
 
-[node name="ScreenPanel" type="ColorRect" parent="Backdrop" unique_id=2077473638]
+[node name="ScreenPanel" type="ColorRect" parent="Backdrop" unique_id=2077473639]
 offset_top = 288.0
 offset_right = 1280.0
 offset_bottom = 432.0
 color = Color(0.494118, 0.878431, 0.882353, 1)
 
-[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=227453762]
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=227453763]
 offset_top = 360.0
 offset_right = 2048.0
 offset_bottom = 432.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=1794428641]
+[node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=1794428642]
 offset_top = 264.0
 offset_right = 2048.0
 offset_bottom = 280.0
 color = Color(0.388235, 0.65098, 0.662745, 1)
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=1091297499]
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1091297500]
 position = Vector2(1024, 420)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=942899569]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=942899570]
 position = Vector2(-384, -172)
 shape = SubResource("1_floor_shape")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699051]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699052]
 position = Vector2(-327.75, 0)
 shape = SubResource("1_floor_shape")
 
-[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=228714617]
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=228714618]
 position = Vector2(-16, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1383946835]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1383946836]
 position = Vector2(0, -2)
 shape = SubResource("2_left_boundary_shape")
 
-[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1083262211]
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1083262212]
 position = Vector2(1296, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1804150624]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1804150625]
 position = Vector2(72, -48)
 shape = SubResource("3_right_boundary_shape")
 
-[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1918642201]
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1918642202]
 position = Vector2(1024, 272)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1918642202]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1918642203]
 position = Vector2(-383.75, 0)
 shape = SubResource("4_ceiling_shape")
 
@@ -157,22 +157,58 @@ polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 wait_time = 2.0
 autostart = true
 
-[node name="ElevatorReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
+[node name="Turret02_2" type="StaticBody2D" parent="." unique_id=2026734527]
+position = Vector2(960, 304)
+script = ExtResource("2_turret_script")
+fire_interval = 2.0
+start_delay = 0.7
+fire_left_only = true
+projectile_spawn_offset = Vector2(-12, 0)
+
+[node name="TopCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=2026734528]
+position = Vector2(0, -6)
+shape = SubResource("7_turret02_top_shape")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=2026734529]
+position = Vector2(-6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="RightCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=2026734530]
+position = Vector2(6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="KnockbackArea" type="Area2D" parent="Turret02_2" unique_id=2026734531]
+
+[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=2026734532]
+position = Vector2(-6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="RightHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=2026734533]
+position = Vector2(6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="TurretVisual" type="Polygon2D" parent="Turret02_2" unique_id=2026734534]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Dot" type="Polygon2D" parent="Turret02_2" unique_id=2026734535]
+position = Vector2(2, -2)
+color = Color(0.85098, 0.172549, 0.192157, 1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[node name="FireTimer" type="Timer" parent="Turret02_2" unique_id=2026734536]
+wait_time = 2.0
+autostart = true
+
+[node name="PrevScreenReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
 position = Vector2(608, 512)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor00.tscn"
-target_spawn_name = "ElevatorReturn"
+target_scene_path = "res://Floor1-1.tscn"
+target_spawn_name = "floor1_right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/ElevatorReturn" unique_id=1229656228]
-position = Vector2(-1552, -552)
-scale = Vector2(0.5, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/PrevScreenReturn" unique_id=1229656228]
+position = Vector2(-1552, -555.5)
 shape = SubResource("RectangleShape2D_1er4s")
-
-[node name="ElevatorReturnVisual" type="Polygon2D" parent="Turret02/ElevatorReturn" unique_id=1840224771]
-position = Vector2(-1552, -552)
-scale = Vector2(0.5, 1)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-32, -52.5, 32, -52.5, 32, 52.5, -32, 52.5)
 
 [node name="Player" parent="." unique_id=1003581347 instance=ExtResource("1_player")]
 position = Vector2(96, 364)
@@ -183,12 +219,9 @@ position = Vector2(68, 364)
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=1003581351]
 position = Vector2(1184, 364)
 
-[node name="NextScreen" type="Area2D" parent="." unique_id=1003581352]
+[node name="NextScreen" type="Area2D" parent="." unique_id=1003581349]
 position = Vector2(1216, 364)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor1-2.tscn"
-target_spawn_name = "floor1_left"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=1003581353]
-position = Vector2(0, -29.75)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=1003581350]
 shape = SubResource("RectangleShape2D_1er4s")

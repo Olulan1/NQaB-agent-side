@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var fire_interval: float = 1.0
+@export var start_delay: float = 0.0
 @export var projectile_speed: float = 640.0
 @export var aim_at_player: bool = false
 @export var fire_left_only: bool = false
@@ -15,8 +16,13 @@ extends StaticBody2D
 func _ready() -> void:
 	fire_timer.wait_time = fire_interval
 	fire_timer.timeout.connect(_fire)
-	fire_timer.start()
 	knockback_area.body_entered.connect(_on_knockback_area_body_entered)
+	fire_timer.stop()
+	if start_delay > 0.0:
+		await get_tree().create_timer(start_delay).timeout
+	if not is_inside_tree():
+		return
+	fire_timer.start()
 
 
 func _fire() -> void:
