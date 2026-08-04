@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Elevator.tscn" id="2_elevator"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_portal_script"]
+[ext_resource type="Script" path="res://Floor00.gd" id="4_floor_script"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1360, 72)
@@ -12,7 +14,11 @@ size = Vector2(32, 432)
 [sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
 size = Vector2(32, 144)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vb1t"]
+size = Vector2(80, 161)
+
 [node name="Floor00" type="Node2D" unique_id=10237484]
+script = ExtResource("4_floor_script")
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=959528717]
 layer = -1
@@ -29,18 +35,10 @@ offset_bottom = 432.0
 color = Color(0.141176, 0.317647, 0.352941, 1)
 
 [node name="ExitBand" type="ColorRect" parent="Backdrop" unique_id=526978492]
-offset_left = 1080.0
-offset_top = 384.0
-offset_right = 1240.0
-offset_bottom = 456.0
-rotation = -1.5707964
-color = Color(0.219608, 0.439216, 0.654902, 0.25)
-
-[node name="ReturnBand" type="ColorRect" parent="Backdrop" unique_id=1810756457]
-offset_left = -80.0
-offset_top = 384.0
-offset_right = 80.0
-offset_bottom = 461.90906
+offset_left = 1088.0
+offset_top = 416.0
+offset_right = 1248.0
+offset_bottom = 477.71692
 rotation = -1.5707964
 color = Color(0.219608, 0.439216, 0.654902, 0.25)
 
@@ -83,6 +81,26 @@ shape = SubResource("3_right_boundary_shape")
 [node name="Player" parent="." unique_id=952308366 instance=ExtResource("1_player")]
 position = Vector2(160, 364)
 
+[node name="ReturnBand" type="Area2D" parent="." unique_id=628796692]
+position = Vector2(64, 288)
+script = ExtResource("3_portal_script")
+target_scene_path = "res://Intro02.tscn"
+target_spawn_name = "intro02_middle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnBand" unique_id=628796694]
+position = Vector2(-104, 16.5)
+shape = SubResource("RectangleShape2D_2vb1t")
+
+[node name="ReturnBandVisual" type="ColorRect" parent="." unique_id=628796695]
+offset_left = -80.0
+offset_top = 224.0
+offset_bottom = 384.0
+color = Color(0.219608, 0.439216, 0.654902, 0.7)
+
 [node name="ExitElevator" parent="." unique_id=628796693 instance=ExtResource("2_elevator")]
 position = Vector2(1120, 352)
-target_scene_path = "res://Intro01.tscn"
+target_scene_path = "res://Floor1-1.tscn"
+target_spawn_name = "floor1_left"
+
+[node name="ElevatorReturn" type="Marker2D" parent="." unique_id=628796696]
+position = Vector2(1064, 352)

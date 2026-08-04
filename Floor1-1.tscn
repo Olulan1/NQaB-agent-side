@@ -2,15 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
+[ext_resource type="Script" uid="uid://ddv43ppmvrsqx" path="res://Floor1-1.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
-size = Vector2(1279.5, 72)
+size = Vector2(1391.5, 72)
 
 [sub_resource type="RectangleShape2D" id="2_left_boundary_shape"]
-size = Vector2(32, 144)
+size = Vector2(32, 148)
 
 [sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
-size = Vector2(32, 144)
+size = Vector2(64, 144)
 
 [sub_resource type="RectangleShape2D" id="4_ceiling_shape"]
 size = Vector2(1279.5, 16)
@@ -30,7 +32,11 @@ size = Vector2(4, 16)
 [sub_resource type="RectangleShape2D" id="9_turret02_knockback_shape"]
 size = Vector2(4, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
+size = Vector2(32, 105)
+
 [node name="Floor1-1" type="Node2D" unique_id=859458130]
+script = ExtResource("3_floor_script")
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=1425520211]
 layer = -1
@@ -66,19 +72,21 @@ position = Vector2(-384, -172)
 shape = SubResource("1_floor_shape")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699051]
-position = Vector2(-383.75, 0)
+position = Vector2(-327.75, 0)
 shape = SubResource("1_floor_shape")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=228714617]
 position = Vector2(-16, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1383946835]
+position = Vector2(0, -2)
 shape = SubResource("2_left_boundary_shape")
 
 [node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1083262211]
 position = Vector2(1296, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1804150624]
+position = Vector2(72, -48)
 shape = SubResource("3_right_boundary_shape")
 
 [node name="Ceiling" type="StaticBody2D" parent="." unique_id=1918642201]
@@ -149,5 +157,22 @@ polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 wait_time = 2.0
 autostart = true
 
+[node name="ElevatorReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
+position = Vector2(608, 512)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor00.tscn"
+target_spawn_name = "ElevatorReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/ElevatorReturn" unique_id=1229656228]
+position = Vector2(-1552, -555.5)
+shape = SubResource("RectangleShape2D_1er4s")
+
+[node name="ElevatorReturnVisual" type="Polygon2D" parent="Turret02/ElevatorReturn" unique_id=1840224771]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, -52.5, 32, -52.5, 32, 52.5, -32, 52.5)
+
 [node name="Player" parent="." unique_id=1003581347 instance=ExtResource("1_player")]
 position = Vector2(160, 364)
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=1003581348]
+position = Vector2(68, 364)

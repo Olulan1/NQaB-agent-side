@@ -58,7 +58,10 @@ position = Vector2(832, 552)
 position = Vector2(160, 556)
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1804852993]
-position = Vector2(160, 556)
+position = Vector2(24, 556)
+
+[node name="MiddleSpawn" type="Marker2D" parent="." unique_id=1804852994]
+position = Vector2(552, 556)
 
 [node name="ReturnPortal" type="Area2D" parent="." unique_id=1708558279]
 position = Vector2(64, 288)
