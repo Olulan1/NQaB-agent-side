@@ -32,15 +32,15 @@ func _physics_process(delta: float) -> void:
 	if knockback_time_left > 0.0:
 		knockback_time_left = maxf(knockback_time_left - delta, 0.0)
 
-	var left_held := Input.is_physical_key_pressed(KEY_A)
-	var right_held := Input.is_physical_key_pressed(KEY_D)
+	var left_held := Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)
+	var right_held := Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)
 	var horizontal := 0.0
 	if knockback_time_left <= 0.0:
 		if left_held != right_held:
 			horizontal = -1.0 if left_held else 1.0
 			facing = -1 if left_held else 1
 
-	crouching = Input.is_physical_key_pressed(KEY_S)
+	crouching = Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)
 	_update_crouch_state()
 	_update_muzzle_position()
 
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += fall_gravity * delta
 
 	var jump_held := Input.is_physical_key_pressed(KEY_SPACE)
-	var weak_jump_held := Input.is_physical_key_pressed(KEY_W)
+	var weak_jump_held := Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)
 	if is_on_floor() and weak_jump_held and not weak_jump_was_held and not (jump_held and not jump_was_held):
 		velocity.y = jump_velocity * 0.5
 	elif is_on_floor() and jump_held and not jump_was_held:
