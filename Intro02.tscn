@@ -54,6 +54,17 @@ shape = SubResource("1_floor_shape")
 [node name="Player" parent="." unique_id=1804852992 instance=ExtResource("1_player")]
 position = Vector2(53, 556)
 
+[node name="TitleLayer" type="CanvasLayer" parent="." unique_id=1804852995]
+
+[node name="TitleLabel" type="Label" parent="TitleLayer" unique_id=1804852996]
+offset_left = 80.0
+offset_top = 176.0
+offset_right = 416.0
+offset_bottom = 321.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_font_sizes/font_size = 24
+text = "Not Quite a Box"
+
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1804852993]
 position = Vector2(24, 556)
 
