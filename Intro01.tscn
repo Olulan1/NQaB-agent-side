@@ -25,9 +25,9 @@ offset_bottom = 720.0
 color = Color(0.2, 0, 0, 1)
 
 [node name="UpperGlow" type="ColorRect" parent="Backdrop" unique_id=936115880]
-offset_left = 72.0
+offset_left = 73.0
 offset_top = 96.0
-offset_right = 1208.0
+offset_right = 1209.0
 offset_bottom = 576.0
 color = Color(0.313725, 0.0980392, 0.0980392, 0.3)
 
@@ -55,19 +55,19 @@ shape = SubResource("1_floor_shape")
 position = Vector2(160, 556)
 
 [node name="ControlsHintLayer" type="CanvasLayer" parent="." unique_id=2113921933]
-layer = 1
 
 [node name="ControlsHint" type="Label" parent="ControlsHintLayer" unique_id=2113921934]
 offset_left = 96.0
 offset_top = 332.0
 offset_right = 240.0
 offset_bottom = 448.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.968627, 0.737255, 0.878431, 1)
 theme_override_font_sizes/font_size = 20
-horizontal_alignment = 0
-vertical_alignment = 0
-text = "Move\nW   ↑\nA   ←\nS   ↓\nD   →"
+text = "Move
+W   ↑
+A   ←
+S   ↓
+D   →"
 
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=2106397712]
 position = Vector2(1152, 556)
@@ -80,6 +80,12 @@ target_scene_path = "res://Intro02.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal" unique_id=1652989034]
 position = Vector2(1, 0)
 shape = SubResource("2_portal_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=951396878]
+position = Vector2(1296, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=2106397713]
+shape = SubResource("3_left_boundary_shape")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=2106397710]
 position = Vector2(-16, 288)
