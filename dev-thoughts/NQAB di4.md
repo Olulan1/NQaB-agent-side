@@ -14,4 +14,4 @@ After the succesful enstation of Floor00 and Floor01 as SEPARATE FLOORS, linked 
 
 Intro00/01 - Intro02 - Floor00 - Floor01 - Floor1-1 - Floor1-2
 
-After all of this, explain why Intro00 and Intro01 are dependent even though only one is used when running the game.
+After all of this, explain why Intro00 and Intro01 are dependent even though only one is ever traversed by the player actively.
