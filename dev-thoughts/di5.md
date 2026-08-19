@@ -4,6 +4,9 @@ Find out if it is possible to transition the player to a crouching sprite tgat d
 
 Find out if it is possible to separate the head and body pieces of the player so that they can bre recognized as separate parts of the entity. This can be used to - overlay a different sprite, perform changes of gear on the character or just ensure that weapons and the projectiles they shoot are registering at the correct player height.
 
+Link Intro02 TowerPortal to Floor01 
+Link a teleport called Return
+
 See what the best way to implement potential sprites for the player is. 
 
 See, consider and explain how would be best to implement the weapon changing system. The button for switching "fire types" (weapons, before their sprites are implemented)will be q. The types of fire will be: 
@@ -14,4 +17,6 @@ See, consider and explain how would be best to implement the weapon changing sys
 
 Cooldowns should refer to a hidden timer where a button can be pressed but will not activate the attack. The attack will only be activated ONCE the timer is over AND the button is pressed, and previous presses are not stored as input. 
 
-There should be a small, black box with transparent space in the middle for each of the 4 weapon types, reference images found in 
+There should be a small, black box with transparent space in the middle for each of the 4 weapon types, reference images found in /Users/lani/nqab/dev-thoughts under the numbers they're listed with
+
+Also, ammo should be displayed in a similar context to how text is currently displayed. It is currently an unlimited resource, but make a point of ensuring the bullet icon (source: ammo.png). List 6 of them when default is selected, 4 when burst is selected, 2 when shotgun is selected, and 1 when laser is selected. Line the bullets up equidistant below health.
