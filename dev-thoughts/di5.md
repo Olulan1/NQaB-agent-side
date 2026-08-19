@@ -1,1 +1,17 @@
-For the duration of the time the player is crouched, their fall speed should be increased by a scale factor of 2.4, and returned to normal when crouch is released
+Store a copy of the current player as a variable that is out of use, and begin the changes below.
+
+Find out if it is possible to transition the player to a crouching sprite tgat does not phase into the ground when they crouch
+
+Find out if it is possible to separate the head and body pieces of the player so that they can bre recognized as separate parts of the entity. This can be used to - overlay a different sprite, perform changes of gear on the character or just ensure that weapons and the projectiles they shoot are registering at the correct player height.
+
+See what the best way to implement potential sprites for the player is. 
+
+See, consider and explain how would be best to implement the weapon changing system. The button for switching "fire types" (weapons, before their sprites are implemented)will be q. The types of fire will be: 
+1. Default ( current fire, current cooldown)
+2. Burst fire (2, 3 shots fired with 0.1s between them and a 1.5s cooldown)
+3. Shotgun fire (3, 3, half-size shots that do 3 damage in the first 0.7s, 2 damage in the subsequent 0.8s and 1 damage in the 0.6s after that, despawning after either coming into contact with a wall or an enemy or travelling 10 tiles. They spread out with one going straight, one going on a diagonal line up, and the other down. The gradient of the line is 0.11 from the initial straight line the middle projectile travels), 
+4. Laser (A red line that appears for 0.7s over 7 tiles, doing 1 damage, and with a 2s cooldown)
+
+Cooldowns should refer to a hidden timer where a button can be pressed but will not activate the attack. The attack will only be activated ONCE the timer is over AND the button is pressed, and previous presses are not stored as input. 
+
+There should be a small, black box with transparent space in the middle for each of the 4 weapon types, reference images found in 

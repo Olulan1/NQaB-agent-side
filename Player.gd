@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var jump_velocity: float = -360.0
 @export var sprint_multiplier: float = 3.0
 @export var fall_gravity: float = 640.0
+@export var crouch_fall_gravity_multiplier: float = 2.4
 @export var max_health: int = 5
 @export var invulnerability_duration: float = 1.5
 @export var knockback_horizontal_speed: float = 160.0
@@ -63,7 +64,8 @@ func _physics_process(delta: float) -> void:
 	_update_muzzle_position()
 
 	if not is_on_floor():
-		velocity.y += fall_gravity * delta
+		var gravity_multiplier := crouch_fall_gravity_multiplier if crouching else 1.0
+		velocity.y += fall_gravity * gravity_multiplier * delta
 
 	var jump_held := Input.is_physical_key_pressed(KEY_SPACE)
 	var weak_jump_held := Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)
