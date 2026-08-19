@@ -1,0 +1,52 @@
+Changelog for /Users/lani/nqab
+
+Committed history
+
+- 19:45 - 06/08/2026 | dbada20 | cd-13th-ia
+  - Added the `WASD draft.png` reference asset under `dev-thoughts/`.
+  - Updated `Intro01.tscn` to support the control-hint work that followed.
+
+- 19:47 - 06/08/2026 | 240973b | cd-13.5th-ia
+  - Adjusted `Intro01.tscn` and `Player.gd`.
+  - Refined the intro-screen control presentation and player input handling.
+
+- 19:57 - 06/08/2026 | 2bff7f6 | cd-14th-ia
+  - Extended `Intro02.tscn`.
+  - Added a line to `dev-thoughts/NQaB tasklist.md` to track the new work.
+
+- 21:24 - 06/08/2026 | 6069d2c | x
+  - Added `dev-thoughts/energy bar draft.png`.
+  - Added the associated `.import` metadata for the health/energy UI reference.
+
+- 21:35 - 06/08/2026 | f770cb3 | PROJECTILE DESTRUCTION IMPLEMENTATION
+  - Expanded `Player.gd` with projectile/health-related logic.
+  - Updated `Projectile.gd`, `SceneTransition.gd`, and `Turret.gd` to support turret destruction and projectile interaction.
+
+- 18:10 - 18/08/2026 | ce7bf8b | cd-v2
+  - Created `dev-thoughts/NQAB di4.md`.
+
+- 18:24 - 18/08/2026 | 03bdba0 | .
+  - Edited `dev-thoughts/NQAB di4.md` after the first draft.
+
+- 19:02 - 18/08/2026 | dfc084b | cd-15th-ia
+  - Added `Floor01.gd`, `Floor01.gd.uid`, and `Floor01.tscn`.
+  - Updated `Intro01.tscn` to support the next floor-linking step.
+
+Live worktree change
+
+- 16:55 - 19/08/2026
+  - `Intro02.tscn`: widened `TowerPortalVisual` by changing `offset_right` from `640.0` to `704.0`.
+
+Prior Codex command references recorded in the nqab folder
+
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly and implement only the first visible task: make a label for controls at the start of Intro01.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly and implement only the second visible task: Making a left aligned title on Intro02.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md, implement task 4 and its subtext. Specifically, projectiles shot by the player should temporarily destroy turrets...`
+- `TASK: act as a spec-executor. You are not alone in the codebase; do not revert or overwrite other agents' edits. Own only these files: Intro01.tscn, Floor01.tscn, Floor01.gd.`
+- `I think leave it as is. Also, create a mirror to LeftBoundary on Intro01 called RightBoundary, behind the ExitPortal, on the right. Just duplicate Floor00.gd and .tscn as Floor01.gd and Floor01.tscn.`
+
+Notes
+
+- This changelog is limited to the tracked commit history relevant to the current project state plus the live uncommitted scene edit above.
+- The command references are recorded as prompts that materially changed or constrained the repo state; they are not Git commits.

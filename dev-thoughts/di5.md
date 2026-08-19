@@ -1,0 +1,1 @@
+For the duration of the time the player is crouched, their fall speed should be increased by a scale factor of 2.4, and returned to normal when crouch is released

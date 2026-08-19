@@ -111,6 +111,6 @@ shape = SubResource("3_right_boundary_shape")
 [node name="TowerPortalVisual" type="ColorRect" parent="." unique_id=1708558287]
 offset_left = 576.0
 offset_top = 448.0
-offset_right = 640.0
+offset_right = 704.0
 offset_bottom = 576.0
 color = Color(0, 0, 0, 0.7019608)

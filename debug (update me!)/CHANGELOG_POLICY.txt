@@ -1,0 +1,6 @@
+Changelog policy
+
+- `changelog.txt` must be updated every time new commands are issued that affect the NQaB workspace.
+- New entries may be added or existing entries may be clarified, but the current logs must never be removed.
+- If a command removes files, the changelog should record that removal instead of deleting the earlier entry.
+- Preserve the chronological history already present in `changelog.txt`.
