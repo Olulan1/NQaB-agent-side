@@ -1,3 +1,9 @@
+Steps to be done in correspondence:
+1. Create a "RightSpawn" on Floor1-1 that is in a mirrored position to the current LeftSpawn
+2. Ensure that the Floor1-2 PrevScreenReturn goes to the RightSpawn of Floor1-1 and not the LeftSpawn.
+3. Do not move the LeftSpawn on Floor1-1 from its current position.
+4. Create a LeftSpawn and RightSpawn on Floor1-2 in the positions of the LeftSpawn and RightSpawn on Floor1-1
+
 Store a copy of the current player as a variable that is out of use, and begin the changes below.
 
 Find out if it is possible to transition the player to a crouching sprite tgat does not phase into the ground when they crouch

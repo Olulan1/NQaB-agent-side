@@ -178,7 +178,7 @@ polygon = PackedVector2Array(-32, -52.5, 32, -52.5, 32, 52.5, -32, 52.5)
 position = Vector2(96, 364)
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1003581348]
-position = Vector2(68, 364)
+position = Vector2(116, 364)
 
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=1003581351]
 position = Vector2(1184, 364)
