@@ -13,15 +13,18 @@ shape = SubResource("1_player_shape")
 
 [node name="VisualRoot" type="Node2D" parent="."]
 
-[node name="BodyTop" type="Polygon2D" parent="VisualRoot"]
-position = Vector2(0, -10)
+[node name="Head" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, -11)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 color = Color(0.968627, 0.968627, 0.968627, 1)
 
-[node name="BodyBottom" type="Polygon2D" parent="VisualRoot"]
-position = Vector2(0, 10)
+[node name="Body" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 9)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 color = Color(0.85098, 0.172549, 0.192157, 1)
+
+[node name="WeaponIcon" type="Sprite2D" parent="VisualRoot"]
+position = Vector2(14, -6)
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(16, -6)

@@ -1,17 +1,18 @@
+Complete insofar:
+
 Steps to be done in correspondence:
 1. Create a "RightSpawn" on Floor1-1 that is in a mirrored position to the current LeftSpawn
 2. Ensure that the Floor1-2 PrevScreenReturn goes to the RightSpawn of Floor1-1 and not the LeftSpawn.
 3. Do not move the LeftSpawn on Floor1-1 from its current position.
 4. Create a LeftSpawn and RightSpawn on Floor1-2 in the positions of the LeftSpawn and RightSpawn on Floor1-1
 
+Incomplete insofar:
+
 Store a copy of the current player as a variable that is out of use, and begin the changes below.
 
 Find out if it is possible to transition the player to a crouching sprite tgat does not phase into the ground when they crouch
 
 Find out if it is possible to separate the head and body pieces of the player so that they can bre recognized as separate parts of the entity. This can be used to - overlay a different sprite, perform changes of gear on the character or just ensure that weapons and the projectiles they shoot are registering at the correct player height.
-
-Link Intro02 TowerPortal to Floor01 
-Link a teleport called Return
 
 See what the best way to implement potential sprites for the player is. 
 
@@ -23,6 +24,6 @@ See, consider and explain how would be best to implement the weapon changing sys
 
 Cooldowns should refer to a hidden timer where a button can be pressed but will not activate the attack. The attack will only be activated ONCE the timer is over AND the button is pressed, and previous presses are not stored as input. 
 
-There should be a small, black box with transparent space in the middle for each of the 4 weapon types, reference images found in /Users/lani/nqab/dev-thoughts under the numbers they're listed with
+There should be a small, black box with transparent space in the middle for each of the 4 weapon types, reference images found in /Users/lani/nqab/dev-thoughts/imgs under the numbers they're listed with
 
-Also, ammo should be displayed in a similar context to how text is currently displayed. It is currently an unlimited resource, but make a point of ensuring the bullet icon (source: ammo.png). List 6 of them when default is selected, 4 when burst is selected, 2 when shotgun is selected, and 1 when laser is selected. Line the bullets up equidistant below health.
+Also, ammo should be displayed in a similar context to how text is currently displayed. It is currently an unlimited resource, but make a point of ensuring the bullet icon (source: dev-thoughts/imgs/ammo.png). List 6 of them when default is selected, 4 when burst is selected, 2 when shotgun is selected, and 1 when laser is selected. Line the bullets up equidistant below health.
