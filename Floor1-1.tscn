@@ -160,7 +160,7 @@ autostart = true
 [node name="ElevatorReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
 position = Vector2(608, 512)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor00.tscn"
+target_scene_path = "res://Floor03.tscn"
 target_spawn_name = "ElevatorReturn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/ElevatorReturn" unique_id=1229656228]

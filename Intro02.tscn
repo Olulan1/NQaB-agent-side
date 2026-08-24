@@ -97,7 +97,8 @@ color = Color(0.219608, 0.439216, 0.654902, 0.7)
 [node name="TowerPortal" type="Area2D" parent="." unique_id=1708558283]
 position = Vector2(608, 512)
 script = ExtResource("2_portal_script")
-target_scene_path = "res://Floor00.tscn"
+target_scene_path = "res://Floor01.tscn"
+target_spawn_name = "LeftSpawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TowerPortal" unique_id=1708558284]
 shape = SubResource("RectangleShape2D_2vb1t")

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://r7m2p9v4x6q1"]
+[gd_scene format=3 uid="uid://duvrhqchurqwc"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
-[ext_resource type="Script" path="res://Floor1-2.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://bcq7o44g4ch0f" path="res://Floor1-2.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
@@ -157,6 +157,16 @@ polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 wait_time = 2.0
 autostart = true
 
+[node name="PrevScreenReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
+position = Vector2(608, 512)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor1-1.tscn"
+target_spawn_name = "floor1_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/PrevScreenReturn" unique_id=1229656228]
+position = Vector2(-1552, -555.5)
+shape = SubResource("RectangleShape2D_1er4s")
+
 [node name="Turret02_2" type="StaticBody2D" parent="." unique_id=2026734527]
 position = Vector2(960, 304)
 script = ExtResource("2_turret_script")
@@ -200,27 +210,17 @@ polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 wait_time = 2.0
 autostart = true
 
-[node name="PrevScreenReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
-position = Vector2(608, 512)
-script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor1-1.tscn"
-target_spawn_name = "floor1_right"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/PrevScreenReturn" unique_id=1229656228]
-position = Vector2(-1552, -555.5)
-shape = SubResource("RectangleShape2D_1er4s")
-
 [node name="Player" parent="." unique_id=1003581347 instance=ExtResource("1_player")]
 position = Vector2(96, 364)
 
 [node name="LeftSpawn" type="Marker2D" parent="." unique_id=1003581348]
-position = Vector2(68, 364)
+position = Vector2(116, 364)
 
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=1003581351]
 position = Vector2(1184, 364)
 
 [node name="NextScreen" type="Area2D" parent="." unique_id=1003581349]
-position = Vector2(1216, 364)
+position = Vector2(1216, 368)
 script = ExtResource("3_ubfde")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=1003581350]
