@@ -436,7 +436,8 @@ func _build_health_ui() -> void:
 		icon.name = "Ammo%02d" % (i + 1)
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		icon.texture = AMMO_ICON_TEXTURE
-		icon.custom_minimum_size = Vector2(14.0, 14.0)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.custom_minimum_size = Vector2(20.0, 20.0)
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		ammo_row.add_child(icon)
 		_ammo_icons.append(icon)
