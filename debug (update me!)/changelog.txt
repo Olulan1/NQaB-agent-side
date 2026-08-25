@@ -37,6 +37,13 @@ Live worktree change
 - 16:55 - 19/08/2026
   - `Intro02.tscn`: widened `TowerPortalVisual` by changing `offset_right` from `640.0` to `704.0`.
 
+- 17:55 - 25/08/2026
+  - Replaced `dev-thoughts/imgs/ammo.png` with the blue transparent ammo art and reimported it in Godot.
+  - Added held-weapon scaling controls to `Player.gd`, then split the held weapon size so `1.png` keeps the current scale while the other weapon textures render larger.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the current ammo art and held-weapon scale behavior.
+  - Verified in the live Godot scene that the ammo HUD renders blue with no opaque background and that the held weapon size changes apply correctly.
+  - Verified that `Floor1-2.tscn` already routes `PrevScreenReturn` back to `Floor1-1`'s right-side spawn path through the existing pending-spawn name, so no scene rewrite was required for that link.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

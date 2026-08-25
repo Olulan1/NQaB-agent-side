@@ -157,18 +157,18 @@ polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
 wait_time = 2.0
 autostart = true
 
-[node name="ElevatorReturn" type="Area2D" parent="Turret02" unique_id=1840224770]
-position = Vector2(608, 512)
+[node name="ElevatorReturn" type="Area2D" parent="." unique_id=1840224770]
+position = Vector2(1568, 888)
 script = ExtResource("3_ubfde")
 target_scene_path = "res://Floor03.tscn"
 target_spawn_name = "ElevatorReturn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/ElevatorReturn" unique_id=1229656228]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorReturn" unique_id=1229656228]
 position = Vector2(-1552, -552)
 scale = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_1er4s")
 
-[node name="ElevatorReturnVisual" type="Polygon2D" parent="Turret02/ElevatorReturn" unique_id=1840224771]
+[node name="ElevatorReturnVisual" type="Polygon2D" parent="ElevatorReturn" unique_id=1840224771]
 position = Vector2(-1552, -552)
 scale = Vector2(0.5, 1)
 color = Color(0, 0, 0, 1)

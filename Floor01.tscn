@@ -84,7 +84,7 @@ position = Vector2(160, 364)
 position = Vector2(116, 364)
 
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=628796698]
-position = Vector2(1184, 364)
+position = Vector2(1152, 368)
 
 [node name="Return" type="Area2D" parent="." unique_id=628796692]
 position = Vector2(64, 288)
