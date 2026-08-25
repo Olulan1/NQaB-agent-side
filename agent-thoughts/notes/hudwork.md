@@ -51,3 +51,4 @@ This note records the answer to: how to manually access the size of the HUD item
 - The ammo HUD now ignores the PNG's native size and uses `expand_mode = TextureRect.EXPAND_IGNORE_SIZE` with a small `custom_minimum_size`.
 - The actual visible bullet art still lives in [ammo.png](../../dev-thoughts/imgs/ammo.png); if it ever looks too large again, check the import behavior plus the `TextureRect` settings first.
 - The latest ammo artwork replacement makes the bullet fill more of its canvas, so the row should read larger without changing the HUD container geometry.
+- The current ammo art is now the blue transparent version stored in [ammo.png](../../dev-thoughts/imgs/ammo.png); the live HUD screenshot shows the blue bullets rendered without an opaque background.
