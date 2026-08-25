@@ -44,6 +44,7 @@ This note records the answer to: how to manually access the size of the HUD item
 - Make weapon boxes smaller or larger by changing `box.custom_minimum_size`.
 - Make the weapon art itself smaller by changing the `icon.custom_minimum_size` inside the weapon loop.
 - Move the held weapon closer to or farther from the character by changing `STANDING_WEAPON_ICON_POSITION` and `CROUCH_WEAPON_ICON_POSITION`.
+- Scale the held weapon by changing `HELD_WEAPON_DEFAULT_ICON_SCALE` and `HELD_WEAPON_OTHER_ICON_SCALE` in [Player.gd](../../Player.gd#L35).
 - The HP value shown to the player is controlled by `max_health`, and the current player HP is tracked in `health`.
 
 ## Current finding
@@ -52,3 +53,4 @@ This note records the answer to: how to manually access the size of the HUD item
 - The actual visible bullet art still lives in [ammo.png](../../dev-thoughts/imgs/ammo.png); if it ever looks too large again, check the import behavior plus the `TextureRect` settings first.
 - The latest ammo artwork replacement makes the bullet fill more of its canvas, so the row should read larger without changing the HUD container geometry.
 - The current ammo art is now the blue transparent version stored in [ammo.png](../../dev-thoughts/imgs/ammo.png); the live HUD screenshot shows the blue bullets rendered without an opaque background.
+- The held weapon sprite now keeps `1.png` at `HELD_WEAPON_DEFAULT_ICON_SCALE = Vector2(0.08, 0.08)` and uses `HELD_WEAPON_OTHER_ICON_SCALE = Vector2(0.136, 0.136)` for the other textures.

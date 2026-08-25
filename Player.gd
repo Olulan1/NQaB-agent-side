@@ -32,6 +32,8 @@ const STANDING_BODY_SCALE := Vector2(1.0, 1.0)
 const CROUCH_BODY_SCALE := Vector2(1.0, 0.72)
 const STANDING_WEAPON_ICON_POSITION := Vector2(14.0, -6.0)
 const CROUCH_WEAPON_ICON_POSITION := Vector2(14.0, 0.0)
+const HELD_WEAPON_DEFAULT_ICON_SCALE := Vector2(0.08, 0.08)
+const HELD_WEAPON_OTHER_ICON_SCALE := Vector2(0.136, 0.136)
 
 @export var speed: float = 96.0
 @export var crouch_speed: float = 64.0
@@ -88,6 +90,7 @@ func _ready() -> void:
 	SceneTransition.set_player_health(health)
 	_build_health_ui()
 	_sync_health_ui()
+	_sync_weapon_icon_scale()
 	_sync_weapon_ui()
 	_sync_ammo_ui()
 	_update_crouch_state()
@@ -191,6 +194,11 @@ func _update_muzzle_position() -> void:
 	muzzle.position = Vector2(offset.x * facing, offset.y)
 	weapon_icon.flip_h = facing < 0
 	weapon_icon.position.x = absf(weapon_icon.position.x) * facing
+
+
+func _sync_weapon_icon_scale() -> void:
+	if weapon_icon != null:
+		weapon_icon.scale = HELD_WEAPON_DEFAULT_ICON_SCALE if current_weapon_index == 0 else HELD_WEAPON_OTHER_ICON_SCALE
 
 
 func _try_fire_current_weapon() -> void:
@@ -511,6 +519,7 @@ func _sync_health_ui() -> void:
 
 func _sync_weapon_ui() -> void:
 	if weapon_icon != null:
+		_sync_weapon_icon_scale()
 		weapon_icon.texture = WEAPON_ICON_TEXTURES[current_weapon_index]
 		weapon_icon.centered = true
 		weapon_icon.flip_h = facing < 0
