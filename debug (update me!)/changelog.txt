@@ -44,6 +44,43 @@ Live worktree change
   - Verified in the live Godot scene that the ammo HUD renders blue with no opaque background and that the held weapon size changes apply correctly.
   - Verified that `Floor1-2.tscn` already routes `PrevScreenReturn` back to `Floor1-1`'s right-side spawn path through the existing pending-spawn name, so no scene rewrite was required for that link.
 
+- 18:04 - 25/08/2026
+  - Reviewed the current worktree state.
+  - No new repository file changes were present beyond the already recorded history, so the changelog was left additive and intact.
+
+- 20:43 - 25/08/2026
+  - Updated `Player.gd` so the shotgun and laser held weapons can sit slightly lower on the player without changing the default weapon or rifle position.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the new per-weapon Y offsets.
+
+- 20:58 - 25/08/2026
+  - Rolled back the shotgun/laser Y-offset pose change in `Player.gd`.
+  - Reapplied the offset logic as a leftward X shift for the shotgun and laser only.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the left-shifted held-weapon offsets instead of the previous downward offsets.
+
+- 20:59 - 25/08/2026
+  - Reimported and ran the game in Godot after the leftward offset change.
+  - Captured live screenshots to verify the held weapon pose path after the rollback and replacement edit.
+
+- 21:03 - 25/08/2026
+  - Adjusted `Player.gd` so only the laser held weapon moves 3.0 units left.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the laser-only offset value.
+
+- 21:06 - 25/08/2026
+  - Updated `Player.gd` so the laser held weapon now moves 23.0 units left.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the larger laser-only offset value.
+
+- 21:08 - 25/08/2026
+  - Ran the live Godot scene after the 23.0-unit laser-left update.
+  - Captured a screenshot showing the laser held weapon shifted far further left than the previous `-3.0` setting.
+
+- 21:10 - 25/08/2026
+  - Updated `Player.gd` so the laser held weapon now moves 10 units right from the prior `-23.0` setting.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the current laser offset value.
+
+- 21:12 - 25/08/2026
+  - Reimported and ran the Godot scene after the laser-right update.
+  - Captured a live screenshot to verify the laser pose moved right from the prior `-23.0` build.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

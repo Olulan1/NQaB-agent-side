@@ -34,6 +34,7 @@ const STANDING_WEAPON_ICON_POSITION := Vector2(14.0, -6.0)
 const CROUCH_WEAPON_ICON_POSITION := Vector2(14.0, 0.0)
 const HELD_WEAPON_DEFAULT_ICON_SCALE := Vector2(0.08, 0.08)
 const HELD_WEAPON_OTHER_ICON_SCALE := Vector2(0.136, 0.136)
+const HELD_WEAPON_X_OFFSETS: PackedFloat32Array = [0.0, 0.0, -1.5, -13.0]
 
 @export var speed: float = 96.0
 @export var crouch_speed: float = 64.0
@@ -178,27 +179,34 @@ func _update_crouch_state() -> void:
 		head_visual.position = CROUCH_HEAD_POSITION
 		body_visual.position = CROUCH_BODY_POSITION
 		body_visual.scale = CROUCH_BODY_SCALE
-		weapon_icon.position = CROUCH_WEAPON_ICON_POSITION
 		collision_shape.position = Vector2(0.0, 6.0)
 	else:
 		shape.size = STANDING_COLLIDER_SIZE
 		head_visual.position = STANDING_HEAD_POSITION
 		body_visual.position = STANDING_BODY_POSITION
 		body_visual.scale = STANDING_BODY_SCALE
-		weapon_icon.position = STANDING_WEAPON_ICON_POSITION
 		collision_shape.position = Vector2.ZERO
+	_sync_weapon_icon_pose()
 
 
 func _update_muzzle_position() -> void:
 	var offset := crouched_projectile_spawn_offset if crouching else projectile_spawn_offset
 	muzzle.position = Vector2(offset.x * facing, offset.y)
-	weapon_icon.flip_h = facing < 0
-	weapon_icon.position.x = absf(weapon_icon.position.x) * facing
+	_sync_weapon_icon_pose()
 
 
 func _sync_weapon_icon_scale() -> void:
 	if weapon_icon != null:
 		weapon_icon.scale = HELD_WEAPON_DEFAULT_ICON_SCALE if current_weapon_index == 0 else HELD_WEAPON_OTHER_ICON_SCALE
+
+
+func _sync_weapon_icon_pose() -> void:
+	if weapon_icon == null:
+		return
+	var base_position := CROUCH_WEAPON_ICON_POSITION if crouching else STANDING_WEAPON_ICON_POSITION
+	var weapon_x_offset := HELD_WEAPON_X_OFFSETS[current_weapon_index]
+	weapon_icon.flip_h = facing < 0
+	weapon_icon.position = Vector2((absf(base_position.x) + weapon_x_offset) * facing, base_position.y)
 
 
 func _try_fire_current_weapon() -> void:
@@ -522,11 +530,7 @@ func _sync_weapon_ui() -> void:
 		_sync_weapon_icon_scale()
 		weapon_icon.texture = WEAPON_ICON_TEXTURES[current_weapon_index]
 		weapon_icon.centered = true
-		weapon_icon.flip_h = facing < 0
-		weapon_icon.position = Vector2(
-			absf(STANDING_WEAPON_ICON_POSITION.x) * facing,
-			CROUCH_WEAPON_ICON_POSITION.y if crouching else STANDING_WEAPON_ICON_POSITION.y
-		)
+		_sync_weapon_icon_pose()
 	for i in range(_weapon_boxes.size()):
 		var box := _weapon_boxes[i]
 		var style := box.get_theme_stylebox("panel") as StyleBoxFlat

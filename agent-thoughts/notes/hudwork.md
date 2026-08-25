@@ -33,6 +33,7 @@ This note records the answer to: how to manually access the size of the HUD item
   - `weapon_icon` is at [Player.gd](../../Player.gd#L65)
   - `STANDING_WEAPON_ICON_POSITION` is at [Player.gd](../../Player.gd#L33)
   - `CROUCH_WEAPON_ICON_POSITION` is at [Player.gd](../../Player.gd#L34)
+  - `HELD_WEAPON_X_OFFSETS` is at [Player.gd](../../Player.gd#L35)
   - `_sync_weapon_ui()` sets the visible weapon icon position at [Player.gd](../../Player.gd#L511)
 
 ## How to adjust manually
@@ -44,6 +45,7 @@ This note records the answer to: how to manually access the size of the HUD item
 - Make weapon boxes smaller or larger by changing `box.custom_minimum_size`.
 - Make the weapon art itself smaller by changing the `icon.custom_minimum_size` inside the weapon loop.
 - Move the held weapon closer to or farther from the character by changing `STANDING_WEAPON_ICON_POSITION` and `CROUCH_WEAPON_ICON_POSITION`.
+- Move only the shotgun/laser slightly left or right by changing `HELD_WEAPON_X_OFFSETS` in [Player.gd](../../Player.gd#L35).
 - Scale the held weapon by changing `HELD_WEAPON_DEFAULT_ICON_SCALE` and `HELD_WEAPON_OTHER_ICON_SCALE` in [Player.gd](../../Player.gd#L35).
 - The HP value shown to the player is controlled by `max_health`, and the current player HP is tracked in `health`.
 
@@ -54,3 +56,4 @@ This note records the answer to: how to manually access the size of the HUD item
 - The latest ammo artwork replacement makes the bullet fill more of its canvas, so the row should read larger without changing the HUD container geometry.
 - The current ammo art is now the blue transparent version stored in [ammo.png](../../dev-thoughts/imgs/ammo.png); the live HUD screenshot shows the blue bullets rendered without an opaque background.
 - The held weapon sprite now keeps `1.png` at `HELD_WEAPON_DEFAULT_ICON_SCALE = Vector2(0.08, 0.08)` and uses `HELD_WEAPON_OTHER_ICON_SCALE = Vector2(0.136, 0.136)` for the other textures.
+- The held weapon sprite now applies `HELD_WEAPON_X_OFFSETS = [0.0, 0.0, -1.5, -13.0]`, which shifts the shotgun and laser slightly left without moving the default or rifle.
