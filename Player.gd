@@ -7,6 +7,20 @@ const WEAPON_ICON_TEXTURES: Array[Texture2D] = [
 	preload("res://dev-thoughts/imgs/4.png"),
 ]
 
+const HELD_WEAPON_STANDING_TEXTURES: Array[Texture2D] = [
+	preload("res://dev-thoughts/imgs/1.png"),
+	preload("res://dev-thoughts/imgs/2.png"),
+	preload("res://dev-thoughts/imgs/3.png"),
+	preload("res://dev-thoughts/imgs/4.png"),
+]
+
+const HELD_WEAPON_CROUCH_TEXTURES: Array[Texture2D] = [
+	preload("res://dev-thoughts/imgs/1_crouch.png"),
+	preload("res://dev-thoughts/imgs/2_crouch.png"),
+	preload("res://dev-thoughts/imgs/3_crouch.png"),
+	preload("res://dev-thoughts/imgs/4_crouch.png"),
+]
+
 const AMMO_ICON_TEXTURE: Texture2D = preload("res://dev-thoughts/imgs/ammo.png")
 const WEAPON_NAMES: PackedStringArray = ["Default", "Burst", "Shotgun", "Laser"]
 const WEAPON_AMMO_COUNTS: PackedInt32Array = [6, 4, 2, 1]
@@ -32,9 +46,22 @@ const STANDING_BODY_SCALE := Vector2(1.0, 1.0)
 const CROUCH_BODY_SCALE := Vector2(1.0, 0.72)
 const STANDING_WEAPON_ICON_POSITION := Vector2(14.0, -6.0)
 const CROUCH_WEAPON_ICON_POSITION := Vector2(14.0, 0.0)
+const STANDING_WEAPON_X_OFFSETS: PackedFloat32Array = [0.0, 0.0, -1.5, -13.0]
+const CROUCH_WEAPON_X_OFFSETS: PackedFloat32Array = [0.0, 0.0, -1.5, -13.0]
+const STANDING_WEAPON_MUZZLE_OFFSETS: PackedVector2Array = [
+	Vector2(23.0, -10.0),
+	Vector2(39.0, -9.0),
+	Vector2(38.0, -12.0),
+	Vector2(32.0, -4.0),
+]
+const CROUCH_WEAPON_MUZZLE_OFFSETS: PackedVector2Array = [
+	Vector2(23.0, -4.0),
+	Vector2(39.0, -3.0),
+	Vector2(38.0, -6.0),
+	Vector2(32.0, 2.0),
+]
 const HELD_WEAPON_DEFAULT_ICON_SCALE := Vector2(0.08, 0.08)
 const HELD_WEAPON_OTHER_ICON_SCALE := Vector2(0.136, 0.136)
-const HELD_WEAPON_X_OFFSETS: PackedFloat32Array = [0.0, 0.0, -1.5, -13.0]
 
 @export var speed: float = 96.0
 @export var crouch_speed: float = 64.0
@@ -59,8 +86,6 @@ const HELD_WEAPON_X_OFFSETS: PackedFloat32Array = [0.0, 0.0, -1.5, -13.0]
 @export var laser_beam_length: float = 224.0
 @export var laser_beam_duration: float = 0.7
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
-@export var projectile_spawn_offset: Vector2 = Vector2(18.0, -8.0)
-@export var crouched_projectile_spawn_offset: Vector2 = Vector2(18.0, 2.0)
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var head_visual: Polygon2D = $VisualRoot/Head
@@ -91,7 +116,6 @@ func _ready() -> void:
 	SceneTransition.set_player_health(health)
 	_build_health_ui()
 	_sync_health_ui()
-	_sync_weapon_icon_scale()
 	_sync_weapon_ui()
 	_sync_ammo_ui()
 	_update_crouch_state()
@@ -186,11 +210,11 @@ func _update_crouch_state() -> void:
 		body_visual.position = STANDING_BODY_POSITION
 		body_visual.scale = STANDING_BODY_SCALE
 		collision_shape.position = Vector2.ZERO
-	_sync_weapon_icon_pose()
+	_sync_held_weapon_visual()
 
 
 func _update_muzzle_position() -> void:
-	var offset := crouched_projectile_spawn_offset if crouching else projectile_spawn_offset
+	var offset := _get_current_weapon_muzzle_offset()
 	muzzle.position = Vector2(offset.x * facing, offset.y)
 	_sync_weapon_icon_pose()
 
@@ -200,13 +224,35 @@ func _sync_weapon_icon_scale() -> void:
 		weapon_icon.scale = HELD_WEAPON_DEFAULT_ICON_SCALE if current_weapon_index == 0 else HELD_WEAPON_OTHER_ICON_SCALE
 
 
+func _sync_held_weapon_visual() -> void:
+	if weapon_icon == null:
+		return
+	weapon_icon.texture = _get_held_weapon_textures()[current_weapon_index]
+	weapon_icon.centered = true
+	_sync_weapon_icon_scale()
+	_sync_weapon_icon_pose()
+
+
 func _sync_weapon_icon_pose() -> void:
 	if weapon_icon == null:
 		return
 	var base_position := CROUCH_WEAPON_ICON_POSITION if crouching else STANDING_WEAPON_ICON_POSITION
-	var weapon_x_offset := HELD_WEAPON_X_OFFSETS[current_weapon_index]
+	var weapon_x_offset := _get_held_weapon_x_offsets()[current_weapon_index]
 	weapon_icon.flip_h = facing < 0
 	weapon_icon.position = Vector2((absf(base_position.x) + weapon_x_offset) * facing, base_position.y)
+
+
+func _get_held_weapon_textures() -> Array[Texture2D]:
+	return HELD_WEAPON_CROUCH_TEXTURES if crouching else HELD_WEAPON_STANDING_TEXTURES
+
+
+func _get_held_weapon_x_offsets() -> PackedFloat32Array:
+	return CROUCH_WEAPON_X_OFFSETS if crouching else STANDING_WEAPON_X_OFFSETS
+
+
+func _get_current_weapon_muzzle_offset() -> Vector2:
+	var offsets := CROUCH_WEAPON_MUZZLE_OFFSETS if crouching else STANDING_WEAPON_MUZZLE_OFFSETS
+	return offsets[current_weapon_index]
 
 
 func _try_fire_current_weapon() -> void:
@@ -527,10 +573,7 @@ func _sync_health_ui() -> void:
 
 func _sync_weapon_ui() -> void:
 	if weapon_icon != null:
-		_sync_weapon_icon_scale()
-		weapon_icon.texture = WEAPON_ICON_TEXTURES[current_weapon_index]
-		weapon_icon.centered = true
-		_sync_weapon_icon_pose()
+		_sync_held_weapon_visual()
 	for i in range(_weapon_boxes.size()):
 		var box := _weapon_boxes[i]
 		var style := box.get_theme_stylebox("panel") as StyleBoxFlat
