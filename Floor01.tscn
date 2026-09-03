@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_portal_script"]
 [ext_resource type="Script" uid="uid://d38gj6j3c5wgd" path="res://Floor01.gd" id="4_floor_script"]
+[ext_resource type="Script" path="res://DestructibleBarrier.gd" id="5_barrier_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vb1t"]
 size = Vector2(80, 161)
@@ -15,6 +16,9 @@ size = Vector2(32, 432)
 
 [sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
 size = Vector2(32, 360)
+
+[sub_resource type="RectangleShape2D" id="4_barrier_shape"]
+size = Vector2(48, 128)
 
 [node name="Floor01" type="Node2D" unique_id=10237484]
 script = ExtResource("4_floor_script")
@@ -76,6 +80,65 @@ position = Vector2(1296, 360)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1704224994]
 position = Vector2(0, -180)
 shape = SubResource("3_right_boundary_shape")
+
+[node name="Barrier1" type="StaticBody2D" parent="."]
+position = Vector2(272, 320)
+script = ExtResource("5_barrier_script")
+body_color = Color(0.498039, 0.498039, 0.498039, 1)
+caption_text = "Press E to fire"
+caption_width = 240.0
+caption_height = 32.0
+caption_font_size = 16
+caption_gap = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier1"]
+shape = SubResource("4_barrier_shape")
+
+[node name="Barrier2" type="StaticBody2D" parent="."]
+position = Vector2(456, 320)
+script = ExtResource("5_barrier_script")
+body_color = Color(0.498039, 0.498039, 0.498039, 1)
+caption_text = "press q to switch weapons"
+caption_width = 280.0
+caption_height = 32.0
+caption_font_size = 16
+caption_gap = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier2"]
+shape = SubResource("4_barrier_shape")
+
+[node name="Barrier3" type="StaticBody2D" parent="."]
+position = Vector2(640, 320)
+script = ExtResource("5_barrier_script")
+max_health = 8
+body_color = Color(0, 0, 0, 1)
+caption_text = "Your weapons deal different amounts of damage, use them carefully."
+caption_width = 560.0
+caption_height = 72.0
+caption_font_size = 14
+caption_gap = 10.0
+show_dots = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier3"]
+shape = SubResource("4_barrier_shape")
+
+[node name="Barrier4" type="StaticBody2D" parent="."]
+position = Vector2(824, 320)
+script = ExtResource("5_barrier_script")
+max_health = 6
+body_color = Color(0.545098, 0.815686, 0.960784, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier4"]
+shape = SubResource("4_barrier_shape")
+
+[node name="Barrier5" type="StaticBody2D" parent="."]
+position = Vector2(1008, 320)
+script = ExtResource("5_barrier_script")
+body_color = Color(0.188235, 0.803922, 0.780392, 1)
+dependency_path = NodePath("../Barrier4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier5"]
+shape = SubResource("4_barrier_shape")
 
 [node name="Player" parent="." unique_id=952308366 instance=ExtResource("1_player")]
 position = Vector2(160, 364)
