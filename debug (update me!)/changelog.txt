@@ -125,6 +125,26 @@ Live worktree change
   - Restored the earlier green color on the `Floor1-1.tscn` title caption.
   - Added a black outline override to the same title caption.
 
+- 22:13 - 03/09/2026
+  - Added `floorPrefabs/ExitElevator.gd` and `floorPrefabs/ExitElevator.tscn` as a reusable exit-elevator asset with an included caption.
+  - Duplicated `Floor1-2` into `Floor1-3`, retargeted `PrevScreenReturn` to `Floor1-2`'s `RightSpawn`, and replaced the next-screen node with the exit-elevator asset captioned `NEXT FLOOR`.
+
+- 22:16 - 03/09/2026
+  - Linked `Floor1-2`'s forward portal to `Floor1-3.tscn`.
+  - Set the destination spawn for that link to `floor1_left` so `Floor1-3` places the player at its left spawn marker.
+
+- 22:24 - 03/09/2026
+  - Duplicated `Floor1-1` into `Floor2-1` as a standalone scene/script pair.
+  - Cleared `Floor2-1`'s `NextScreen` destination and retargeted its `ElevatorReturn` to `Floor1-3`'s `RightSpawn`.
+  - Retargeted `Floor1-3`'s `ExitElevator` to `Floor2-1`'s `LeftSpawn`.
+
+- 22:29 - 03/09/2026
+  - Renamed `Floor2-1`'s title caption to `Floor 2 - Enemy forces`.
+  - Changed `Floor1-1`'s title caption color to light blue.
+
+- 22:38 - 03/09/2026
+  - Updated `Floor1-3.gd` so `RightSpawn` is recognized as a valid landing token for the right-side spawn.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

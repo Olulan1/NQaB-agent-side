@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://floorPrefabs/ExitElevator.gd" id="1_exit_elevator_script"]
+
+[sub_resource type="RectangleShape2D" id="1_elevator_shape"]
+size = Vector2(56, 128)
+
+[node name="ExitElevator" type="Area2D"]
+script = ExtResource("1_exit_elevator_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("1_elevator_shape")
+
+[node name="Shaft" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-28, -96, 28, -96, 28, 32, -28, 32)
+color = Color(0.0705882, 0.145098, 0.168627, 1)
+
+[node name="Door" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, -88, 20, -88, 20, 24, -20, 24)
+color = Color(0.219608, 0.439216, 0.654902, 0.8)
+
+[node name="CenterLine" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2, -84, 2, -84, 2, 20, -2, 20)
+color = Color(0.968627, 0.968627, 0.968627, 0.8)
+
+[node name="Indicator" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-8, -110, 8, -110, 0, -120)
+color = Color(0.85098, 0.172549, 0.192157, 1)
+
+[node name="Caption" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -146.0
+offset_right = 128.0
+offset_bottom = -114.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 0.9)
+theme_override_font_sizes/font_size = 18
+text = "EXIT ELEVATOR"
+horizontal_alignment = 1
