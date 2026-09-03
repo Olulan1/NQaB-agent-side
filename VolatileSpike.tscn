@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://VolatileSpike.gd" id="1_volatile_spike_script"]
+
+[sub_resource type="RectangleShape2D" id="1_body_shape"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="2_contact_shape"]
+size = Vector2(36, 36)
+
+[node name="VolatileSpike" type="CharacterBody2D"]
+script = ExtResource("1_volatile_spike_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_body_shape")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+
+[node name="Orb" type="Polygon2D" parent="VisualRoot"]
+color = Color(0.172549, 0.121569, 0.25098, 1)
+polygon = PackedVector2Array(-10, -8, -4, -12, 4, -12, 10, -8, 12, 0, 10, 8, 4, 12, -4, 12, -10, 8, -12, 0)
+
+[node name="Core" type="Polygon2D" parent="VisualRoot"]
+color = Color(0.835294, 0.160784, 0.478431, 1)
+polygon = PackedVector2Array(-6, -5, -2, -8, 2, -8, 6, -5, 8, 0, 6, 5, 2, 8, -2, 8, -6, 5, -8, 0)
+
+[node name="Eye" type="Polygon2D" parent="VisualRoot"]
+color = Color(0.968627, 0.968627, 0.968627, 1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[node name="SpikeNorth" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, -14)
+color = Color(0.823529, 0.823529, 0.972549, 1)
+polygon = PackedVector2Array(0, -8, 4, 0, 0, 8, -4, 0)
+
+[node name="SpikeNorthEast" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(10, -10)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeEast" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(14, 0)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeSouthEast" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(10, 10)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeSouth" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 14)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeSouthWest" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(-10, 10)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeWest" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(-14, 0)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="SpikeNorthWest" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(-10, -10)
+color = Color(0.756863, 0.756863, 0.964706, 1)
+polygon = PackedVector2Array(0, -4, 4, 0, 0, 4, -4, 0)
+
+[node name="ContactArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactArea"]
+shape = SubResource("2_contact_shape")

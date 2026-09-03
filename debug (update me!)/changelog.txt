@@ -145,6 +145,10 @@ Live worktree change
 - 22:38 - 03/09/2026
   - Updated `Floor1-3.gd` so `RightSpawn` is recognized as a valid landing token for the right-side spawn.
 
+- 23:30 - 03/09/2026
+  - Removed the turrets from `Floor2-1` and replaced them with `VolatileSpike` (`VS`) and `Dasher`.
+  - Added the new enemy scene scripts and linked them into `Floor2-1`.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

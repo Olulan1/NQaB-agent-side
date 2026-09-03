@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dunwaumd5vix"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
-[ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
 [ext_resource type="Script" path="res://Floor2-1.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
+[ext_resource type="PackedScene" path="res://VolatileSpike.tscn" id="5_volatile_spike"]
+[ext_resource type="PackedScene" path="res://Dasher.tscn" id="6_dasher"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1391.5, 72)
@@ -16,21 +17,6 @@ size = Vector2(64, 144)
 
 [sub_resource type="RectangleShape2D" id="4_ceiling_shape"]
 size = Vector2(1279.5, 16)
-
-[sub_resource type="RectangleShape2D" id="5_turret_shape"]
-size = Vector2(24, 34)
-
-[sub_resource type="RectangleShape2D" id="6_turret_knockback_shape"]
-size = Vector2(36, 46)
-
-[sub_resource type="RectangleShape2D" id="7_turret02_top_shape"]
-size = Vector2(16, 4)
-
-[sub_resource type="RectangleShape2D" id="8_turret02_side_shape"]
-size = Vector2(4, 16)
-
-[sub_resource type="RectangleShape2D" id="9_turret02_knockback_shape"]
-size = Vector2(4, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
 size = Vector2(64, 108.5)
@@ -109,66 +95,11 @@ position = Vector2(1024, 272)
 position = Vector2(-383.75, 0)
 shape = SubResource("4_ceiling_shape")
 
-[node name="Turret" type="StaticBody2D" parent="." unique_id=2026734511]
-position = Vector2(640, 300)
-script = ExtResource("2_turret_script")
+[node name="VolatileSpike" parent="." unique_id=2026734511 instance=ExtResource("5_volatile_spike")]
+position = Vector2(816, 344)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret" unique_id=2026734514]
-shape = SubResource("5_turret_shape")
-
-[node name="KnockbackArea" type="Area2D" parent="Turret" unique_id=2026734515]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/KnockbackArea" unique_id=2026734516]
-shape = SubResource("6_turret_knockback_shape")
-
-[node name="TurretVisual" type="Polygon2D" parent="Turret" unique_id=2026734512]
-color = Color(0.388235, 0.388235, 0.388235, 1)
-polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)
-
-[node name="FireTimer" type="Timer" parent="Turret" unique_id=2026734513]
-autostart = true
-
-[node name="Turret02" type="StaticBody2D" parent="." unique_id=2026734517]
-position = Vector2(960, 376)
-script = ExtResource("2_turret_script")
-fire_interval = 2.0
-fire_left_only = true
-projectile_spawn_offset = Vector2(-12, 0)
-
-[node name="TopCollision" type="CollisionShape2D" parent="Turret02" unique_id=2026734518]
-position = Vector2(0, -6)
-shape = SubResource("7_turret02_top_shape")
-
-[node name="LeftCollision" type="CollisionShape2D" parent="Turret02" unique_id=2026734524]
-position = Vector2(-6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="RightCollision" type="CollisionShape2D" parent="Turret02" unique_id=2026734525]
-position = Vector2(6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="KnockbackArea" type="Area2D" parent="Turret02" unique_id=2026734519]
-
-[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=2026734520]
-position = Vector2(-6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="RightHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=2026734526]
-position = Vector2(6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="TurretVisual" type="Polygon2D" parent="Turret02" unique_id=2026734521]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[node name="Dot" type="Polygon2D" parent="Turret02" unique_id=2026734523]
-position = Vector2(2, -2)
-color = Color(0.85098, 0.172549, 0.192157, 1)
-polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-
-[node name="FireTimer" type="Timer" parent="Turret02" unique_id=2026734522]
-wait_time = 2.0
-autostart = true
+[node name="Dasher" parent="." unique_id=2026734517 instance=ExtResource("6_dasher")]
+position = Vector2(464, 344)
 
 [node name="ElevatorReturn" type="Area2D" parent="." unique_id=1840224770]
 position = Vector2(1568, 888)
