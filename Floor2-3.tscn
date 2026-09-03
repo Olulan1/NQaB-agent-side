@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://c343d83ro0mb2"]
+
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
+[ext_resource type="Script" uid="uid://ciw4wxwi562le" path="res://Floor2-3.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
+[ext_resource type="PackedScene" path="res://floorPrefabs/ExitElevator.tscn" id="4_exit_elevator"]
+
+[sub_resource type="RectangleShape2D" id="1_floor_shape"]
+size = Vector2(1391.5, 72)
+
+[sub_resource type="RectangleShape2D" id="2_left_boundary_shape"]
+size = Vector2(32, 148)
+
+[sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
+size = Vector2(64, 144)
+
+[sub_resource type="RectangleShape2D" id="4_ceiling_shape"]
+size = Vector2(1279.5, 16)
+
+[sub_resource type="RectangleShape2D" id="5_turret_shape"]
+size = Vector2(24, 34)
+
+[sub_resource type="RectangleShape2D" id="6_turret_knockback_shape"]
+size = Vector2(36, 46)
+
+[sub_resource type="RectangleShape2D" id="7_turret02_top_shape"]
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="8_turret02_side_shape"]
+size = Vector2(4, 16)
+
+[sub_resource type="RectangleShape2D" id="9_turret02_knockback_shape"]
+size = Vector2(4, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
+size = Vector2(32, 105)
+
+[node name="Floor2-3" type="Node2D" unique_id=1637834644]
+script = ExtResource("3_floor_script")
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=162317627]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1434528541]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.164706, 0.188235, 1)
+
+[node name="ScreenPanel" type="ColorRect" parent="Backdrop" unique_id=914829725]
+offset_top = 288.0
+offset_right = 1280.0
+offset_bottom = 432.0
+color = Color(0.494118, 0.878431, 0.882353, 1)
+
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=24304819]
+offset_top = 360.0
+offset_right = 2048.0
+offset_bottom = 432.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=2016634609]
+offset_top = 264.0
+offset_right = 2048.0
+offset_bottom = 280.0
+color = Color(0.388235, 0.65098, 0.662745, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=496088393]
+position = Vector2(1024, 420)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=1376805079]
+position = Vector2(-384, -172)
+shape = SubResource("1_floor_shape")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1270621078]
+position = Vector2(-327.75, 0)
+shape = SubResource("1_floor_shape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1815174064]
+position = Vector2(-16, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1388914468]
+position = Vector2(0, -2)
+shape = SubResource("2_left_boundary_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=341179357]
+position = Vector2(1296, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=708836786]
+position = Vector2(72, -48)
+shape = SubResource("3_right_boundary_shape")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=967291061]
+position = Vector2(1024, 272)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=272918202]
+position = Vector2(-383.75, 0)
+shape = SubResource("4_ceiling_shape")
+
+[node name="Turret" type="StaticBody2D" parent="." unique_id=402787527]
+position = Vector2(640, 300)
+script = ExtResource("2_turret_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret" unique_id=1146124236]
+shape = SubResource("5_turret_shape")
+
+[node name="KnockbackArea" type="Area2D" parent="Turret" unique_id=662856902]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/KnockbackArea" unique_id=470726997]
+shape = SubResource("6_turret_knockback_shape")
+
+[node name="TurretVisual" type="Polygon2D" parent="Turret" unique_id=298497901]
+color = Color(0.388235, 0.388235, 0.388235, 1)
+polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)
+
+[node name="FireTimer" type="Timer" parent="Turret" unique_id=410844216]
+autostart = true
+
+[node name="Turret02" type="StaticBody2D" parent="." unique_id=47674064]
+position = Vector2(960, 376)
+script = ExtResource("2_turret_script")
+fire_interval = 2.0
+fire_left_only = true
+projectile_spawn_offset = Vector2(-12, 0)
+
+[node name="TopCollision" type="CollisionShape2D" parent="Turret02" unique_id=1944494325]
+position = Vector2(0, -6)
+shape = SubResource("7_turret02_top_shape")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="Turret02" unique_id=94708116]
+position = Vector2(-6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="RightCollision" type="CollisionShape2D" parent="Turret02" unique_id=859601342]
+position = Vector2(6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="KnockbackArea" type="Area2D" parent="Turret02" unique_id=1705707143]
+
+[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=1915768403]
+position = Vector2(-6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="RightHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=1292336994]
+position = Vector2(6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="TurretVisual" type="Polygon2D" parent="Turret02" unique_id=1840422]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Dot" type="Polygon2D" parent="Turret02" unique_id=1452339525]
+position = Vector2(2, -2)
+color = Color(0.85098, 0.172549, 0.192157, 1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[node name="FireTimer" type="Timer" parent="Turret02" unique_id=1222509374]
+wait_time = 2.0
+autostart = true
+
+[node name="PrevScreenReturn" type="Area2D" parent="Turret02" unique_id=269768654]
+position = Vector2(608, 512)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor2-2.tscn"
+target_spawn_name = "RightSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/PrevScreenReturn" unique_id=1001899796]
+position = Vector2(-1552, -555.5)
+shape = SubResource("RectangleShape2D_1er4s")
+
+[node name="Turret02_2" type="StaticBody2D" parent="." unique_id=1778860168]
+position = Vector2(960, 304)
+script = ExtResource("2_turret_script")
+fire_interval = 2.0
+start_delay = 0.7
+fire_left_only = true
+projectile_spawn_offset = Vector2(-12, 0)
+
+[node name="TopCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=2064136403]
+position = Vector2(0, -6)
+shape = SubResource("7_turret02_top_shape")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=1580904932]
+position = Vector2(-6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="RightCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=1369010427]
+position = Vector2(6, 0)
+shape = SubResource("8_turret02_side_shape")
+
+[node name="KnockbackArea" type="Area2D" parent="Turret02_2" unique_id=722726482]
+
+[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=1131607073]
+position = Vector2(-6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="RightHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=1847210018]
+position = Vector2(6, 0)
+shape = SubResource("9_turret02_knockback_shape")
+
+[node name="TurretVisual" type="Polygon2D" parent="Turret02_2" unique_id=1972132230]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Dot" type="Polygon2D" parent="Turret02_2" unique_id=672137689]
+position = Vector2(2, -2)
+color = Color(0.85098, 0.172549, 0.192157, 1)
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[node name="FireTimer" type="Timer" parent="Turret02_2" unique_id=1996395062]
+wait_time = 2.0
+autostart = true
+
+[node name="Player" parent="." unique_id=1640003665 instance=ExtResource("1_player")]
+position = Vector2(96, 364)
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=1069301572]
+position = Vector2(116, 364)
+
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=382157409]
+position = Vector2(1008, 364)
+
+[node name="ExitElevator" parent="." unique_id=2052566944 instance=ExtResource("4_exit_elevator")]
+position = Vector2(1072, 368)
+target_scene_path = "res://Floor3-1.tscn"
+target_spawn_name = "LeftSpawn"
+caption_text = "NEXT FLOOR"

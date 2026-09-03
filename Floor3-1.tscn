@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://bhhgveisdx7t3"]
+
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://Floor3-1.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
+[ext_resource type="PackedScene" path="res://VolatileSpike.tscn" id="5_volatile_spike"]
+[ext_resource type="PackedScene" path="res://Dasher.tscn" id="6_dasher"]
+
+[sub_resource type="RectangleShape2D" id="1_floor_shape"]
+size = Vector2(1391.5, 72)
+
+[sub_resource type="RectangleShape2D" id="2_left_boundary_shape"]
+size = Vector2(32, 148)
+
+[sub_resource type="RectangleShape2D" id="3_right_boundary_shape"]
+size = Vector2(64, 144)
+
+[sub_resource type="RectangleShape2D" id="4_ceiling_shape"]
+size = Vector2(1279.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
+size = Vector2(64, 108.5)
+
+[node name="Floor3-1" type="Node2D" unique_id=859458130]
+script = ExtResource("3_floor_script")
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=1425520211]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1863727859]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.164706, 0.188235, 1)
+
+[node name="ScreenPanel" type="ColorRect" parent="Backdrop" unique_id=2077473638]
+offset_top = 288.0
+offset_right = 1280.0
+offset_bottom = 432.0
+color = Color(0.494118, 0.878431, 0.882353, 1)
+
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=227453762]
+offset_top = 360.0
+offset_right = 2048.0
+offset_bottom = 432.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="FloorTitle" type="RichTextLabel" parent="Backdrop" unique_id=2147483601]
+offset_left = 400.0
+offset_top = 112.0
+offset_right = 880.0
+offset_bottom = 184.0
+theme_override_colors/default_color = Color(0.0823529, 0.341176, 0.172549, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Floor 2 - Enemy forces"
+horizontal_alignment = 2
+
+[node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=1794428641]
+offset_top = 264.0
+offset_right = 2048.0
+offset_bottom = 280.0
+color = Color(0.388235, 0.65098, 0.662745, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1091297499]
+position = Vector2(1024, 420)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=942899569]
+position = Vector2(-384, -172)
+shape = SubResource("1_floor_shape")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=233699051]
+position = Vector2(-327.75, 0)
+shape = SubResource("1_floor_shape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=228714617]
+position = Vector2(-16, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1383946835]
+position = Vector2(0, -2)
+shape = SubResource("2_left_boundary_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1083262211]
+position = Vector2(1296, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=1804150624]
+position = Vector2(72, -48)
+shape = SubResource("3_right_boundary_shape")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1918642201]
+position = Vector2(1024, 272)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1918642202]
+position = Vector2(-383.75, 0)
+shape = SubResource("4_ceiling_shape")
+
+[node name="VolatileSpike" parent="." unique_id=2026734511 instance=ExtResource("5_volatile_spike")]
+position = Vector2(816, 344)
+
+[node name="Dasher" parent="." unique_id=2026734517 instance=ExtResource("6_dasher")]
+position = Vector2(464, 344)
+
+[node name="ElevatorReturn" type="Area2D" parent="." unique_id=1840224770]
+position = Vector2(1568, 888)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor2-3.tscn"
+target_spawn_name = "RightSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorReturn" unique_id=1229656228]
+position = Vector2(-1552, -552)
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_1er4s")
+
+[node name="ElevatorReturnVisual" type="Polygon2D" parent="ElevatorReturn" unique_id=1840224771]
+position = Vector2(-1552, -552)
+scale = Vector2(0.5, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, -52.5, 32, -52.5, 32, 52.5, -32, 52.5)
+
+[node name="Player" parent="." unique_id=1003581347 instance=ExtResource("1_player")]
+position = Vector2(96, 364)
+
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=1003581348]
+position = Vector2(116, 364)
+
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=1003581351]
+position = Vector2(1008, 364)
+
+[node name="NextScreen" type="Area2D" parent="." unique_id=1003581352]
+position = Vector2(1216, 364)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor2-2.tscn"
+target_spawn_name = "LeftSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=1003581353]
+position = Vector2(0, -29.75)
+shape = SubResource("RectangleShape2D_1er4s")

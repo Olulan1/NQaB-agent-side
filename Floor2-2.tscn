@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://di0giwnrgy5na"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
-[ext_resource type="Script" path="res://Floor2-2.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://bw0k6txyjw5vn" path="res://Floor2-2.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
 [ext_resource type="PackedScene" path="res://Dasher.tscn" id="4_dasher"]
 
@@ -20,111 +20,98 @@ size = Vector2(1279.5, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
 size = Vector2(32, 105)
 
-[node name="Floor2-2" type="Node2D"]
+[node name="Floor2-2" type="Node2D" unique_id=969237222]
 script = ExtResource("3_floor_script")
 
-[node name="Backdrop" type="CanvasLayer" parent="."]
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=385412108]
 layer = -1
 
-[node name="Background" type="ColorRect" parent="Backdrop"]
+[node name="Background" type="ColorRect" parent="Backdrop" unique_id=81005632]
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.0784314, 0.164706, 0.188235, 1)
 
-[node name="ScreenPanel" type="ColorRect" parent="Backdrop"]
+[node name="ScreenPanel" type="ColorRect" parent="Backdrop" unique_id=1560941121]
 offset_top = 288.0
 offset_right = 1280.0
 offset_bottom = 432.0
 color = Color(0.494118, 0.878431, 0.882353, 1)
 
-[node name="FloorVisual" type="ColorRect" parent="Backdrop"]
+[node name="FloorVisual" type="ColorRect" parent="Backdrop" unique_id=999733112]
 offset_top = 360.0
 offset_right = 2048.0
 offset_bottom = 432.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="FloorTitle" type="RichTextLabel" parent="Backdrop"]
-offset_left = 400.0
-offset_top = 112.0
-offset_right = 880.0
-offset_bottom = 184.0
-theme_override_colors/default_color = Color(0.0823529, 0.341176, 0.172549, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "Floor 1 - [i]Dangerous Traps[/i]"
-horizontal_alignment = 2
-
-[node name="CeilingVisual" type="ColorRect" parent="Backdrop"]
+[node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=1824474727]
 offset_top = 264.0
 offset_right = 2048.0
 offset_bottom = 280.0
 color = Color(0.388235, 0.65098, 0.662745, 1)
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1346452860]
 position = Vector2(1024, 420)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=1643095044]
 position = Vector2(-384, -172)
 shape = SubResource("1_floor_shape")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=2127983004]
 position = Vector2(-327.75, 0)
 shape = SubResource("1_floor_shape")
 
-[node name="LeftBoundary" type="StaticBody2D" parent="."]
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1710163192]
 position = Vector2(-16, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=145502197]
 position = Vector2(0, -2)
 shape = SubResource("2_left_boundary_shape")
 
-[node name="RightBoundary" type="StaticBody2D" parent="."]
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=742574471]
 position = Vector2(1296, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=302872107]
 position = Vector2(72, -48)
 shape = SubResource("3_right_boundary_shape")
 
-[node name="Ceiling" type="StaticBody2D" parent="."]
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=2125488552]
 position = Vector2(1024, 272)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1360186708]
 position = Vector2(-383.75, 0)
 shape = SubResource("4_ceiling_shape")
 
-[node name="PrevScreenReturn" type="Area2D" parent="."]
+[node name="PrevScreenReturn" type="Area2D" parent="." unique_id=224309082]
 position = Vector2(608, 512)
 script = ExtResource("3_ubfde")
 target_scene_path = "res://Floor2-1.tscn"
 target_spawn_name = "RightSpawn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn"]
-position = Vector2(0, -32)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn" unique_id=284685490]
+position = Vector2(-592, -176)
 shape = SubResource("RectangleShape2D_1er4s")
 
-[node name="Dasher" parent="." instance=ExtResource("4_dasher")]
+[node name="Dasher" parent="." unique_id=1497576367 instance=ExtResource("4_dasher")]
 position = Vector2(384, 344)
 
-[node name="Dasher2" parent="." instance=ExtResource("4_dasher")]
+[node name="Dasher2" parent="." unique_id=1902008612 instance=ExtResource("4_dasher")]
 position = Vector2(896, 344)
 
-[node name="Player" parent="." instance=ExtResource("1_player")]
+[node name="Player" parent="." unique_id=1007623561 instance=ExtResource("1_player")]
 position = Vector2(96, 364)
 
-[node name="LeftSpawn" type="Marker2D" parent="."]
+[node name="LeftSpawn" type="Marker2D" parent="." unique_id=189400275]
 position = Vector2(116, 364)
 
-[node name="RightSpawn" type="Marker2D" parent="."]
+[node name="RightSpawn" type="Marker2D" parent="." unique_id=1731447631]
 position = Vector2(1184, 364)
 
-[node name="NextScreen" type="Area2D" parent="."]
+[node name="NextScreen" type="Area2D" parent="." unique_id=642218796]
 position = Vector2(1216, 364)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor1-3.tscn"
-target_spawn_name = "floor1_left"
+target_scene_path = "res://Floor2-3.tscn"
+target_spawn_name = "LeftSpawn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=711641672]
 position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_1er4s")

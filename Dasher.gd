@@ -27,6 +27,7 @@ var facing: int = -1
 func _ready() -> void:
 	health = max_health
 	player = get_node_or_null(player_path) as CharacterBody2D
+	randomize()
 	dash_speed_px = (dash_distance_tiles * TILE_SIZE) / dash_duration
 	gravity_px = float(ProjectSettings.get_setting("physics/2d/default_gravity"))
 	dash_timer.wait_time = dash_interval
@@ -71,12 +72,7 @@ func _on_dash_timer_timeout() -> void:
 	if dash_time_left > 0.0:
 		return
 
-	if is_instance_valid(player):
-		dash_direction = -1 if player.global_position.x < global_position.x else 1
-	else:
-		dash_direction *= -1
-		if dash_direction == 0:
-			dash_direction = -1
+	dash_direction = -1 if randf() < 0.5 else 1
 
 	var projected_x := global_position.x + (dash_distance_tiles * TILE_SIZE * dash_direction)
 	if projected_x < bounds_left_x or projected_x > bounds_right_x:
@@ -96,6 +92,15 @@ func _refresh_bounds() -> void:
 		bounds_left_x = left_boundary.global_position.x + 24.0
 	if right_boundary != null:
 		bounds_right_x = right_boundary.global_position.x - 24.0
+
+	var visible_rect := get_viewport().get_visible_rect()
+	if visible_rect.size.x > 0.0:
+		var visible_left_x := visible_rect.position.x + 16.0
+		var visible_right_x := visible_rect.position.x + visible_rect.size.x - 16.0
+		bounds_left_x = maxf(bounds_left_x, visible_left_x)
+		bounds_right_x = minf(bounds_right_x, visible_right_x)
+		if bounds_right_x < bounds_left_x:
+			bounds_right_x = bounds_left_x
 
 
 func _on_contact_body_entered(body: Node2D) -> void:

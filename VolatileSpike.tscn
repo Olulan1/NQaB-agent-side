@@ -9,6 +9,7 @@ size = Vector2(28, 28)
 size = Vector2(36, 36)
 
 [node name="VolatileSpike" type="CharacterBody2D"]
+scale = Vector2(0.333333, 0.333333)
 script = ExtResource("1_volatile_spike_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
