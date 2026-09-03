@@ -81,6 +81,11 @@ Live worktree change
   - Reimported and ran the Godot scene after the laser-right update.
   - Captured a live screenshot to verify the laser pose moved right from the prior `-23.0` build.
 
+- 20:45 - 03/09/2026
+  - Updated `Player.gd` muzzle offsets so the standing and crouching weapon tables reflect the current laser-position tuning.
+  - Adjusted the laser projectile spawn offset in `Player.gd` to match the latest standing/crouching placement work.
+  - Added `agent-thoughts/notes/laser-offset-shortcuts.md` as a shortcut reference for the editable muzzle-offset values.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

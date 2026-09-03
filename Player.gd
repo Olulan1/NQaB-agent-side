@@ -52,13 +52,13 @@ const STANDING_WEAPON_MUZZLE_OFFSETS: PackedVector2Array = [
 	Vector2(23.0, -10.0),
 	Vector2(39.0, -9.0),
 	Vector2(38.0, -12.0),
-	Vector2(32.0, -4.0),
+	Vector2(26.0, -10.0),
 ]
 const CROUCH_WEAPON_MUZZLE_OFFSETS: PackedVector2Array = [
 	Vector2(23.0, -4.0),
 	Vector2(39.0, -3.0),
 	Vector2(38.0, -6.0),
-	Vector2(32.0, 2.0),
+	Vector2(20.0, 2.0),
 ]
 const HELD_WEAPON_DEFAULT_ICON_SCALE := Vector2(0.08, 0.08)
 const HELD_WEAPON_OTHER_ICON_SCALE := Vector2(0.136, 0.136)
@@ -321,7 +321,8 @@ func _spawn_shotgun_projectiles() -> void:
 func _spawn_laser_beam() -> void:
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = muzzle.global_position + Vector2((laser_beam_length * 0.5) * facing, 0.0)
+	var projectile_offset := Vector2(0.0, -4.0) if crouching else Vector2(-6.0, 3.0)
+	projectile.global_position = muzzle.global_position + Vector2((laser_beam_length * 0.5) * facing + projectile_offset.x, projectile_offset.y)
 	projectile.scale = Vector2((laser_beam_length / 14.0) * facing, 2.0)
 	projectile.modulate = Color(1.0, 0.2, 0.2, 0.92)
 	projectile.set("damage", 1)
