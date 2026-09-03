@@ -1,13 +1,11 @@
 extends CharacterBody2D
 class_name VolatileSpike
 
-const TRACE_NAMES: Array[String] = ["NextScreen", "ExitBand", "ExitElevator", "ReturnBand", "ElevatorReturn"]
-
 @export var rise_speed: float = 240.0
-@export var trace_speed: float = 120.0
-@export var return_speed: float = 220.0
+@export var trace_speed: float = 180.0
+@export var return_speed: float = 73.3333333333
 @export var trace_duration: float = 20.0
-@export var ceiling_margin: float = 8.0
+@export var screen_margin: float = 16.0
 
 @onready var contact_area: Area2D = $ContactArea
 
@@ -98,23 +96,11 @@ func _refresh_scene_bounds() -> void:
 	var left_rect := _get_node_rect(parent_root.get_node_or_null("LeftBoundary"))
 	var right_rect := _get_node_rect(parent_root.get_node_or_null("RightBoundary"))
 
-	bounds_left_x = left_rect.end.x + 24.0 if left_rect.size != Vector2.ZERO else 24.0
-	bounds_right_x = right_rect.position.x - 24.0 if right_rect.size != Vector2.ZERO else 1256.0
-	bounds_top_y = ceiling_rect.end.y + ceiling_margin if ceiling_rect.size != Vector2.ZERO else 64.0
-	bounds_bottom_y = floor_rect.position.y - ceiling_margin if floor_rect.size != Vector2.ZERO else 416.0
+	bounds_left_x = left_rect.end.x + screen_margin if left_rect.size != Vector2.ZERO else screen_margin
+	bounds_right_x = right_rect.position.x - screen_margin if right_rect.size != Vector2.ZERO else 1280.0 - screen_margin
+	bounds_top_y = ceiling_rect.end.y + screen_margin if ceiling_rect.size != Vector2.ZERO else screen_margin
+	bounds_bottom_y = floor_rect.position.y - screen_margin if floor_rect.size != Vector2.ZERO else 720.0 - screen_margin
 	ceiling_target_y = bounds_top_y + _collision_half_height() + 4.0
-
-	for gate_name in TRACE_NAMES:
-		var gate_rect := _get_node_rect(parent_root.get_node_or_null(gate_name))
-		if gate_rect.size == Vector2.ZERO:
-			continue
-		if gate_rect.position.x <= bounds_left_x + 48.0:
-			bounds_left_x = minf(bounds_left_x, gate_rect.position.x - 24.0)
-		if gate_rect.end.x >= bounds_right_x - 48.0:
-			bounds_right_x = maxf(bounds_right_x, gate_rect.end.x + 24.0)
-		bounds_top_y = minf(bounds_top_y, gate_rect.position.y - 24.0)
-		bounds_bottom_y = maxf(bounds_bottom_y, gate_rect.end.y + 24.0)
-		ceiling_target_y = bounds_top_y + _collision_half_height() + 4.0
 
 
 func _collision_half_height() -> float:
