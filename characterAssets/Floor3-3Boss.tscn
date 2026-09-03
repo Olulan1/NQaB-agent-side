@@ -1,0 +1,63 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://characterAssets/Floor3-3Boss.gd" id="1_enemy_script"]
+
+[sub_resource type="RectangleShape2D" id="1_enemy_shape"]
+size = Vector2(48, 128)
+
+[sub_resource type="CircleShape2D" id="2_detection_shape"]
+radius = 192.0
+
+[sub_resource type="RectangleShape2D" id="3_contact_shape"]
+size = Vector2(48, 128)
+
+[node name="Floor3-3Boss" type="CharacterBody2D"]
+position = Vector2(0, 0)
+script = ExtResource("1_enemy_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_enemy_shape")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 0)
+color = Color(0.141176, 0.470588, 0.2, 1)
+polygon = PackedVector2Array(-24, -64, 24, -64, 24, 64, -24, 64)
+
+[node name="Core" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 0)
+color = Color(0.0352941, 0.0784314, 0.054902, 1)
+polygon = PackedVector2Array(-18, -52, 18, -52, 18, 52, -18, 52)
+
+[node name="EyeLens" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 6)
+color = Color(0.247059, 0.0470588, 0.0313726, 1)
+polygon = PackedVector2Array(-22, 0, -16, -16, 0, -22, 16, -16, 22, 0, 16, 16, 0, 22, -16, 16)
+
+[node name="EyeCore" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 6)
+color = Color(0.890196, 0.188235, 0.0705882, 1)
+polygon = PackedVector2Array(-8, 0, -5, -5, 0, -8, 5, -5, 8, 0, 5, 5, 0, 8, -5, 5)
+
+[node name="LowerPanel" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 46)
+color = Color(0.0196078, 0.0431373, 0.027451, 1)
+polygon = PackedVector2Array(-24, -14, 24, -14, 24, 14, -24, 14)
+
+[node name="Muzzle" type="Marker2D" parent="VisualRoot"]
+position = Vector2(22, -8)
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 1.9
+autostart = false
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("2_detection_shape")
+
+[node name="ContactArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactArea"]
+shape = SubResource("3_contact_shape")

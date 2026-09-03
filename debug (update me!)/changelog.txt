@@ -97,6 +97,34 @@ Live worktree change
 - 21:27 - 03/09/2026
   - Shifted all five `Floor01` barriers downward so their bottoms meet the actual solid floor collision instead of only the visible floor strip.
 
+- 21:39 - 03/09/2026
+  - Added `Floor02Enemy.gd` and `Floor02Enemy.tscn` for a green left-facing enemy with 3-square detection, 1 damage pellets, and a 3-second fire rate.
+  - Instanced the new enemy into `Floor02.tscn`.
+
+- 21:47 - 03/09/2026
+  - Added `characterAssets/Floor3-3Boss.gd` and `characterAssets/Floor3-3Boss.tscn` as a saved copy of the current Floor02 enemy.
+  - Scaled down the live `Floor02` enemy and halved its movement and detection settings.
+  - Added the long contextual enemy caption to `Floor02.tscn`.
+
+- 21:50 - 03/09/2026
+  - Updated both the live `Floor02` enemy and `characterAssets/Floor3-3Boss` enemy to fire every 1.9 seconds.
+  - Added player-contact damage handling to both enemy variants.
+
+- 21:53 - 03/09/2026
+  - Moved the Floor02 enemy caption lower so it sits farther from the player's HUD.
+  - Added the Floor03 guidance caption and placed it in a HUD-safe region.
+
+- 21:56 - 03/09/2026
+  - Added a mixed-style forest-green title caption to `Floor1-1.tscn` in the top-right corner.
+
+- 21:58 - 03/09/2026
+  - Darkened the `Floor1-1.tscn` title caption to a deeper green.
+  - Shifted the title caption further left so it stays visible in the scene.
+
+- 22:00 - 03/09/2026
+  - Restored the earlier green color on the `Floor1-1.tscn` title caption.
+  - Added a black outline override to the same title caption.
+
 Prior Codex command references recorded in the nqab folder
 
 - `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`

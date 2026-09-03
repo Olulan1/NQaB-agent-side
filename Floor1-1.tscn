@@ -58,6 +58,19 @@ offset_right = 2048.0
 offset_bottom = 432.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
+[node name="FloorTitle" type="RichTextLabel" parent="Backdrop" unique_id=2147483601]
+offset_left = 400.0
+offset_top = 112.0
+offset_right = 880.0
+offset_bottom = 184.0
+theme_override_colors/default_color = Color(0.0823529, 0.341176, 0.172549, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Floor 1 - [i]Dangerous Traps[/i]"
+horizontal_alignment = 2
+
 [node name="CeilingVisual" type="ColorRect" parent="Backdrop" unique_id=1794428641]
 offset_top = 264.0
 offset_right = 2048.0

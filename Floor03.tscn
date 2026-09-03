@@ -58,6 +58,17 @@ theme_override_font_sizes/font_size = 18
 text = "EXIT ELEVATOR"
 horizontal_alignment = 1
 
+[node name="GuidanceCaption" type="Label" parent="Backdrop" unique_id=1956418301]
+offset_left = 120.0
+offset_top = 136.0
+offset_right = 1160.0
+offset_bottom = 208.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 0.9)
+theme_override_font_sizes/font_size = 18
+text = "You know all you need to now - Good luck!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=537728461]
 position = Vector2(1024, 420)
 
