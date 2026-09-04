@@ -212,3 +212,28 @@ Notes
 - Added weapon-specific boss reactions: slight knockback for pistol and rifle, stronger knockback for shotgun, and a 2 second stun for laser hits.
 - Kept the boss charging on a 7 second timer with horizontal-only dash movement, and verified that the boss moves in the level without getting stuck.
 - Verified that the boss healthbar remains visible while alive and disappears with the boss when health reaches zero.
+
+02:52 - 04/09/2026
+- Added a visible rectangular `PrevScreenReturn` marker to `Floor2-3` and kept it linked to `Floor2-2`'s `RightSpawn`.
+- Retargeted `Floor2-3`'s `ExitElevator` to `Floor3-1`'s `LeftSpawn`.
+- Linked `Floor3-2`'s `NextScreen` to `Floor3-3`'s `LeftSpawn`.
+- Expanded `Floor3-3` with two additional teleport portals, reduced the portal cooldown to 6 seconds there, and made teleport selection random across the other portals in the room.
+- Retargeted `Floor3-3`'s `ExitElevator` to `demoEnd`'s `RightSpawn`.
+- Replaced `demoEnd`'s caption block with `Congratulations! You beat the demo!` and made its return portal reset player health before sending the player back to `Intro01`.
+- Verified the updated floor chain and demo end headlessly with `FLOOR_CHAIN_DEMOEND_HEADLESS_OK`.
+
+03:06 - 04/09/2026
+- Retargeted `Floor3-3`'s `PrevScreenReturn` to `Floor3-2`'s `RightSpawn` so it only flows back one screen.
+- Added a `LeftSpawn` marker to `demoEnd` and retargeted `Floor3-3`'s `ExitElevator` to it.
+- Retargeted `demoEnd`'s `PrevScreenReturn` to `Floor1-1`'s `LeftSpawn`, and updated `demoEnd.gd` to honor both left and right spawn tokens.
+- Reverified the updated links headlessly with `FLOOR3_DEMOEND_LEFTSPAWN_OK`.
+
+03:12 - 04/09/2026
+- Added a `boss_dead` gate to `Floor3-3` so both `PrevScreenReturn` and `ExitElevator` stay locked until the boss dies.
+- Added a standalone caption on `Floor3-3` explaining that the exits unlock only after the boss is dead.
+- Verified the gate behavior headlessly with `FLOOR3_BOSS_GATE_OK`.
+
+03:15 - 04/09/2026
+- Moved the `Floor3-3` boss-gate caption below the player standing area.
+- Reduced the `Floor3-3` boss-gate caption font size so it reads more subtly.
+- Reverified the caption placement headlessly with `FLOOR3_CAPTION_TWEAK_OK`.

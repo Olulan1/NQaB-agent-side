@@ -24,6 +24,7 @@ func _ready() -> void:
 	player = get_node_or_null(player_path) as CharacterBody2D
 	open_texture = _load_texture(open_texture_path)
 	closed_texture = _load_texture(closed_texture_path)
+	add_to_group("teleport_portal")
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	_apply_open_state()
@@ -50,7 +51,9 @@ func _try_teleport() -> void:
 	if _cooldown_time_left > 0.0:
 		return
 
-	var partner := get_node_or_null(linked_portal_path) as TeleportPortal
+	var partner := _pick_destination_portal()
+	if partner == null:
+		partner = get_node_or_null(linked_portal_path) as TeleportPortal
 	if partner == null:
 		return
 
@@ -61,6 +64,21 @@ func _try_teleport() -> void:
 
 	_begin_cooldown()
 	partner._begin_cooldown()
+
+
+func _pick_destination_portal() -> TeleportPortal:
+	var portals: Array[TeleportPortal] = []
+	for node in get_tree().get_nodes_in_group("teleport_portal"):
+		var portal := node as TeleportPortal
+		if portal == null:
+			continue
+		if portal == self:
+			continue
+		portals.append(portal)
+
+	if portals.is_empty():
+		return null
+	return portals[randi() % portals.size()]
 
 
 func _begin_cooldown() -> void:

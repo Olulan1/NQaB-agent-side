@@ -40,20 +40,20 @@ shape = SubResource("1_floor_shape")
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(160, 556)
 
-[node name="ControlsHintLayer" type="CanvasLayer" parent="."]
+[node name="VictoryCaptionLayer" type="CanvasLayer" parent="."]
 
-[node name="ControlsHint" type="Label" parent="ControlsHintLayer"]
-offset_left = 96.0
-offset_top = 332.0
-offset_right = 240.0
-offset_bottom = 448.0
-theme_override_colors/font_color = Color(0.968627, 0.737255, 0.878431, 1)
-theme_override_font_sizes/font_size = 20
-text = "Move
-W   ↑
-A   ←
-S   ↓
-D   →"
+[node name="VictoryCaption" type="Label" parent="VictoryCaptionLayer"]
+offset_left = 176.0
+offset_top = 120.0
+offset_right = 1104.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+text = "Congratulations! You beat the demo!"
+
+[node name="LeftSpawn" type="Marker2D" parent="."]
+position = Vector2(116, 556)
 
 [node name="RightSpawn" type="Marker2D" parent="."]
 position = Vector2(1152, 556)
@@ -61,8 +61,9 @@ position = Vector2(1152, 556)
 [node name="PrevScreenReturn" type="Area2D" parent="."]
 position = Vector2(1216, 556)
 script = ExtResource("2_portal_script")
-target_scene_path = "res://Floor3-3.tscn"
-target_spawn_name = "RightSpawn"
+target_scene_path = "res://Floor1-1.tscn"
+target_spawn_name = "LeftSpawn"
+reset_player_health_on_use = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn"]
 position = Vector2(1, 0)

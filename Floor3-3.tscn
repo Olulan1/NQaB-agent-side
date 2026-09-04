@@ -51,6 +51,20 @@ offset_right = 2048.0
 offset_bottom = 280.0
 color = Color(0.388235, 0.65098, 0.662745, 1)
 
+[node name="BossGateCaptionLayer" type="CanvasLayer" parent="." unique_id=199280331]
+
+[node name="BossGateCaption" type="Label" parent="BossGateCaptionLayer" unique_id=199280332]
+offset_left = 256.0
+offset_top = 472.0
+offset_right = 1024.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+text = "PrevScreenReturn and ExitElevator unlock only after the boss is dead."
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=645462264]
 position = Vector2(1024, 420)
 
@@ -86,8 +100,9 @@ shape = SubResource("4_ceiling_shape")
 [node name="PrevScreenReturn" type="Area2D" parent="." unique_id=1462933445]
 position = Vector2(608, 512)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor2-2.tscn"
+target_scene_path = "res://Floor3-2.tscn"
 target_spawn_name = "RightSpawn"
+requires_boss_dead = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn" unique_id=2080973332]
 position = Vector2(-592, -176)
@@ -97,12 +112,24 @@ shape = SubResource("RectangleShape2D_1er4s")
 position = Vector2(640, 320)
 
 [node name="LeftPortal" parent="." unique_id=1307929348 instance=ExtResource("4_teleport_portal")]
-position = Vector2(416, 344)
+position = Vector2(384, 336)
 linked_portal_path = NodePath("../RightPortal")
+cooldown_seconds = 6.0
 
 [node name="RightPortal" parent="." unique_id=1560690085 instance=ExtResource("4_teleport_portal")]
-position = Vector2(864, 344)
+position = Vector2(688, 336)
 linked_portal_path = NodePath("../LeftPortal")
+cooldown_seconds = 6.0
+
+[node name="OuterLeftPortal" parent="." unique_id=1307929350 instance=ExtResource("4_teleport_portal")]
+position = Vector2(136, 336)
+linked_portal_path = NodePath("../OuterRightPortal")
+cooldown_seconds = 6.0
+
+[node name="OuterRightPortal" parent="." unique_id=1560690087 instance=ExtResource("4_teleport_portal")]
+position = Vector2(896, 336)
+linked_portal_path = NodePath("../OuterLeftPortal")
+cooldown_seconds = 6.0
 
 [node name="Player" parent="." unique_id=1377907609 instance=ExtResource("1_player")]
 position = Vector2(96, 364)
@@ -115,6 +142,7 @@ position = Vector2(1008, 364)
 
 [node name="ExitElevator" parent="." unique_id=2018013110 instance=ExtResource("5_exit_elevator")]
 position = Vector2(1072, 368)
-target_scene_path = "res://Floor3-1.tscn"
+target_scene_path = "res://demoEnd.tscn"
 target_spawn_name = "LeftSpawn"
 caption_text = "NEXT FLOOR"
+requires_boss_dead = true

@@ -245,7 +245,7 @@ position = Vector2(1184, 364)
 [node name="NextScreen" type="Area2D" parent="." unique_id=642218796]
 position = Vector2(1216, 364)
 script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor2-3.tscn"
+target_scene_path = "res://Floor3-3.tscn"
 target_spawn_name = "LeftSpawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextScreen" unique_id=711641672]
