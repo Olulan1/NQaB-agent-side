@@ -9,6 +9,8 @@ size = Vector2(32, 24)
 size = Vector2(36, 30)
 
 [node name="Dasher" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 1
 script = ExtResource("1_dasher_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

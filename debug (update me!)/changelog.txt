@@ -179,3 +179,16 @@ Notes
 - Restored the spacebar jump height to its original value.
 - Clamped Dasher movement to the visible viewport as well as the scene boundaries.
 - Duplicated Floor1-3 to Floor2-3 and Floor2-1 to Floor3-1, then relinked Floor2-2, Floor2-3, and Floor3-1 to continue the floor chain.
+00:46 - 04/09/2026
+- Removed the remaining turrets from Floor2-3 and replaced them with two VolatileSpike enemies.
+- Recolored the Floor2-1 caption to purple.
+- Changed Floor3-1's caption to bold red "Danger" at a larger font size.
+00:55 - 04/09/2026
+- Doubled the visual size of all VolatileSpike enemies.
+- Added proximity-based vertical hover motion for VolatileSpike when the player is within 2 to 3 tiles.
+- Updated Floor3-1's caption to bold "Level 3: Danger.".
+01:19 - 04/09/2026
+- Duplicated `Floor2-2` into `Floor3-2` and relinked the level-3 screen path so `Floor3-1` now leads to `Floor3-2`, while `Floor3-2` returns to `Floor3-1`'s `RightSpawn`.
+- Added the `Level1-1` turret set to `Floor3-1` and the `Level1-2` turret set to `Floor3-2`.
+- Moved the level-3 enemies onto their own collision layer and kept turrets on a separate layer so enemies, dashers, and turrets no longer collide with one another, while player projectiles still reach both.
+- Doubled the `Floor3-1` VolatileSpike scale to `1.333333` and reverified the scene links and layers in headless Godot.

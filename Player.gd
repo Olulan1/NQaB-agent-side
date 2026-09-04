@@ -109,6 +109,7 @@ var _weapon_boxes: Array[Panel] = []
 
 func _ready() -> void:
 	_ensure_input_actions()
+	set_collision_mask_value(2, true)
 	SceneTransition.player_max_health = max_health
 	if SceneTransition.player_health <= 0:
 		SceneTransition.reset_player_health()
@@ -288,6 +289,7 @@ func _spawn_default_projectile() -> void:
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = muzzle.global_position
+	_configure_player_projectile(projectile)
 	projectile.set("damage", projectile_damage)
 	projectile.set("source_is_player", true)
 	projectile.set("free_on_hit", true)
@@ -306,6 +308,7 @@ func _spawn_shotgun_projectiles() -> void:
 		get_tree().current_scene.add_child(projectile)
 		projectile.global_position = muzzle.global_position
 		projectile.scale = Vector2(0.5, 0.5)
+		_configure_player_projectile(projectile)
 		projectile.set("damage", 3)
 		projectile.set("source_is_player", true)
 		projectile.set("free_on_hit", true)
@@ -325,6 +328,7 @@ func _spawn_laser_beam() -> void:
 	projectile.global_position = muzzle.global_position + Vector2((laser_beam_length * 0.5) * facing + projectile_offset.x, projectile_offset.y)
 	projectile.scale = Vector2((laser_beam_length / 14.0) * facing, 2.0)
 	projectile.modulate = Color(1.0, 0.2, 0.2, 0.92)
+	_configure_player_projectile(projectile)
 	projectile.set("damage", 1)
 	projectile.set("source_is_player", true)
 	projectile.set("free_on_hit", false)
@@ -336,6 +340,13 @@ func _spawn_laser_beam() -> void:
 		projectile.call("set_velocity", Vector2.ZERO)
 	elif projectile.has_method("set_direction"):
 		projectile.call("set_direction", facing)
+
+
+func _configure_player_projectile(projectile: Area2D) -> void:
+	projectile.collision_mask = 0
+	projectile.set_collision_mask_value(1, true)
+	projectile.set_collision_mask_value(2, true)
+	projectile.set_collision_mask_value(3, true)
 
 
 func apply_projectile_knockback(_source_position: Vector2, _projectile_velocity: Vector2) -> void:

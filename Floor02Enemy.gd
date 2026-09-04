@@ -80,6 +80,7 @@ func _fire() -> void:
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = muzzle.global_position
+	_configure_enemy_projectile(projectile)
 	projectile.set("damage", projectile_damage)
 	projectile.set("source_is_player", false)
 	projectile.set("free_on_hit", true)
@@ -112,3 +113,8 @@ func apply_player_projectile_hit(damage: int, _source_position: Vector2, _projec
 	health = maxi(health - maxi(1, damage), 0)
 	if health <= 0:
 		queue_free()
+
+
+func _configure_enemy_projectile(projectile: Area2D) -> void:
+	projectile.collision_mask = 0
+	projectile.set_collision_mask_value(1, true)

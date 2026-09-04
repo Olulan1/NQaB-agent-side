@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
 [ext_resource type="Script" uid="uid://ciw4wxwi562le" path="res://Floor2-3.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
+[ext_resource type="PackedScene" path="res://VolatileSpike.tscn" id="5_volatile_spike"]
 [ext_resource type="PackedScene" path="res://floorPrefabs/ExitElevator.tscn" id="4_exit_elevator"]
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
@@ -97,119 +98,11 @@ position = Vector2(1024, 272)
 position = Vector2(-383.75, 0)
 shape = SubResource("4_ceiling_shape")
 
-[node name="Turret" type="StaticBody2D" parent="." unique_id=402787527]
-position = Vector2(640, 300)
-script = ExtResource("2_turret_script")
+[node name="VolatileSpike" parent="." unique_id=402787527 instance=ExtResource("5_volatile_spike")]
+position = Vector2(384, 344)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret" unique_id=1146124236]
-shape = SubResource("5_turret_shape")
-
-[node name="KnockbackArea" type="Area2D" parent="Turret" unique_id=662856902]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/KnockbackArea" unique_id=470726997]
-shape = SubResource("6_turret_knockback_shape")
-
-[node name="TurretVisual" type="Polygon2D" parent="Turret" unique_id=298497901]
-color = Color(0.388235, 0.388235, 0.388235, 1)
-polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)
-
-[node name="FireTimer" type="Timer" parent="Turret" unique_id=410844216]
-autostart = true
-
-[node name="Turret02" type="StaticBody2D" parent="." unique_id=47674064]
-position = Vector2(960, 376)
-script = ExtResource("2_turret_script")
-fire_interval = 2.0
-fire_left_only = true
-projectile_spawn_offset = Vector2(-12, 0)
-
-[node name="TopCollision" type="CollisionShape2D" parent="Turret02" unique_id=1944494325]
-position = Vector2(0, -6)
-shape = SubResource("7_turret02_top_shape")
-
-[node name="LeftCollision" type="CollisionShape2D" parent="Turret02" unique_id=94708116]
-position = Vector2(-6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="RightCollision" type="CollisionShape2D" parent="Turret02" unique_id=859601342]
-position = Vector2(6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="KnockbackArea" type="Area2D" parent="Turret02" unique_id=1705707143]
-
-[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=1915768403]
-position = Vector2(-6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="RightHitbox" type="CollisionShape2D" parent="Turret02/KnockbackArea" unique_id=1292336994]
-position = Vector2(6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="TurretVisual" type="Polygon2D" parent="Turret02" unique_id=1840422]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[node name="Dot" type="Polygon2D" parent="Turret02" unique_id=1452339525]
-position = Vector2(2, -2)
-color = Color(0.85098, 0.172549, 0.192157, 1)
-polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-
-[node name="FireTimer" type="Timer" parent="Turret02" unique_id=1222509374]
-wait_time = 2.0
-autostart = true
-
-[node name="PrevScreenReturn" type="Area2D" parent="Turret02" unique_id=269768654]
-position = Vector2(608, 512)
-script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor2-2.tscn"
-target_spawn_name = "RightSpawn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret02/PrevScreenReturn" unique_id=1001899796]
-position = Vector2(-1552, -555.5)
-shape = SubResource("RectangleShape2D_1er4s")
-
-[node name="Turret02_2" type="StaticBody2D" parent="." unique_id=1778860168]
-position = Vector2(960, 304)
-script = ExtResource("2_turret_script")
-fire_interval = 2.0
-start_delay = 0.7
-fire_left_only = true
-projectile_spawn_offset = Vector2(-12, 0)
-
-[node name="TopCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=2064136403]
-position = Vector2(0, -6)
-shape = SubResource("7_turret02_top_shape")
-
-[node name="LeftCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=1580904932]
-position = Vector2(-6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="RightCollision" type="CollisionShape2D" parent="Turret02_2" unique_id=1369010427]
-position = Vector2(6, 0)
-shape = SubResource("8_turret02_side_shape")
-
-[node name="KnockbackArea" type="Area2D" parent="Turret02_2" unique_id=722726482]
-
-[node name="LeftHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=1131607073]
-position = Vector2(-6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="RightHitbox" type="CollisionShape2D" parent="Turret02_2/KnockbackArea" unique_id=1847210018]
-position = Vector2(6, 0)
-shape = SubResource("9_turret02_knockback_shape")
-
-[node name="TurretVisual" type="Polygon2D" parent="Turret02_2" unique_id=1972132230]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[node name="Dot" type="Polygon2D" parent="Turret02_2" unique_id=672137689]
-position = Vector2(2, -2)
-color = Color(0.85098, 0.172549, 0.192157, 1)
-polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-
-[node name="FireTimer" type="Timer" parent="Turret02_2" unique_id=1996395062]
-wait_time = 2.0
-autostart = true
+[node name="VolatileSpike2" parent="." unique_id=47674064 instance=ExtResource("5_volatile_spike")]
+position = Vector2(896, 344)
 
 [node name="Player" parent="." unique_id=1640003665 instance=ExtResource("1_player")]
 position = Vector2(96, 364)

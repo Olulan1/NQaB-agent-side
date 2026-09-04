@@ -6,13 +6,17 @@ class_name VolatileSpike
 @export var return_speed: float = 73.3333333333
 @export var trace_duration: float = 20.0
 @export var screen_margin: float = 16.0
+@export var proximity_min_tiles: float = 2.0
+@export var proximity_max_tiles: float = 3.0
+@export var proximity_hover_speed: float = 72.0
 
 @onready var contact_area: Area2D = $ContactArea
 
-enum MotionState { IDLE, RISING, TRACING, RETURNING }
+enum MotionState { IDLE, PROXIMITY, RISING, TRACING, RETURNING }
 
 var state: MotionState = MotionState.IDLE
 var origin_position: Vector2
+var player: CharacterBody2D
 var trace_time_left: float = 0.0
 var trace_waypoints: Array[Vector2] = []
 var waypoint_index: int = 0
@@ -21,10 +25,12 @@ var bounds_left_x: float = 0.0
 var bounds_right_x: float = 0.0
 var bounds_top_y: float = 0.0
 var bounds_bottom_y: float = 0.0
+var proximity_direction: int = 1
 
 
 func _ready() -> void:
 	origin_position = global_position
+	player = get_parent().get_node_or_null("Player") as CharacterBody2D if get_parent() != null else null
 	contact_area.body_entered.connect(_on_contact_body_entered)
 	_refresh_scene_bounds()
 
@@ -32,7 +38,24 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		MotionState.IDLE:
-			velocity = Vector2.ZERO
+			if _is_player_in_proximity_band():
+				state = MotionState.PROXIMITY
+				velocity = Vector2.ZERO
+			else:
+				velocity = Vector2.ZERO
+		MotionState.PROXIMITY:
+			if not _is_player_in_proximity_band():
+				state = MotionState.IDLE
+				velocity = Vector2.ZERO
+			else:
+				velocity.x = 0.0
+				velocity.y = proximity_direction * proximity_hover_speed
+				if global_position.y <= bounds_top_y:
+					global_position.y = bounds_top_y
+					proximity_direction = 1
+				elif global_position.y >= bounds_bottom_y:
+					global_position.y = bounds_bottom_y
+					proximity_direction = -1
 		MotionState.RISING:
 			velocity = Vector2.UP * rise_speed
 			if is_on_ceiling() or global_position.y <= ceiling_target_y:
@@ -103,6 +126,16 @@ func _refresh_scene_bounds() -> void:
 	ceiling_target_y = bounds_top_y + _collision_half_height() + 4.0
 
 
+func _is_player_in_proximity_band() -> bool:
+	if player == null:
+		return false
+
+	var distance := player.global_position.distance_to(global_position)
+	var min_distance := proximity_min_tiles * 64.0
+	var max_distance := proximity_max_tiles * 64.0
+	return distance >= min_distance and distance <= max_distance
+
+
 func _collision_half_height() -> float:
 	var collision_shape := get_node_or_null("CollisionShape2D") as CollisionShape2D
 	if collision_shape == null or collision_shape.shape == null:
@@ -137,9 +170,9 @@ func _on_contact_body_entered(body: Node2D) -> void:
 
 
 func apply_player_projectile_hit(_damage: int, _source_position: Vector2, _projectile_velocity: Vector2) -> void:
-	origin_position = global_position if state == MotionState.IDLE else origin_position
+	origin_position = global_position if state == MotionState.IDLE or state == MotionState.PROXIMITY else origin_position
 	trace_time_left = trace_duration
-	if state == MotionState.IDLE:
+	if state == MotionState.IDLE or state == MotionState.PROXIMITY:
 		_refresh_scene_bounds()
 		state = MotionState.RISING
 		velocity = Vector2.ZERO

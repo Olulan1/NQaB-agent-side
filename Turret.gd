@@ -34,6 +34,7 @@ func _fire() -> void:
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position + projectile_spawn_offset
+	_configure_turret_projectile(projectile)
 	projectile.set("speed", projectile_speed)
 	projectile.set("damage", projectile_damage)
 	projectile.set("source_is_player", false)
@@ -49,6 +50,11 @@ func _fire() -> void:
 			projectile.call("set_direction", -1)
 	elif projectile.has_method("set_downward"):
 		projectile.call("set_downward")
+
+
+func _configure_turret_projectile(projectile: Area2D) -> void:
+	projectile.collision_mask = 0
+	projectile.set_collision_mask_value(1, true)
 
 
 func _on_knockback_area_body_entered(body: Node2D) -> void:
