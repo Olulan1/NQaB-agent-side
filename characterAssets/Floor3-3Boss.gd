@@ -2,6 +2,13 @@ extends CharacterBody2D
 class_name Floor3_3Boss
 
 const TILE_SIZE: float = 64.0
+const DISPLAY_HEALTH_MAX: int = 80
+const JUMP_SHOT_Y_OFFSET: float = -16.0
+const CROUCH_SHOT_Y_OFFSET: float = 8.0
+const BOSS_HEALTH_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
+const HEALTH_BAR_FILL_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
+const HEALTH_BAR_BACKGROUND_COLOR: Color = Color(0.070588, 0.117647, 0.2, 1.0)
+const HEALTH_BAR_MIN_VISIBLE_VALUE: float = 4.0
 
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var fire_interval: float = 1.9
@@ -22,6 +29,7 @@ const TILE_SIZE: float = 64.0
 @onready var charge_timer: Timer = $ChargeTimer
 @onready var contact_area: Area2D = $ContactArea
 @onready var health_bar: ProgressBar = $BossHUD/HealthBar
+@onready var boss_health_value: Label = $BossHUD/BossHealthValue
 
 var health: int
 var facing: int = -1
@@ -34,7 +42,6 @@ var stun_time_left: float = 0.0
 var pending_charge: bool = false
 var charge_time_left: float = 0.0
 var charge_direction: int = -1
-var fire_height_index: int = 0
 var knockback_time_left: float = 0.0
 var knockback_direction: int = 0
 var rng := RandomNumberGenerator.new()
@@ -58,6 +65,7 @@ func _ready() -> void:
 	contact_area.body_entered.connect(_on_contact_body_entered)
 	_configure_health_bar()
 	_sync_health_bar()
+	_sync_boss_health_value()
 	rng.randomize()
 
 
@@ -130,9 +138,8 @@ func _fire() -> void:
 	if is_instance_valid(player):
 		direction = -1 if player.global_position.x < global_position.x else 1
 
-	var projectile_height_offsets := PackedFloat32Array([-8.0, 8.0])
-	var spawn_position := muzzle.global_position + Vector2(0.0, projectile_height_offsets[fire_height_index])
-	fire_height_index = (fire_height_index + 1) % projectile_height_offsets.size()
+	var spawn_y_offset := JUMP_SHOT_Y_OFFSET if rng.randi_range(0, 1) == 0 else CROUCH_SHOT_Y_OFFSET
+	var spawn_position := muzzle.global_position + Vector2(0.0, spawn_y_offset)
 
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
@@ -154,15 +161,48 @@ func _configure_boss_projectile(projectile: Area2D) -> void:
 func _configure_health_bar() -> void:
 	if health_bar == null:
 		return
-	health_bar.max_value = float(max_health)
+	health_bar.max_value = float(DISPLAY_HEALTH_MAX)
 	health_bar.min_value = 0.0
-	health_bar.step = float(max_health) / float(maxi(health_sections, 1))
-	health_bar.value = float(health)
+	health_bar.step = 1.0
+	health_bar.value = _get_display_health_bar_value()
+	var fill_style := StyleBoxFlat.new()
+	fill_style.bg_color = HEALTH_BAR_FILL_COLOR
+	fill_style.border_width_left = 0
+	fill_style.border_width_top = 0
+	fill_style.border_width_right = 0
+	fill_style.border_width_bottom = 0
+	health_bar.add_theme_stylebox_override("fill", fill_style)
+
+	var background_style := StyleBoxFlat.new()
+	background_style.bg_color = HEALTH_BAR_BACKGROUND_COLOR
+	background_style.border_width_left = 0
+	background_style.border_width_top = 0
+	background_style.border_width_right = 0
+	background_style.border_width_bottom = 0
+	health_bar.add_theme_stylebox_override("background", background_style)
 
 
 func _sync_health_bar() -> void:
 	if health_bar != null:
-		health_bar.value = float(health)
+		health_bar.value = _get_display_health_bar_value()
+	_sync_boss_health_value()
+
+
+func _sync_boss_health_value() -> void:
+	if boss_health_value != null:
+		boss_health_value.text = "%d" % _get_display_health()
+		boss_health_value.add_theme_color_override("font_color", BOSS_HEALTH_COLOR)
+
+
+func _get_display_health() -> int:
+	return clampi(roundi(float(health) * float(DISPLAY_HEALTH_MAX) / float(max_health)), 0, DISPLAY_HEALTH_MAX)
+
+
+func _get_display_health_bar_value() -> float:
+	var display_health := _get_display_health()
+	if display_health <= 0:
+		return 0.0
+	return maxf(HEALTH_BAR_MIN_VISIBLE_VALUE, float(display_health))
 
 
 func _on_contact_body_entered(body: Node2D) -> void:

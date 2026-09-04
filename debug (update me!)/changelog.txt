@@ -237,3 +237,18 @@ Notes
 - Moved the `Floor3-3` boss-gate caption below the player standing area.
 - Reduced the `Floor3-3` boss-gate caption font size so it reads more subtly.
 - Reverified the caption placement headlessly with `FLOOR3_CAPTION_TWEAK_OK`.
+
+03:27 - 04/09/2026
+- Changed `Floor3-3Boss` to choose between only two random shot heights: a higher jump-catching shot and a lower crouch-catching shot.
+- Styled the `Floor3-3Boss` health bar blue and added an indigo `-{boss health}` label next to the boss caption.
+- Verified the boss HUD and shot selection headlessly with `FLOOR3_BOSS_UI_OK`.
+
+03:32 - 04/09/2026
+- Changed the boss counter to display as `80` at full health and count down toward `0` without dropping lower.
+- Matched the boss counter color to the open portal rim blue.
+- Reverified the boss counter headlessly with `FLOOR3_BOSS_COUNTER_OK`.
+
+03:37 - 04/09/2026
+- Remapped `Floor3-3Boss`'s health bar to follow the visible boss counter instead of raw HP so it stays slightly filled until the counter reaches `0`.
+- Clamped the visible bar to a small minimum fill above zero, while still emptying it cleanly at `0`.
+- Verified the new fill behavior headlessly with the boss healthbar repro.
