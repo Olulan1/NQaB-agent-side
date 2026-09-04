@@ -192,3 +192,10 @@ Notes
 - Added the `Level1-1` turret set to `Floor3-1` and the `Level1-2` turret set to `Floor3-2`.
 - Moved the level-3 enemies onto their own collision layer and kept turrets on a separate layer so enemies, dashers, and turrets no longer collide with one another, while player projectiles still reach both.
 - Doubled the `Floor3-1` VolatileSpike scale to `1.333333` and reverified the scene links and layers in headless Godot.
+
+02:02 - 04/09/2026
+- Copied `Floor1-3`'s `PrevScreenReturn` onto `Floor2-3` and kept it linked to `Floor2-2`'s `RightSpawn`.
+- Duplicated `Floor2-3` into `Floor3-3`, removed the screen obstacles, and kept only the end `ExitElevator`.
+- Added the `Floor3-3Boss` enemy to the middle of `Floor3-3`, recolored it blue, gave it 75 health, a five-section health bar, red bullets, and a seven-second charge pattern.
+- Added the black-and-red `Barrier3` child in front of the boss exit, and built the two-way `X` teleport portal pair with an eight-second cooldown and closed-state swap.
+- Added `dev-thoughts/assisted_notes_3.md` to capture the requested boss-room spec, and verified the updated scenes in headless Godot.

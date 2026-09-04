@@ -110,6 +110,7 @@ var _weapon_boxes: Array[Panel] = []
 func _ready() -> void:
 	_ensure_input_actions()
 	set_collision_mask_value(2, true)
+	set_collision_mask_value(4, true)
 	SceneTransition.player_max_health = max_health
 	if SceneTransition.player_health <= 0:
 		SceneTransition.reset_player_health()
