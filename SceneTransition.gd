@@ -3,6 +3,7 @@ extends Node
 var pending_spawn_name: String = ""
 var player_max_health: int = 5
 var player_health: int = 5
+var player_weapon_index: int = 0
 
 
 func set_pending_spawn_name(spawn_name: String) -> void:
@@ -21,3 +22,7 @@ func set_player_health(value: int) -> void:
 
 func reset_player_health() -> void:
 	player_health = player_max_health
+
+
+func set_player_weapon_index(value: int) -> void:
+	player_weapon_index = value

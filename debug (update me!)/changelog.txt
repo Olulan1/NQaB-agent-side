@@ -252,3 +252,8 @@ Notes
 - Remapped `Floor3-3Boss`'s health bar to follow the visible boss counter instead of raw HP so it stays slightly filled until the counter reaches `0`.
 - Clamped the visible bar to a small minimum fill above zero, while still emptying it cleanly at `0`.
 - Verified the new fill behavior headlessly with the boss healthbar repro.
+
+10:41 - 04/09/2026
+- Stored the currently equipped weapon in `SceneTransition` so it survives scene changes and scene recreation.
+- Restored the player’s weapon selection from shared state on `_ready()` and updated the shared state whenever the player switches weapons.
+- Verified the persistence behavior headlessly by recreating the player after a weapon switch.

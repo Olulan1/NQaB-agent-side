@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://characterAssets/Floor3-3Boss.gd" id="1_enemy_script"]
+
+[sub_resource type="RectangleShape2D" id="1_enemy_shape"]
+size = Vector2(48, 128)
+
+[sub_resource type="RectangleShape2D" id="2_contact_shape"]
+size = Vector2(56, 136)
+
+[node name="Floor3-3Boss" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 1
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_enemy_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_enemy_shape")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 0)
+color = Color(0.160784, 0.407843, 0.760784, 1)
+polygon = PackedVector2Array(-24, -64, 24, -64, 24, 64, -24, 64)
+
+[node name="Core" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 0)
+color = Color(0.0392157, 0.133333, 0.313726, 1)
+polygon = PackedVector2Array(-18, -52, 18, -52, 18, 52, -18, 52)
+
+[node name="EyeLens" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 6)
+color = Color(0.0941176, 0.352941, 0.643137, 1)
+polygon = PackedVector2Array(-22, 0, -16, -16, 0, -22, 16, -16, 22, 0, 16, 16, 0, 22, -16, 16)
+
+[node name="EyeCore" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 6)
+color = Color(0.690196, 0.819608, 0.964706, 1)
+polygon = PackedVector2Array(-8, 0, -5, -5, 0, -8, 5, -5, 8, 0, 5, 5, 0, 8, -5, 5)
+
+[node name="LowerPanel" type="Polygon2D" parent="VisualRoot"]
+position = Vector2(0, 46)
+color = Color(0.0196078, 0.0431373, 0.133333, 1)
+polygon = PackedVector2Array(-24, -14, 24, -14, 24, 14, -24, 14)
+
+[node name="Muzzle" type="Marker2D" parent="VisualRoot"]
+position = Vector2(22, -8)
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 1.9
+autostart = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[node name="ContactArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactArea"]
+shape = SubResource("2_contact_shape")
+
+[node name="BossHUD" type="CanvasLayer" parent="."]
+layer = 12
+
+[node name="BossLabel" type="Label" parent="BossHUD"]
+offset_left = 384.0
+offset_top = 24.0
+offset_right = 448.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_font_sizes/font_size = 20
+text = "BOSS"
+horizontal_alignment = 0
+
+[node name="BossHealthValue" type="Label" parent="BossHUD"]
+offset_left = 452.0
+offset_top = 24.0
+offset_right = 556.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.160784, 0.407843, 0.760784, 1)
+theme_override_font_sizes/font_size = 20
+text = "80"
+horizontal_alignment = 0
+
+[node name="HealthBar" type="ProgressBar" parent="BossHUD"]
+offset_left = 384.0
+offset_top = 56.0
+offset_right = 896.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+max_value = 75.0
+step = 15.0
+value = 75.0
+show_percentage = false

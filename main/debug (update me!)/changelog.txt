@@ -1,0 +1,254 @@
+Changelog for /Users/lani/nqab
+
+Committed history
+
+- 19:45 - 06/08/2026 | dbada20 | cd-13th-ia
+  - Added the `WASD draft.png` reference asset under `dev-thoughts/`.
+  - Updated `Intro01.tscn` to support the control-hint work that followed.
+
+- 19:47 - 06/08/2026 | 240973b | cd-13.5th-ia
+  - Adjusted `Intro01.tscn` and `Player.gd`.
+  - Refined the intro-screen control presentation and player input handling.
+
+- 19:57 - 06/08/2026 | 2bff7f6 | cd-14th-ia
+  - Extended `Intro02.tscn`.
+  - Added a line to `dev-thoughts/NQaB tasklist.md` to track the new work.
+
+- 21:24 - 06/08/2026 | 6069d2c | x
+  - Added `dev-thoughts/energy bar draft.png`.
+  - Added the associated `.import` metadata for the health/energy UI reference.
+
+- 21:35 - 06/08/2026 | f770cb3 | PROJECTILE DESTRUCTION IMPLEMENTATION
+  - Expanded `Player.gd` with projectile/health-related logic.
+  - Updated `Projectile.gd`, `SceneTransition.gd`, and `Turret.gd` to support turret destruction and projectile interaction.
+
+- 18:10 - 18/08/2026 | ce7bf8b | cd-v2
+  - Created `dev-thoughts/NQAB di4.md`.
+
+- 18:24 - 18/08/2026 | 03bdba0 | .
+  - Edited `dev-thoughts/NQAB di4.md` after the first draft.
+
+- 19:02 - 18/08/2026 | dfc084b | cd-15th-ia
+  - Added `Floor01.gd`, `Floor01.gd.uid`, and `Floor01.tscn`.
+  - Updated `Intro01.tscn` to support the next floor-linking step.
+
+Live worktree change
+
+- 16:55 - 19/08/2026
+  - `Intro02.tscn`: widened `TowerPortalVisual` by changing `offset_right` from `640.0` to `704.0`.
+
+- 17:55 - 25/08/2026
+  - Replaced `dev-thoughts/imgs/ammo.png` with the blue transparent ammo art and reimported it in Godot.
+  - Added held-weapon scaling controls to `Player.gd`, then split the held weapon size so `1.png` keeps the current scale while the other weapon textures render larger.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the current ammo art and held-weapon scale behavior.
+  - Verified in the live Godot scene that the ammo HUD renders blue with no opaque background and that the held weapon size changes apply correctly.
+  - Verified that `Floor1-2.tscn` already routes `PrevScreenReturn` back to `Floor1-1`'s right-side spawn path through the existing pending-spawn name, so no scene rewrite was required for that link.
+
+- 18:04 - 25/08/2026
+  - Reviewed the current worktree state.
+  - No new repository file changes were present beyond the already recorded history, so the changelog was left additive and intact.
+
+- 20:43 - 25/08/2026
+  - Updated `Player.gd` so the shotgun and laser held weapons can sit slightly lower on the player without changing the default weapon or rifle position.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the new per-weapon Y offsets.
+
+- 20:58 - 25/08/2026
+  - Rolled back the shotgun/laser Y-offset pose change in `Player.gd`.
+  - Reapplied the offset logic as a leftward X shift for the shotgun and laser only.
+  - Updated `agent-thoughts/notes/hudwork.md` to document the left-shifted held-weapon offsets instead of the previous downward offsets.
+
+- 20:59 - 25/08/2026
+  - Reimported and ran the game in Godot after the leftward offset change.
+  - Captured live screenshots to verify the held weapon pose path after the rollback and replacement edit.
+
+- 21:03 - 25/08/2026
+  - Adjusted `Player.gd` so only the laser held weapon moves 3.0 units left.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the laser-only offset value.
+
+- 21:06 - 25/08/2026
+  - Updated `Player.gd` so the laser held weapon now moves 23.0 units left.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the larger laser-only offset value.
+
+- 21:08 - 25/08/2026
+  - Ran the live Godot scene after the 23.0-unit laser-left update.
+  - Captured a screenshot showing the laser held weapon shifted far further left than the previous `-3.0` setting.
+
+- 21:10 - 25/08/2026
+  - Updated `Player.gd` so the laser held weapon now moves 10 units right from the prior `-23.0` setting.
+  - Updated `agent-thoughts/notes/hudwork.md` to record the current laser offset value.
+
+- 21:12 - 25/08/2026
+  - Reimported and ran the Godot scene after the laser-right update.
+  - Captured a live screenshot to verify the laser pose moved right from the prior `-23.0` build.
+
+- 20:45 - 03/09/2026
+  - Updated `Player.gd` muzzle offsets so the standing and crouching weapon tables reflect the current laser-position tuning.
+  - Adjusted the laser projectile spawn offset in `Player.gd` to match the latest standing/crouching placement work.
+  - Added `agent-thoughts/notes/laser-offset-shortcuts.md` as a shortcut reference for the editable muzzle-offset values.
+
+- 21:22 - 03/09/2026
+  - Added `DestructibleBarrier.gd` to support destructible static barriers with optional captions, colored bodies, and vertical dot markers.
+  - Updated `Floor01.tscn` to place five equidistant barriers in the player path, with the first three carrying the requested captions and the fifth depending on the fourth.
+
+- 21:24 - 03/09/2026
+  - Updated `Floor01.tscn` so the third barrier now starts with 8 health.
+  - Updated `Floor01.tscn` so the fourth barrier now starts with 6 health.
+
+- 21:27 - 03/09/2026
+  - Shifted all five `Floor01` barriers downward so their bottoms meet the actual solid floor collision instead of only the visible floor strip.
+
+- 21:39 - 03/09/2026
+  - Added `Floor02Enemy.gd` and `Floor02Enemy.tscn` for a green left-facing enemy with 3-square detection, 1 damage pellets, and a 3-second fire rate.
+  - Instanced the new enemy into `Floor02.tscn`.
+
+- 21:47 - 03/09/2026
+  - Added `characterAssets/Floor3-3Boss.gd` and `characterAssets/Floor3-3Boss.tscn` as a saved copy of the current Floor02 enemy.
+  - Scaled down the live `Floor02` enemy and halved its movement and detection settings.
+  - Added the long contextual enemy caption to `Floor02.tscn`.
+
+- 21:50 - 03/09/2026
+  - Updated both the live `Floor02` enemy and `characterAssets/Floor3-3Boss` enemy to fire every 1.9 seconds.
+  - Added player-contact damage handling to both enemy variants.
+
+- 21:53 - 03/09/2026
+  - Moved the Floor02 enemy caption lower so it sits farther from the player's HUD.
+  - Added the Floor03 guidance caption and placed it in a HUD-safe region.
+
+- 21:56 - 03/09/2026
+  - Added a mixed-style forest-green title caption to `Floor1-1.tscn` in the top-right corner.
+
+- 21:58 - 03/09/2026
+  - Darkened the `Floor1-1.tscn` title caption to a deeper green.
+  - Shifted the title caption further left so it stays visible in the scene.
+
+- 22:00 - 03/09/2026
+  - Restored the earlier green color on the `Floor1-1.tscn` title caption.
+  - Added a black outline override to the same title caption.
+
+- 22:13 - 03/09/2026
+  - Added `floorPrefabs/ExitElevator.gd` and `floorPrefabs/ExitElevator.tscn` as a reusable exit-elevator asset with an included caption.
+  - Duplicated `Floor1-2` into `Floor1-3`, retargeted `PrevScreenReturn` to `Floor1-2`'s `RightSpawn`, and replaced the next-screen node with the exit-elevator asset captioned `NEXT FLOOR`.
+
+- 22:16 - 03/09/2026
+  - Linked `Floor1-2`'s forward portal to `Floor1-3.tscn`.
+  - Set the destination spawn for that link to `floor1_left` so `Floor1-3` places the player at its left spawn marker.
+
+- 22:24 - 03/09/2026
+  - Duplicated `Floor1-1` into `Floor2-1` as a standalone scene/script pair.
+  - Cleared `Floor2-1`'s `NextScreen` destination and retargeted its `ElevatorReturn` to `Floor1-3`'s `RightSpawn`.
+  - Retargeted `Floor1-3`'s `ExitElevator` to `Floor2-1`'s `LeftSpawn`.
+
+- 22:29 - 03/09/2026
+  - Renamed `Floor2-1`'s title caption to `Floor 2 - Enemy forces`.
+  - Changed `Floor1-1`'s title caption color to light blue.
+
+- 22:38 - 03/09/2026
+  - Updated `Floor1-3.gd` so `RightSpawn` is recognized as a valid landing token for the right-side spawn.
+
+- 23:30 - 03/09/2026
+  - Removed the turrets from `Floor2-1` and replaced them with `VolatileSpike` (`VS`) and `Dasher`.
+  - Added the new enemy scene scripts and linked them into `Floor2-1`.
+
+- 23:42 - 03/09/2026
+  - Duplicated `Floor1-2` into `Floor2-2` and replaced its turrets with two `Dasher` enemies.
+  - Linked `Floor2-1`'s `NextScreen` to `Floor2-2`'s `LeftSpawn`, and retargeted `Floor2-2`'s `PrevScreenReturn` to `Floor2-1`'s `RightSpawn`.
+  - Updated `VolatileSpike` to trace the screen rectangle only, with faster tracing and slower return travel.
+
+- 23:48 - 03/09/2026
+  - Scaled `VolatileSpike` down by one third.
+  - Made `Dasher` pick dash direction randomly and shortened its dash distance to one third of the original.
+
+Prior Codex command references recorded in the nqab folder
+
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly. Parse the tasklist and output the active spec, every task in order, mismatches, and the exact next runnable instruction for Ralph Specum.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly and implement only the first visible task: make a label for controls at the start of Intro01.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md directly and implement only the second visible task: Making a left aligned title on Intro02.`
+- `$ralph-specum:ralph-specum-implement Read /Users/lani/nqab/dev-thoughts/NQaB tasklist.md, implement task 4 and its subtext. Specifically, projectiles shot by the player should temporarily destroy turrets...`
+- `TASK: act as a spec-executor. You are not alone in the codebase; do not revert or overwrite other agents' edits. Own only these files: Intro01.tscn, Floor01.tscn, Floor01.gd.`
+- `I think leave it as is. Also, create a mirror to LeftBoundary on Intro01 called RightBoundary, behind the ExitPortal, on the right. Just duplicate Floor00.gd and .tscn as Floor01.gd and Floor01.tscn.`
+
+Notes
+
+- This changelog is limited to the tracked commit history relevant to the current project state plus the live uncommitted scene edit above.
+- The command references are recorded as prompts that materially changed or constrained the repo state; they are not Git commits.
+23:52 - 03/09/2026
+- Restored Dasher dash distance to 4 tiles.
+- Halved the spacebar jump height while leaving the weak jump unchanged.
+- Verified Floor2-2 PrevScreenReturn was already linked to Floor2-1 RightSpawn, so no scene edit was required.
+00:01 - 04/09/2026
+- Restored the spacebar jump height to its original value.
+- Clamped Dasher movement to the visible viewport as well as the scene boundaries.
+- Duplicated Floor1-3 to Floor2-3 and Floor2-1 to Floor3-1, then relinked Floor2-2, Floor2-3, and Floor3-1 to continue the floor chain.
+00:46 - 04/09/2026
+- Removed the remaining turrets from Floor2-3 and replaced them with two VolatileSpike enemies.
+- Recolored the Floor2-1 caption to purple.
+- Changed Floor3-1's caption to bold red "Danger" at a larger font size.
+00:55 - 04/09/2026
+- Doubled the visual size of all VolatileSpike enemies.
+- Added proximity-based vertical hover motion for VolatileSpike when the player is within 2 to 3 tiles.
+- Updated Floor3-1's caption to bold "Level 3: Danger.".
+01:19 - 04/09/2026
+- Duplicated `Floor2-2` into `Floor3-2` and relinked the level-3 screen path so `Floor3-1` now leads to `Floor3-2`, while `Floor3-2` returns to `Floor3-1`'s `RightSpawn`.
+- Added the `Level1-1` turret set to `Floor3-1` and the `Level1-2` turret set to `Floor3-2`.
+- Moved the level-3 enemies onto their own collision layer and kept turrets on a separate layer so enemies, dashers, and turrets no longer collide with one another, while player projectiles still reach both.
+- Doubled the `Floor3-1` VolatileSpike scale to `1.333333` and reverified the scene links and layers in headless Godot.
+
+02:02 - 04/09/2026
+- Copied `Floor1-3`'s `PrevScreenReturn` onto `Floor2-3` and kept it linked to `Floor2-2`'s `RightSpawn`.
+- Duplicated `Floor2-3` into `Floor3-3`, removed the screen obstacles, and kept only the end `ExitElevator`.
+- Added the `Floor3-3Boss` enemy to the middle of `Floor3-3`, recolored it blue, gave it 75 health, a five-section health bar, red bullets, and a seven-second charge pattern.
+- Added the black-and-red `Barrier3` child in front of the boss exit, and built the two-way `X` teleport portal pair with an eight-second cooldown and closed-state swap.
+- Added `dev-thoughts/assisted_notes_3.md` to capture the requested boss-room spec, and verified the updated scenes in headless Godot.
+
+02:16 - 04/09/2026
+- Added `demoEnd` as a black-background duplicate of `Intro01` with the exit portal removed and a `PrevScreenReturn` back to `Floor3-3`'s `RightSpawn`.
+- Removed the boss-linked barrier from `Floor3-3Boss.tscn`.
+- Updated `Floor3-3Boss` to walk toward the player at 0.5 tiles per second and alternate projectile height between jump-catching and crouch-catching offsets centered on the original muzzle line.
+- Reverified both `demoEnd` and `Floor3-3` headlessly in Godot, confirming the new spawn target, the missing exit portal, the boss walk speed, and the alternating shot heights.
+
+02:27 - 04/09/2026
+- Reduced the `Floor3-3Boss` scale to `0.8` so it fits the room more comfortably.
+- Tagged player projectiles by weapon so the boss can react differently to pistol, rifle, shotgun, and laser hits.
+- Added weapon-specific boss reactions: slight knockback for pistol and rifle, stronger knockback for shotgun, and a 2 second stun for laser hits.
+- Kept the boss charging on a 7 second timer with horizontal-only dash movement, and verified that the boss moves in the level without getting stuck.
+- Verified that the boss healthbar remains visible while alive and disappears with the boss when health reaches zero.
+
+02:52 - 04/09/2026
+- Added a visible rectangular `PrevScreenReturn` marker to `Floor2-3` and kept it linked to `Floor2-2`'s `RightSpawn`.
+- Retargeted `Floor2-3`'s `ExitElevator` to `Floor3-1`'s `LeftSpawn`.
+- Linked `Floor3-2`'s `NextScreen` to `Floor3-3`'s `LeftSpawn`.
+- Expanded `Floor3-3` with two additional teleport portals, reduced the portal cooldown to 6 seconds there, and made teleport selection random across the other portals in the room.
+- Retargeted `Floor3-3`'s `ExitElevator` to `demoEnd`'s `RightSpawn`.
+- Replaced `demoEnd`'s caption block with `Congratulations! You beat the demo!` and made its return portal reset player health before sending the player back to `Intro01`.
+- Verified the updated floor chain and demo end headlessly with `FLOOR_CHAIN_DEMOEND_HEADLESS_OK`.
+
+03:06 - 04/09/2026
+- Retargeted `Floor3-3`'s `PrevScreenReturn` to `Floor3-2`'s `RightSpawn` so it only flows back one screen.
+- Added a `LeftSpawn` marker to `demoEnd` and retargeted `Floor3-3`'s `ExitElevator` to it.
+- Retargeted `demoEnd`'s `PrevScreenReturn` to `Floor1-1`'s `LeftSpawn`, and updated `demoEnd.gd` to honor both left and right spawn tokens.
+- Reverified the updated links headlessly with `FLOOR3_DEMOEND_LEFTSPAWN_OK`.
+
+03:12 - 04/09/2026
+- Added a `boss_dead` gate to `Floor3-3` so both `PrevScreenReturn` and `ExitElevator` stay locked until the boss dies.
+- Added a standalone caption on `Floor3-3` explaining that the exits unlock only after the boss is dead.
+- Verified the gate behavior headlessly with `FLOOR3_BOSS_GATE_OK`.
+
+03:15 - 04/09/2026
+- Moved the `Floor3-3` boss-gate caption below the player standing area.
+- Reduced the `Floor3-3` boss-gate caption font size so it reads more subtly.
+- Reverified the caption placement headlessly with `FLOOR3_CAPTION_TWEAK_OK`.
+
+03:27 - 04/09/2026
+- Changed `Floor3-3Boss` to choose between only two random shot heights: a higher jump-catching shot and a lower crouch-catching shot.
+- Styled the `Floor3-3Boss` health bar blue and added an indigo `-{boss health}` label next to the boss caption.
+- Verified the boss HUD and shot selection headlessly with `FLOOR3_BOSS_UI_OK`.
+
+03:32 - 04/09/2026
+- Changed the boss counter to display as `80` at full health and count down toward `0` without dropping lower.
+- Matched the boss counter color to the open portal rim blue.
+- Reverified the boss counter headlessly with `FLOOR3_BOSS_COUNTER_OK`.
+
+03:37 - 04/09/2026
+- Remapped `Floor3-3Boss`'s health bar to follow the visible boss counter instead of raw HP so it stays slightly filled until the counter reaches `0`.
+- Clamped the visible bar to a small minimum fill above zero, while still emptying it cleanly at `0`.
+- Verified the new fill behavior headlessly with the boss healthbar repro.
