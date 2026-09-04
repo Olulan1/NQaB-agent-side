@@ -109,7 +109,7 @@ func _on_contact_body_entered(body: Node) -> void:
 		body.call("apply_turret_contact_damage", global_position)
 
 
-func apply_player_projectile_hit(damage: int, _source_position: Vector2, _projectile_velocity: Vector2) -> void:
+func apply_player_projectile_hit(damage: int, _source_position: Vector2, _projectile_velocity: Vector2, _weapon_kind: int = 0) -> void:
 	health = maxi(health - maxi(1, damage), 0)
 	if health <= 0:
 		queue_free()

@@ -169,7 +169,7 @@ func _on_contact_body_entered(body: Node2D) -> void:
 		body.call("apply_turret_knockback", global_position)
 
 
-func apply_player_projectile_hit(_damage: int, _source_position: Vector2, _projectile_velocity: Vector2) -> void:
+func apply_player_projectile_hit(_damage: int, _source_position: Vector2, _projectile_velocity: Vector2, _weapon_kind: int = 0) -> void:
 	origin_position = global_position if state == MotionState.IDLE or state == MotionState.PROXIMITY else origin_position
 	trace_time_left = trace_duration
 	if state == MotionState.IDLE or state == MotionState.PROXIMITY:

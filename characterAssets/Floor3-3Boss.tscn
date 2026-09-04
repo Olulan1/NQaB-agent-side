@@ -1,7 +1,6 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://characterAssets/Floor3-3Boss.gd" id="1_enemy_script"]
-[ext_resource type="Script" path="res://DestructibleBarrier.gd" id="2_barrier_script"]
 
 [sub_resource type="RectangleShape2D" id="1_enemy_shape"]
 size = Vector2(48, 128)
@@ -9,12 +8,10 @@ size = Vector2(48, 128)
 [sub_resource type="RectangleShape2D" id="2_contact_shape"]
 size = Vector2(56, 136)
 
-[sub_resource type="RectangleShape2D" id="3_barrier_shape"]
-size = Vector2(48, 128)
-
 [node name="Floor3-3Boss" type="CharacterBody2D"]
 collision_layer = 3
 collision_mask = 1
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_enemy_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -88,22 +85,3 @@ max_value = 75.0
 step = 15.0
 value = 75.0
 show_percentage = false
-
-[node name="Barrier3" type="StaticBody2D" parent="."]
-position = Vector2(360, -24)
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("2_barrier_script")
-body_color = Color(0, 0, 0, 1)
-caption_text = "Your weapons deal different amounts of damage, use them carefully."
-caption_width = 560.0
-caption_height = 72.0
-caption_font_size = 14
-caption_gap = 10.0
-show_dots = true
-dot_color = Color(0.85098, 0.172549, 0.192157, 1)
-dot_size = Vector2(8.0, 8.0)
-dot_count = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier3"]
-shape = SubResource("3_barrier_shape")

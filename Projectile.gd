@@ -6,6 +6,7 @@ extends Area2D
 @export var source_is_player: bool = false
 @export var free_on_hit: bool = true
 @export var max_distance: float = 0.0
+@export var weapon_kind: int = 0
 @export var damage_profile_durations: PackedFloat32Array = PackedFloat32Array()
 @export var damage_profile_values: PackedInt32Array = PackedInt32Array()
 
@@ -79,7 +80,7 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	if source_is_player and body.has_method("apply_player_projectile_hit"):
-		body.call("apply_player_projectile_hit", damage, global_position, travel_velocity)
+		body.call("apply_player_projectile_hit", damage, global_position, travel_velocity, weapon_kind)
 		if free_on_hit:
 			queue_free()
 		return

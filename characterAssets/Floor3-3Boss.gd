@@ -9,6 +9,7 @@ const TILE_SIZE: float = 64.0
 @export var charge_duration: float = 0.35
 @export var charge_distance_tiles: float = 4.0
 @export var charge_reverse_chance: float = 0.35
+@export var walk_speed_tiles: float = 0.5
 @export var max_health: int = 75
 @export var projectile_damage: int = 1
 @export var projectile_speed: float = 640.0
@@ -26,8 +27,16 @@ var health: int
 var facing: int = -1
 var player: CharacterBody2D
 var charge_speed_px: float
+var walk_speed_px: float
+var knockback_speed_px: float = 12.0
+var shotgun_knockback_speed_px: float = 48.0
+var stun_time_left: float = 0.0
+var pending_charge: bool = false
 var charge_time_left: float = 0.0
 var charge_direction: int = -1
+var fire_height_index: int = 0
+var knockback_time_left: float = 0.0
+var knockback_direction: int = 0
 var rng := RandomNumberGenerator.new()
 
 
@@ -35,6 +44,7 @@ func _ready() -> void:
 	health = max_health
 	player = get_node_or_null(player_path) as CharacterBody2D
 	charge_speed_px = (charge_distance_tiles * TILE_SIZE) / charge_duration
+	walk_speed_px = walk_speed_tiles * TILE_SIZE
 	visual_root.scale.x = facing
 
 	fire_timer.wait_time = fire_interval
@@ -52,22 +62,48 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity.y = 0.0
-
-	if charge_time_left > 0.0:
+	if stun_time_left > 0.0:
+		stun_time_left = maxf(stun_time_left - delta, 0.0)
+		velocity.x = 0.0
+	elif knockback_time_left > 0.0:
+		knockback_time_left = maxf(knockback_time_left - delta, 0.0)
+		velocity.x = knockback_direction * knockback_speed_px
+	elif charge_time_left > 0.0:
 		charge_time_left = maxf(charge_time_left - delta, 0.0)
 		velocity.x = charge_direction * charge_speed_px
 	else:
-		velocity.x = 0.0
+		var walk_direction := facing
+		if is_instance_valid(player):
+			walk_direction = -1 if player.global_position.x < global_position.x else 1
+		facing = walk_direction
+		visual_root.scale.x = facing
+		velocity.x = walk_direction * walk_speed_px
+
+	if not is_on_floor():
+		velocity.y += float(ProjectSettings.get_setting("physics/2d/default_gravity")) * delta
+	else:
+		velocity.y = 0.0
 
 	move_and_slide()
 
-	if is_on_wall() and charge_time_left > 0.0:
-		charge_time_left = 0.0
-		velocity.x = 0.0
+	if is_on_wall():
+		if charge_time_left > 0.0:
+			charge_time_left = 0.0
+			velocity.x = 0.0
+		elif knockback_time_left <= 0.0 and stun_time_left <= 0.0:
+			facing *= -1
+			visual_root.scale.x = facing
+			velocity.x = facing * walk_speed_px
+
+	if pending_charge and charge_time_left <= 0.0 and knockback_time_left <= 0.0 and stun_time_left <= 0.0:
+		pending_charge = false
+		_begin_charge()
 
 
 func _on_charge_timer_timeout() -> void:
+	if stun_time_left > 0.0 or knockback_time_left > 0.0 or charge_time_left > 0.0:
+		pending_charge = true
+		return
 	_begin_charge()
 
 
@@ -85,6 +121,8 @@ func _begin_charge() -> void:
 	facing = desired_direction
 	visual_root.scale.x = facing
 	charge_time_left = charge_duration
+	knockback_time_left = 0.0
+	knockback_direction = 0
 
 
 func _fire() -> void:
@@ -92,9 +130,13 @@ func _fire() -> void:
 	if is_instance_valid(player):
 		direction = -1 if player.global_position.x < global_position.x else 1
 
+	var projectile_height_offsets := PackedFloat32Array([-8.0, 8.0])
+	var spawn_position := muzzle.global_position + Vector2(0.0, projectile_height_offsets[fire_height_index])
+	fire_height_index = (fire_height_index + 1) % projectile_height_offsets.size()
+
 	var projectile := projectile_scene.instantiate() as Area2D
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = muzzle.global_position
+	projectile.global_position = spawn_position
 	_configure_boss_projectile(projectile)
 	projectile.set("damage", projectile_damage)
 	projectile.set("source_is_player", false)
@@ -130,8 +172,30 @@ func _on_contact_body_entered(body: Node2D) -> void:
 		body.call("apply_turret_knockback", global_position)
 
 
-func apply_player_projectile_hit(damage: int, _source_position: Vector2, _projectile_velocity: Vector2) -> void:
+func apply_player_projectile_hit(damage: int, source_position: Vector2, _projectile_velocity: Vector2, weapon_kind: int = 0) -> void:
 	health = maxi(health - maxi(1, damage), 0)
 	_sync_health_bar()
+	_apply_weapon_reaction(source_position, weapon_kind)
 	if health <= 0:
 		queue_free()
+
+
+func _apply_weapon_reaction(source_position: Vector2, weapon_kind: int) -> void:
+	charge_time_left = 0.0
+	pending_charge = false
+	match weapon_kind:
+		2:
+			_start_knockback(source_position, shotgun_knockback_speed_px, 0.18)
+		3:
+			stun_time_left = 2.0
+			knockback_time_left = 0.0
+			velocity = Vector2.ZERO
+		_:
+			_start_knockback(source_position, knockback_speed_px, 0.14)
+
+
+func _start_knockback(source_position: Vector2, speed_px: float, duration: float) -> void:
+	var dx := global_position.x - source_position.x
+	knockback_direction = 1 if dx >= 0.0 else -1
+	knockback_speed_px = speed_px
+	knockback_time_left = duration

@@ -199,3 +199,16 @@ Notes
 - Added the `Floor3-3Boss` enemy to the middle of `Floor3-3`, recolored it blue, gave it 75 health, a five-section health bar, red bullets, and a seven-second charge pattern.
 - Added the black-and-red `Barrier3` child in front of the boss exit, and built the two-way `X` teleport portal pair with an eight-second cooldown and closed-state swap.
 - Added `dev-thoughts/assisted_notes_3.md` to capture the requested boss-room spec, and verified the updated scenes in headless Godot.
+
+02:16 - 04/09/2026
+- Added `demoEnd` as a black-background duplicate of `Intro01` with the exit portal removed and a `PrevScreenReturn` back to `Floor3-3`'s `RightSpawn`.
+- Removed the boss-linked barrier from `Floor3-3Boss.tscn`.
+- Updated `Floor3-3Boss` to walk toward the player at 0.5 tiles per second and alternate projectile height between jump-catching and crouch-catching offsets centered on the original muzzle line.
+- Reverified both `demoEnd` and `Floor3-3` headlessly in Godot, confirming the new spawn target, the missing exit portal, the boss walk speed, and the alternating shot heights.
+
+02:27 - 04/09/2026
+- Reduced the `Floor3-3Boss` scale to `0.8` so it fits the room more comfortably.
+- Tagged player projectiles by weapon so the boss can react differently to pistol, rifle, shotgun, and laser hits.
+- Added weapon-specific boss reactions: slight knockback for pistol and rifle, stronger knockback for shotgun, and a 2 second stun for laser hits.
+- Kept the boss charging on a 7 second timer with horizontal-only dash movement, and verified that the boss moves in the level without getting stuck.
+- Verified that the boss healthbar remains visible while alive and disappears with the boss when health reaches zero.

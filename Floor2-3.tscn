@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://c343d83ro0mb2"]
 
 [ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
-[ext_resource type="Script" uid="uid://cbmsnrv828dhv" path="res://Turret.gd" id="2_turret_script"]
-[ext_resource type="Script" uid="uid://ciw4wxwi562le" path="res://Floor2-3.gd" id="3_floor_script"]
+[ext_resource type="Script" uid="uid://ciw4wxwi562le" path="res://Floor1-3.gd" id="3_floor_script"]
 [ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="3_ubfde"]
-[ext_resource type="PackedScene" path="res://VolatileSpike.tscn" id="5_volatile_spike"]
 [ext_resource type="PackedScene" path="res://floorPrefabs/ExitElevator.tscn" id="4_exit_elevator"]
+[ext_resource type="PackedScene" path="res://VolatileSpike.tscn" id="5_volatile_spike"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
+size = Vector2(32, 105)
 
 [sub_resource type="RectangleShape2D" id="1_floor_shape"]
 size = Vector2(1391.5, 72)
@@ -18,24 +20,6 @@ size = Vector2(64, 144)
 
 [sub_resource type="RectangleShape2D" id="4_ceiling_shape"]
 size = Vector2(1279.5, 16)
-
-[sub_resource type="RectangleShape2D" id="5_turret_shape"]
-size = Vector2(24, 34)
-
-[sub_resource type="RectangleShape2D" id="6_turret_knockback_shape"]
-size = Vector2(36, 46)
-
-[sub_resource type="RectangleShape2D" id="7_turret02_top_shape"]
-size = Vector2(16, 4)
-
-[sub_resource type="RectangleShape2D" id="8_turret02_side_shape"]
-size = Vector2(4, 16)
-
-[sub_resource type="RectangleShape2D" id="9_turret02_knockback_shape"]
-size = Vector2(4, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er4s"]
-size = Vector2(32, 105)
 
 [node name="Floor2-3" type="Node2D" unique_id=1637834644]
 script = ExtResource("3_floor_script")
@@ -65,6 +49,16 @@ offset_top = 264.0
 offset_right = 2048.0
 offset_bottom = 280.0
 color = Color(0.388235, 0.65098, 0.662745, 1)
+
+[node name="PrevScreenReturn" type="Area2D" parent="." unique_id=269768654]
+position = Vector2(24, 368)
+script = ExtResource("3_ubfde")
+target_scene_path = "res://Floor2-2.tscn"
+target_spawn_name = "RightSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn" unique_id=1001899796]
+position = Vector2(-1552, -555.5)
+shape = SubResource("RectangleShape2D_1er4s")
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=496088393]
 position = Vector2(1024, 420)
@@ -112,16 +106,6 @@ position = Vector2(116, 364)
 
 [node name="RightSpawn" type="Marker2D" parent="." unique_id=382157409]
 position = Vector2(1008, 364)
-
-[node name="PrevScreenReturn" type="Area2D" parent="." unique_id=269768654]
-position = Vector2(608, 512)
-script = ExtResource("3_ubfde")
-target_scene_path = "res://Floor2-2.tscn"
-target_spawn_name = "RightSpawn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn" unique_id=1001899796]
-position = Vector2(-1552, -555.5)
-shape = SubResource("RectangleShape2D_1er4s")
 
 [node name="ExitElevator" parent="." unique_id=2052566944 instance=ExtResource("4_exit_elevator")]
 position = Vector2(1072, 368)

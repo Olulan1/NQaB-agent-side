@@ -294,6 +294,7 @@ func _spawn_default_projectile() -> void:
 	projectile.set("damage", projectile_damage)
 	projectile.set("source_is_player", true)
 	projectile.set("free_on_hit", true)
+	projectile.set("weapon_kind", current_weapon_index)
 	if projectile.has_method("set_direction"):
 		projectile.call("set_direction", facing)
 
@@ -313,6 +314,7 @@ func _spawn_shotgun_projectiles() -> void:
 		projectile.set("damage", 3)
 		projectile.set("source_is_player", true)
 		projectile.set("free_on_hit", true)
+		projectile.set("weapon_kind", 2)
 		projectile.set("max_distance", shotgun_projectile_range)
 		projectile.set("damage_profile_durations", PackedFloat32Array([0.7, 0.8, 0.6]))
 		projectile.set("damage_profile_values", PackedInt32Array([3, 2, 1]))
@@ -333,6 +335,7 @@ func _spawn_laser_beam() -> void:
 	projectile.set("damage", 1)
 	projectile.set("source_is_player", true)
 	projectile.set("free_on_hit", false)
+	projectile.set("weapon_kind", 3)
 	projectile.set("max_distance", 0.0)
 	projectile.set("damage_profile_durations", PackedFloat32Array())
 	projectile.set("damage_profile_values", PackedInt32Array())

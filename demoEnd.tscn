@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://diwcowwmjsvlf" path="res://Player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://1i8folt3x0w8" path="res://ScenePortal.gd" id="2_portal_script"]
+[ext_resource type="Script" path="res://demoEnd.gd" id="3_demo_end_script"]
+
+[sub_resource type="RectangleShape2D" id="1_floor_shape"]
+size = Vector2(1279.5, 72)
+
+[sub_resource type="RectangleShape2D" id="2_return_shape"]
+size = Vector2(32, 72)
+
+[sub_resource type="RectangleShape2D" id="3_boundary_shape"]
+size = Vector2(32, 720)
+
+[node name="demoEnd" type="Node2D"]
+script = ExtResource("3_demo_end_script")
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="Backdrop"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="FloorVisual" type="ColorRect" parent="Backdrop"]
+offset_top = 576.0
+offset_right = 2048.0
+offset_bottom = 648.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1024, 612)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-383.75, 0)
+shape = SubResource("1_floor_shape")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(160, 556)
+
+[node name="ControlsHintLayer" type="CanvasLayer" parent="."]
+
+[node name="ControlsHint" type="Label" parent="ControlsHintLayer"]
+offset_left = 96.0
+offset_top = 332.0
+offset_right = 240.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(0.968627, 0.737255, 0.878431, 1)
+theme_override_font_sizes/font_size = 20
+text = "Move
+W   ↑
+A   ←
+S   ↓
+D   →"
+
+[node name="RightSpawn" type="Marker2D" parent="."]
+position = Vector2(1152, 556)
+
+[node name="PrevScreenReturn" type="Area2D" parent="."]
+position = Vector2(1216, 556)
+script = ExtResource("2_portal_script")
+target_scene_path = "res://Floor3-3.tscn"
+target_spawn_name = "RightSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevScreenReturn"]
+position = Vector2(1, 0)
+shape = SubResource("2_return_shape")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+position = Vector2(1296, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("3_boundary_shape")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+position = Vector2(-16, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("3_boundary_shape")
