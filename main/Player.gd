@@ -114,8 +114,10 @@ func _ready() -> void:
 	SceneTransition.player_max_health = max_health
 	if SceneTransition.player_health <= 0:
 		SceneTransition.reset_player_health()
+	current_weapon_index = clampi(SceneTransition.player_weapon_index, 0, WEAPON_ICON_TEXTURES.size() - 1)
 	health = clampi(SceneTransition.player_health, 0, max_health)
 	SceneTransition.set_player_health(health)
+	SceneTransition.set_player_weapon_index(current_weapon_index)
 	_build_health_ui()
 	_sync_health_ui()
 	_sync_weapon_ui()
@@ -171,6 +173,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("switch_weapon"):
 		current_weapon_index = posmod(current_weapon_index + 1, WEAPON_ICON_TEXTURES.size())
+		SceneTransition.set_player_weapon_index(current_weapon_index)
 		_sync_weapon_ui()
 		_sync_ammo_ui()
 
