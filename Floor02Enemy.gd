@@ -5,7 +5,7 @@ const TILE_SIZE: float = 64.0
 
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var fire_interval: float = 1.9
-@export var max_health: int = 5
+@export var max_health: int = 10
 @export var projectile_damage: int = 1
 @export var projectile_speed: float = 640.0
 @export var detection_range_tiles: float = 3.0

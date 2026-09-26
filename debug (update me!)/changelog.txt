@@ -257,3 +257,8 @@ Notes
 - Stored the currently equipped weapon in `SceneTransition` so it survives scene changes and scene recreation.
 - Restored the player’s weapon selection from shared state on `_ready()` and updated the shared state whenever the player switches weapons.
 - Verified the persistence behavior headlessly by recreating the player after a weapon switch.
+
+21:02 - 26/09/2026
+- Set the Floor3-3 boss dash cycle to about five seconds and added a red exclamation warning 0.75 seconds before each dash, visible for 0.74 seconds.
+- Increased the Floor02 enemy to 10 HP, the Floor3 Dashers to 8 HP, and all VolatileSpikes to 40 HP with hits reducing health until destruction.
+- Set Floor01 Barrier1, Barrier2, Barrier4, and Barrier5 to 13 HP while leaving Barrier3 at 8 HP.

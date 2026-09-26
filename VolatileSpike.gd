@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name VolatileSpike
 
 @export var rise_speed: float = 240.0
+@export var max_health: int = 40
 @export var trace_speed: float = 180.0
 @export var return_speed: float = 73.3333333333
 @export var trace_duration: float = 20.0
@@ -15,6 +16,7 @@ class_name VolatileSpike
 enum MotionState { IDLE, PROXIMITY, RISING, TRACING, RETURNING }
 
 var state: MotionState = MotionState.IDLE
+var health: int
 var origin_position: Vector2
 var player: CharacterBody2D
 var trace_time_left: float = 0.0
@@ -29,6 +31,7 @@ var proximity_direction: int = 1
 
 
 func _ready() -> void:
+	health = max_health
 	origin_position = global_position
 	player = get_parent().get_node_or_null("Player") as CharacterBody2D if get_parent() != null else null
 	contact_area.body_entered.connect(_on_contact_body_entered)
@@ -169,7 +172,12 @@ func _on_contact_body_entered(body: Node2D) -> void:
 		body.call("apply_turret_knockback", global_position)
 
 
-func apply_player_projectile_hit(_damage: int, _source_position: Vector2, _projectile_velocity: Vector2, _weapon_kind: int = 0) -> void:
+func apply_player_projectile_hit(damage: int, _source_position: Vector2, _projectile_velocity: Vector2, _weapon_kind: int = 0) -> void:
+	health = maxi(health - maxi(1, damage), 0)
+	if health <= 0:
+		queue_free()
+		return
+
 	origin_position = global_position if state == MotionState.IDLE or state == MotionState.PROXIMITY else origin_position
 	trace_time_left = trace_duration
 	if state == MotionState.IDLE or state == MotionState.PROXIMITY:

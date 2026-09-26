@@ -9,10 +9,13 @@ const BOSS_HEALTH_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
 const HEALTH_BAR_FILL_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
 const HEALTH_BAR_BACKGROUND_COLOR: Color = Color(0.070588, 0.117647, 0.2, 1.0)
 const HEALTH_BAR_MIN_VISIBLE_VALUE: float = 4.0
+const DASH_WARNING_LEAD: float = 0.75
+const DASH_WARNING_VISIBLE_DURATION: float = 0.74
+const DASH_START_GAP: float = 0.01
 
 @export var projectile_scene: PackedScene = preload("res://Projectile.tscn")
 @export var fire_interval: float = 1.9
-@export var charge_interval: float = 7.0
+@export var charge_interval: float = 5.0
 @export var charge_duration: float = 0.35
 @export var charge_distance_tiles: float = 4.0
 @export var charge_reverse_chance: float = 0.35
@@ -27,6 +30,9 @@ const HEALTH_BAR_MIN_VISIBLE_VALUE: float = 4.0
 @onready var muzzle: Marker2D = $VisualRoot/Muzzle
 @onready var fire_timer: Timer = $FireTimer
 @onready var charge_timer: Timer = $ChargeTimer
+@onready var dash_warning_timer: Timer = $DashWarningTimer
+@onready var dash_start_timer: Timer = $DashStartTimer
+@onready var dash_warning: Label = $DashWarning
 @onready var contact_area: Area2D = $ContactArea
 @onready var health_bar: ProgressBar = $BossHUD/HealthBar
 @onready var boss_health_value: Label = $BossHUD/BossHealthValue
@@ -58,8 +64,15 @@ func _ready() -> void:
 	fire_timer.timeout.connect(_fire)
 	fire_timer.start()
 
-	charge_timer.wait_time = charge_interval
+	charge_timer.wait_time = maxf(charge_interval - DASH_WARNING_LEAD, DASH_START_GAP)
+	charge_timer.one_shot = true
 	charge_timer.timeout.connect(_on_charge_timer_timeout)
+	dash_warning_timer.wait_time = DASH_WARNING_VISIBLE_DURATION
+	dash_warning_timer.one_shot = true
+	dash_warning_timer.timeout.connect(_on_dash_warning_timeout)
+	dash_start_timer.wait_time = DASH_START_GAP
+	dash_start_timer.one_shot = true
+	dash_start_timer.timeout.connect(_on_dash_start_timeout)
 	charge_timer.start()
 
 	contact_area.body_entered.connect(_on_contact_body_entered)
@@ -103,15 +116,31 @@ func _physics_process(delta: float) -> void:
 			visual_root.scale.x = facing
 			velocity.x = facing * walk_speed_px
 
-	if pending_charge and charge_time_left <= 0.0 and knockback_time_left <= 0.0 and stun_time_left <= 0.0:
-		pending_charge = false
-		_begin_charge()
+	_try_begin_pending_charge()
 
 
 func _on_charge_timer_timeout() -> void:
-	if stun_time_left > 0.0 or knockback_time_left > 0.0 or charge_time_left > 0.0:
-		pending_charge = true
+	pending_charge = true
+	dash_warning.visible = true
+	dash_warning_timer.start()
+
+
+func _on_dash_warning_timeout() -> void:
+	dash_warning.visible = false
+	dash_start_timer.start()
+
+
+func _on_dash_start_timeout() -> void:
+	_try_begin_pending_charge()
+
+
+func _try_begin_pending_charge() -> void:
+	if not pending_charge or not dash_warning_timer.is_stopped() or not dash_start_timer.is_stopped():
 		return
+	if charge_time_left > 0.0 or knockback_time_left > 0.0 or stun_time_left > 0.0:
+		return
+
+	pending_charge = false
 	_begin_charge()
 
 
@@ -131,6 +160,7 @@ func _begin_charge() -> void:
 	charge_time_left = charge_duration
 	knockback_time_left = 0.0
 	knockback_direction = 0
+	charge_timer.start()
 
 
 func _fire() -> void:
@@ -222,6 +252,11 @@ func apply_player_projectile_hit(damage: int, source_position: Vector2, _project
 
 func _apply_weapon_reaction(source_position: Vector2, weapon_kind: int) -> void:
 	charge_time_left = 0.0
+	if pending_charge:
+		dash_warning_timer.stop()
+		dash_start_timer.stop()
+		dash_warning.visible = false
+		charge_timer.start()
 	pending_charge = false
 	match weapon_kind:
 		2:

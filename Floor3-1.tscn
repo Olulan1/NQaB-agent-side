@@ -182,6 +182,7 @@ position = Vector2(816, 344)
 
 [node name="Dasher" parent="." unique_id=2107518200 instance=ExtResource("6_dasher")]
 position = Vector2(464, 344)
+max_health = 8
 
 [node name="ElevatorReturn" type="Area2D" parent="." unique_id=1840224770]
 position = Vector2(1568, 888)

@@ -84,6 +84,7 @@ shape = SubResource("3_right_boundary_shape")
 [node name="Barrier1" type="StaticBody2D" parent="."]
 position = Vector2(272, 320)
 script = ExtResource("5_barrier_script")
+max_health = 13
 body_color = Color(0.498039, 0.498039, 0.498039, 1)
 caption_text = "Press E to fire"
 caption_width = 240.0
@@ -97,6 +98,7 @@ shape = SubResource("4_barrier_shape")
 [node name="Barrier2" type="StaticBody2D" parent="."]
 position = Vector2(456, 320)
 script = ExtResource("5_barrier_script")
+max_health = 13
 body_color = Color(0.498039, 0.498039, 0.498039, 1)
 caption_text = "press q to switch weapons"
 caption_width = 280.0
@@ -125,7 +127,7 @@ shape = SubResource("4_barrier_shape")
 [node name="Barrier4" type="StaticBody2D" parent="."]
 position = Vector2(824, 320)
 script = ExtResource("5_barrier_script")
-max_health = 6
+max_health = 13
 body_color = Color(0.545098, 0.815686, 0.960784, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier4"]
@@ -134,6 +136,7 @@ shape = SubResource("4_barrier_shape")
 [node name="Barrier5" type="StaticBody2D" parent="."]
 position = Vector2(1008, 320)
 script = ExtResource("5_barrier_script")
+max_health = 13
 body_color = Color(0.188235, 0.803922, 0.780392, 1)
 dependency_path = NodePath("../Barrier4")
 
