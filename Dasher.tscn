@@ -48,7 +48,28 @@ polygon = PackedVector2Array(-2, 0, 2, 0, 6, 12, -2, 12)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
+
+[node name="DashWarningTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashStartTimer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[node name="DashWarning" type="Label" parent="."]
+z_index = 5
+offset_left = -18.0
+offset_top = -52.0
+offset_right = 18.0
+offset_bottom = -18.0
+theme_override_colors/font_color = Color(0.470588, 0.843137, 1, 1)
+theme_override_colors/font_outline_color = Color(0.019608, 0.047059, 0.078431, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 30
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
 
 [node name="ContactArea" type="Area2D" parent="."]
 

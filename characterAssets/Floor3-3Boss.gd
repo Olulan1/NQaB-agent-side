@@ -3,8 +3,8 @@ class_name Floor3_3Boss
 
 const TILE_SIZE: float = 64.0
 const DISPLAY_HEALTH_MAX: int = 80
-const JUMP_SHOT_Y_OFFSET: float = -16.0
-const CROUCH_SHOT_Y_OFFSET: float = 8.0
+const JUMP_SHOT_Y_OFFSET: float = 12.0
+const CROUCH_SHOT_Y_OFFSET: float = 36.0
 const BOSS_HEALTH_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
 const HEALTH_BAR_FILL_COLOR: Color = Color(0.160784, 0.407843, 0.760784, 1.0)
 const HEALTH_BAR_BACKGROUND_COLOR: Color = Color(0.070588, 0.117647, 0.2, 1.0)

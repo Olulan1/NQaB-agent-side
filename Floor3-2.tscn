@@ -229,11 +229,11 @@ shape = SubResource("RectangleShape2D_1er4s")
 
 [node name="Dasher" parent="." unique_id=1497576367 instance=ExtResource("4_dasher")]
 position = Vector2(384, 344)
-max_health = 8
+max_health = 15
 
 [node name="Dasher2" parent="." unique_id=1902008612 instance=ExtResource("4_dasher")]
 position = Vector2(896, 344)
-max_health = 8
+max_health = 15
 
 [node name="Player" parent="." unique_id=1007623561 instance=ExtResource("1_player")]
 position = Vector2(96, 364)

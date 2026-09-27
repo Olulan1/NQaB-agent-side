@@ -262,3 +262,11 @@ Notes
 - Set the Floor3-3 boss dash cycle to about five seconds and added a red exclamation warning 0.75 seconds before each dash, visible for 0.74 seconds.
 - Increased the Floor02 enemy to 10 HP, the Floor3 Dashers to 8 HP, and all VolatileSpikes to 40 HP with hits reducing health until destruction.
 - Set Floor01 Barrier1, Barrier2, Barrier4, and Barrier5 to 13 HP while leaving Barrier3 at 8 HP.
+
+23:45 - 26/09/2026
+- Added a light-blue exclamation warning to the shared Dasher scene, visible for half the configured dash duration immediately before each dash.
+- Lowered both Floor3-3 boss projectile paths while keeping their vertical separation, so the lower path intersects the standing player's hitbox.
+
+08:43 - 27/09/2026
+- Set the shared Dasher health to 8 HP for floors below Floor 3.
+- Set all Dasher instances on Floor 3 to 15 HP.
