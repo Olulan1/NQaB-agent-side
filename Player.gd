@@ -354,6 +354,7 @@ func _configure_player_projectile(projectile: Area2D) -> void:
 	projectile.set_collision_mask_value(1, true)
 	projectile.set_collision_mask_value(2, true)
 	projectile.set_collision_mask_value(3, true)
+	projectile.set_collision_mask_value(4, true)
 
 
 func apply_projectile_knockback(_source_position: Vector2, _projectile_velocity: Vector2) -> void:

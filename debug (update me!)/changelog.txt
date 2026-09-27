@@ -270,3 +270,7 @@ Notes
 08:43 - 27/09/2026
 - Set the shared Dasher health to 8 HP for floors below Floor 3.
 - Set all Dasher instances on Floor 3 to 15 HP.
+
+08:47 - 27/09/2026
+- Put Dashers on collision layer 2 and VolatileSpikes on layer 4; both only scan layer 1, so neither blocks enemies of the same or other type.
+- Added layer 4 to player projectile collision masks so VolatileSpikes remain shootable; the player's existing body mask still collides with both enemy layers.
